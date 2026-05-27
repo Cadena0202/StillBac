@@ -979,12 +979,8 @@ function startBubbles(bc, direction = 'up', duraction =2600) {
     delay: i * 55,
     born: false,
     startTime: null,
+    
   }));
-bubbles.forEach(b => { if (Math.random() < 0.08) {
-      b.r *= 2.4;
-      b.speed *= 0.7;
-      b.alpha *= 1.4;
-    }
   
   let startTime = null;
   let running = true;
