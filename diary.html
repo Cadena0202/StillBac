@@ -1376,10 +1376,11 @@ function clearAuth() {
   sessionStorage.removeItem('mode');
 }
 // PC
-  window.addEventListener('beforeunload', () => {
+window.addEventListener('beforeunload', () => {
+
+  sessionStorage.setItem('bubbleReload', 'true');
 
   const fade = document.getElementById('page-fade');
-  const bubbleCanvas = document.getElementById('bubble-canvas');
 
   fade.classList.add('dark');
   fade.classList.remove('hide');
