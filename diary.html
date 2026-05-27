@@ -1316,7 +1316,19 @@ function clearAuth() {
   sessionStorage.removeItem('mode');
 }
 // PC
-window.addEventListener('beforeunload', clearAuth);
+  window.addEventListener('beforeunload', () => {
+
+  const fade = document.getElementById('page-fade');
+  const bubbleCanvas = document.getElementById('bubble-canvas');
+
+  fade.classList.add('dark');
+  fade.classList.remove('hide');
+
+  bubbleCanvas.classList.add('active');
+
+  startBubbles(bubbleCanvas, 'down');
+
+});
 
 }  
 </script>
