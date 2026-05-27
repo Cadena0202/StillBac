@@ -1006,18 +1006,21 @@ function startBubbles(bc, direction = 'up') {
 
   
 // ---- 権限取得 ----
-const fade = document.getElementById('page-fade');
-const bubbleCanvas = document.getElementById('bubble-canvas');
+document.querySelector('.corner-top').addEventListener('click', e => {
+  e.preventDefault();
 
-fade.classList.add('dark');
-fade.classList.remove('hide');
+  const fade = document.getElementById('page-fade');
+  const bubbleCanvas = document.getElementById('bubble-canvas');
 
-bubbleCanvas.classList.add('active');
-startBubbles(bubbleCanvas, 'down');
+  fade.classList.add('dark');
+  fade.classList.remove('hide');
 
-setTimeout(() => {
-  window.location.href = 'index.html';
-}, 600);
+  bubbleCanvas.classList.add('active');
+  startBubbles(bubbleCanvas, 'down');
+
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 600);
 });
   
 } else {
