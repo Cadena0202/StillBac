@@ -313,7 +313,7 @@ function startBubbles(bc) {
   bc.height = window.innerHeight;
   const BW = bc.width;
   const BH = bc.height;
-  const bubbles = Array.from({ length: 120 }, (_, i) => {
+  const bubbles = Array.from({ length: 200 }, (_, i) => {
     const b = {
       x: Math.random() * BW,
       y: - Math.random() * 80 - 20,
@@ -364,7 +364,7 @@ function startBubbles(bc) {
 
       const bx = b.x + Math.sin(b.wobble) * b.wobbleAmp;
 
-      if (b.y - b.r > BH) { b.y = -b.r; b.x = Math.random() * BW; }
+      if (b.y - b.r > BH) continue;
      
       const g = bctx.createRadialGradient(
         bx - b.r * 0.3,
