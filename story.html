@@ -58,6 +58,60 @@
 
   position:relative;
 }
+
+/* 上固定ラベル */
+.story-top-label{
+  position:sticky;
+  top:0;
+  z-index:15;
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(200,220,255,0.08);
+  padding:10px 4px;
+  margin-bottom:8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.story-top-label span{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:11px;
+  letter-spacing:0.20em;
+
+  color:rgba(170,190,220,0.34);
+}
+
+/* ページネーション */
+.pagination{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin-top:40px;
+}
+.page-btn{
+  background:transparent;
+  border:none;
+  color:rgba(180,205,235,0.34);
+  font-family:'Cormorant Garamond',serif;
+  font-size:12px;
+  letter-spacing:0.18em;
+  cursor:pointer;
+  transition:
+    color 0.3s,
+    opacity 0.3s;
+}
+.page-btn:hover{
+  color:rgba(210,225,255,0.72);
+}
+.page-btn.active{
+  color:rgba(200,169,58,0.75);
+}
+.page-btn.disabled{
+  opacity:0.2;
+  pointer-events:none;
+}
   .story-item{border-bottom:1px solid rgba(200,220,255,0.07);padding:22px 6px;display:flex;align-items:baseline;gap:20px;cursor:pointer;transition:background 0.25s;opacity:0;transform:translateY(6px);animation:cardrise 0.55s ease forwards;position:relative;}  
   .story-item:hover{background:rgba(200,220,255,0.03);}  
   @keyframes cardrise{to{opacity:1;transform:translateY(0);}}  
@@ -343,9 +397,14 @@
       <h1>Story</h1>  
       <div class="story-header-line"></div>  
     </div>  
+    <div class="story-top-label">
+  <span>Fragments</span>
+  <span id="story-count">0 records</span>
+</div>
     <div class="story-list" id="story-list">  
       <div class="loading-note">— loading —</div>  
     </div>  
+    <div class="pagination" id="pagination"></div>
      <div class="loading-flash" id="loading-flash"></div>
     <div id="back-top"><button id="back-top-btn"></button></div>  
   </div>  
@@ -427,7 +486,9 @@ const app=initializeApp(firebaseConfig),db=getFirestore(app);
 const READ_PW  = 'ubatte';      // 読む用（変えてください）  
 const WRITE_PW = '2243';   // 書く用（変えてください）  
   
-let isOwner=false, allStories=[], currentStoryId=null, editingStoryId=null;  
+let isOwner=false, allStories=[], currentStoryId=null, editingStoryId=null; 
+let currntPage = 1;
+  const STORIES_PER_PAGE =10;
   
 function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}  
   
@@ -511,19 +572,153 @@ setTimeout(()=>{
   }
 }
   
-function renderStories(){  
-  const list=document.getElementById('story-list');  
-  list.innerHTML='';  
-  if(allStories.length===0){list.innerHTML='<div class="empty-note">— まだ何も書かれていない —</div>';return;}  
-  allStories.forEach((s,i)=>{  
-    const el=document.createElement('div');  
-    el.className='story-item';  
-    el.style.animationDelay=`${i*0.06}s`;  
-    el.innerHTML=`<span class="story-num">${String(allStories.length-i).padStart(2,'0')}.</span><div class="story-info"><div class="story-title">${escHtml(s.title||'— 無題 —')}</div><div class="story-desc">${escHtml(s.desc||'')}</div></div><span class="story-arrow">→</span>`;  
-    el.addEventListener('click',()=>openStory(s));  
-    list.appendChild(el);  
-  });  
-}  
+function renderStories(){
+
+  const list=document.getElementById('story-list');
+  const pagination=document.getElementById('pagination');
+
+  list.innerHTML='';
+  pagination.innerHTML='';
+
+  document.getElementById('story-count').textContent =
+    `${allStories.length} records`;
+
+  if(allStories.length===0){
+
+    list.innerHTML=
+      '<div class="empty-note">— まだ何も書かれていない —</div>';
+
+    return;
+  }
+
+  const start=(currentPage-1)*STORIES_PER_PAGE;
+  const end=start+STORIES_PER_PAGE;
+
+  const currentStories=allStories.slice(start,end);
+
+  currentStories.forEach((s,i)=>{
+
+    const el=document.createElement('div');
+
+    el.className='story-item';
+
+    el.style.animationDelay=`${i*0.06}s`;
+
+    el.innerHTML=`
+      <span class="story-num">
+        ${String(allStories.length-(start+i)).padStart(2,'0')}.
+      </span>
+
+      <div class="story-info">
+        <div class="story-title">
+          ${escHtml(s.title||'— 無題 —')}
+        </div>
+
+        <div class="story-desc">
+          ${escHtml(s.desc||'')}
+        </div>
+      </div>
+
+      <span class="story-arrow">→</span>
+    `;
+
+    el.addEventListener('click',()=>openStory(s));
+
+    list.appendChild(el);
+  });
+
+  renderPagination();
+}
+function renderPagination(){
+
+  const pagination=document.getElementById('pagination');
+
+  const totalPages=Math.ceil(
+    allStories.length/STORIES_PER_PAGE
+  );
+
+  if(totalPages<=1)return;
+
+  // prev
+  const prev=document.createElement('button');
+
+  prev.textContent='←';
+
+  prev.className='page-btn';
+
+  if(currentPage===1){
+    prev.classList.add('disabled');
+  }
+
+  prev.onclick=()=>{
+    if(currentPage>1){
+      currentPage--;
+      renderStories();
+
+      window.scrollTo({
+        top:0,
+        behavior:'smooth'
+      });
+    }
+  };
+
+  pagination.appendChild(prev);
+
+  // page numbers
+  for(let i=1;i<=totalPages;i++){
+
+    const btn=document.createElement('button');
+
+    btn.textContent=i;
+
+    btn.className='page-btn';
+
+    if(i===currentPage){
+      btn.classList.add('active');
+    }
+
+    btn.onclick=()=>{
+
+      currentPage=i;
+
+      renderStories();
+
+      window.scrollTo({
+        top:0,
+        behavior:'smooth'
+      });
+    };
+
+    pagination.appendChild(btn);
+  }
+
+  // next
+  const next=document.createElement('button');
+
+  next.textContent='→';
+
+  next.className='page-btn';
+
+  if(currentPage===totalPages){
+    next.classList.add('disabled');
+  }
+
+  next.onclick=()=>{
+    if(currentPage<totalPages){
+
+      currentPage++;
+
+      renderStories();
+
+      window.scrollTo({
+        top:0,
+        behavior:'smooth'
+      });
+    }
+  };
+
+  pagination.appendChild(next);
+}
   
 function openStory(s){  
   currentStoryId=s.id;  
@@ -677,6 +872,3 @@ document.getElementById('post-modal').addEventListener('click',e=>{if(e.target==
 </script> 
 </body>
 </html>
-
-</body>  
-</html>  
