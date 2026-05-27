@@ -173,20 +173,16 @@ header:hover .site-title {
   }
   /* パスワードモーダル */
 #password-modal{
-  display:none;
   position:fixed;
   inset:0;
   z-index:70;
-  background:rgba(0,0,0,0.18);
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:40px 24px;
-  opacity:0;
-  pointer-events:none;
+  opacity:1;
+  pointer-events:auto;
   transition:opacity 0.35s ease;
 }
-
 #password-modal.open{
   opacity:1;
   pointer-events:auto;
