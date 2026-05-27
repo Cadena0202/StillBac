@@ -1023,7 +1023,7 @@ function startBubbles(bc, direction = 'up') {
         b.startTime = ts;
       }
 
-      if (direction==='down') b.y +=b.speed; else b.y -= b.speed;
+      if (direction === 'down') b.y += b.speed; else b.y -= b.speed;
       b.wobble += 0.03;
 
       const bx = b.x + Math.sin(b.wobble) * b.wobbleAmp;
