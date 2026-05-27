@@ -636,7 +636,7 @@ header:hover .site-title {
       rgba(255,255,255,0) 100%);
   opacity: 1;
   pointer-events: none;
-  transition: opacity 2.4s ease;
+  transition: opacity 1.2s ease;
 }
 
 #page-fade.hide {
@@ -922,9 +922,14 @@ const db = getFirestore(app);
 
 // ---- 権限取得 ----
 const mode = sessionStorage.getItem('mode');
-
 if (!mode) {
-  window.location.href = 'index.html';
+  const fade =
+    document.getElementById('page-fade');
+  // フェードを再表示
+  fade.classList.remove('hide');
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 1200);
 }
 
 let isOwner = mode === 'owner';
