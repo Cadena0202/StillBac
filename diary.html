@@ -191,12 +191,12 @@ header:hover .site-title {
   position:relative;
   z-index:71;
   width:100%;
-  max-width:320px;
+  max-width:270px;
   border-left:1px solid rgba(200,220,255,0.18);
-  padding:24px 26px;
+  padding:18px 22px;
   display:flex;
   flex-direction:column;
-  gap:12px;
+  gap:8px;
   background:rgba(10,14,24,0.72);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
@@ -229,21 +229,14 @@ header:hover .site-title {
 .password-close:hover{
   color:rgba(220,235,255,0.58);
 }
-  .password-label{
-  font-family:'Cormorant Garamond', serif;
-  font-style:italic;
-  font-size:11px;
-  color:rgba(200,169,58,0.42);
-  letter-spacing:0.22em;
-}
 #password-input{
   background:transparent;
   border:none;
   border-bottom:1px solid rgba(200,220,255,0.16);
   color:rgba(220,230,245,0.78);
   font-family:'Shippori Mincho', serif;
-  font-size:12px;
-  padding:10px 4px;
+  font-size:11px;
+  padding:8px 2px;
   outline:none;
   letter-spacing:0.08em;
 }
@@ -252,9 +245,9 @@ header:hover .site-title {
   background:transparent;
   border:1px solid rgba(200,169,58,0.24);
   color:rgba(200,169,58,0.60);
-  padding:8px 20px;
+  padding:6px 16px;
   font-family:'Cormorant Garamond', serif;
-  font-size:11px;
+  font-size:10px;
   letter-spacing:0.22em;
   cursor:pointer;
   transition:all 0.3s;
@@ -599,17 +592,11 @@ header:hover .site-title {
     <button class="password-close" id="password-close">
       close
     </button>
-
-    <div class="password-label">
-      enter password
-    </div>
-
     <input
       type="password"
       id="password-input"
       placeholder="••••••"
     >
-
     <button id="password-submit">
       enter
     </button>
