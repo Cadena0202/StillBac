@@ -1137,6 +1137,7 @@ if (isReload) {
   fade.classList.remove('hide');
   const bc =document.getElementById('bubble-canvas');
   bc.classList.add('active');
+  fade.classList.add('hide');
   startBubbles(bc, 'down');
 
   setTimeout(() => {
