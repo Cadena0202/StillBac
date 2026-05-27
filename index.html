@@ -108,12 +108,15 @@
 </head>
 <body>
 
- <script>
+<script>
 if (sessionStorage.getItem('fromDiary') === 'true') {
-  document.documentElement.style.background = '#04060c';
+  document.addEventListener('DOMContentLoaded', () => {
+    const ol = document.getElementById('loading-overlay');
+    ol.style.background = 'rgba(4,6,12,0.97)';
+  });
 }
 </script>
-
+ 
 <canvas id="bg"></canvas>
 <div class="corner corner-tl"></div>
 <div class="corner corner-tr"></div>
