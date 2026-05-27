@@ -1085,28 +1085,23 @@ const isReload =
   navEntries[0].type === 'reload';
 
 if (isReload) {
-    document.getElementById('page-fade').classList.add('hide');
+
+  window.location.href = 'index.html';
+
+} else {
+
+  loadEntries();
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document
+        .getElementById('page-fade')
+        .classList.add('hide');
+    });
+  });
+
+}
   
-  const fade =
-    document.getElementById('page-fade');
-
-  const bubbleCanvas =
-    document.getElementById('bubble-canvas');
-
-　fade.classList.add('dark');
-　fade.classList.remove('hide');
-
-  
-  bubbleCanvas.classList.add('active');
-
-  startBubbles(bubbleCanvas, 'down');
-
-  setTimeout(() => {
-
-    window.location.href = 'index.html';
-
-  }, 900);
-
 } else {
 
   loadEntries();
@@ -1396,10 +1391,6 @@ function clearAuth() {
 
   fade.classList.add('dark');
   fade.classList.remove('hide');
-
-  bubbleCanvas.classList.add('active');
-
-  startBubbles(bubbleCanvas, 'down');
 
 });
 
