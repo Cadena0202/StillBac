@@ -1006,15 +1006,18 @@ function startBubbles(bc, direction = 'up') {
 
   
 // ---- 権限取得 ----
-const mode = sessionStorage.getItem('mode');
-if (!mode) {
-  const fade =
-    document.getElementById('page-fade');
-  // フェードを再表示
- fade.classList.remove('hide')
-  setTimeout(() => {
-    window.location.href = 'index.html';
-  }, 600);
+const fade = document.getElementById('page-fade');
+const bubbleCanvas = document.getElementById('bubble-canvas');
+
+fade.classList.add('dark');
+fade.classList.remove('hide');
+
+bubbleCanvas.classList.add('active');
+startBubbles(bubbleCanvas, 'down');
+
+setTimeout(() => {
+  window.location.href = 'index.html';
+}, 600);
   
 } else {
 
