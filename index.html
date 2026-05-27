@@ -307,11 +307,13 @@ function startBubbles(bc) {
   requestAnimationFrame(anim);
 
 }
- if (sessionStorage.getItem('fromDiary') === 'true') {
+if (sessionStorage.getItem('fromDiary') === 'true') {
   sessionStorage.removeItem('fromDiary');
-  const bc = document.getElementById('bubble-canvas');
-  bc.classList.add('active');
-  startReloadBubbles(bc);
+  const overlay = document.getElementById('loading-overlay');
+  overlay.classList.add('active');
+  setTimeout(() => {
+    overlay.classList.remove('active');
+  }, 1500);
 }
 function checkPassword() {
   const val = document.getElementById('pw-input').value.trim();
