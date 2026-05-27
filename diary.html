@@ -149,7 +149,6 @@ header:hover .site-title {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  padding-right: 42px;
   filter: blur(1.8px);
   opacity: 0.48;
   user-select: none;
@@ -862,8 +861,7 @@ function renderCards() {
     card.innerHTML = `
       <div class="card-meta">
         <span class="card-date">${escHtml(entry.date || '')}</span>
-      </div>
-      <div class="card-title">${escHtml(entry.title || '— 無題 —')}</div>
+      </div>      
       <div class="card-body">${escHtml(preview)}</div>
       <div class="card-cat-dot ${dotClass}"></div>
     `;
