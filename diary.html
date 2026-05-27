@@ -1028,8 +1028,8 @@ function startBubbles(bc, direction = 'up') {
 
       const bx = b.x + Math.sin(b.wobble) * b.wobbleAmp;
 
-      if (direction === 'down' ) ? b.y - b.r > BH : b.y + b.r < 0) continue;
-
+      if (direction === 'down' ? b.y - b.r > BH : b.y + b.r < 0) continue;
+      
       const g = bctx.createRadialGradient(
         bx - b.r * 0.3,
         b.y - b.r * 0.3,
