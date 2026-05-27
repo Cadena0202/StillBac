@@ -1032,10 +1032,12 @@ document.getElementById('password-input').addEventListener('keydown', e => {
 function checkPassword(){
   const value =
     document.getElementById('password-input').value;
-  if(value === 'noct'){
-    input.blur();
-document.getElementById('password-modal').classList.remove('open');
-    openDetail(pendingEntry);
+ if(value === 'noct'){
+  document.getElementById('password-input').blur();
+  document.getElementById('password-modal')
+    .classList.remove('open');
+  openDetail(pendingEntry);
+}
   } else {
     document
       .getElementById('password-input')
@@ -1056,7 +1058,6 @@ window.addEventListener('load', () => {
 function clearAuth() {
   sessionStorage.removeItem('mode');
 }
-
 // PC
 window.addEventListener('beforeunload', clearAuth);
 
