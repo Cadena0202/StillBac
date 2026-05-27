@@ -1033,6 +1033,12 @@ function startBubbles(bc, direction = 'up', duraction =2600) {
     if (elapsed < 2600) requestAnimationFrame(animBubbles);
     else { bctx.clearRect(0,0,BW,BH); running = false; }
   }
+  
+    if (Math.random() < 0.08) {
+      b.r *= 2.4;
+      b.speed *= 0.7;
+      b.alpha *= 1.4;
+}
 
   requestAnimationFrame(animBubbles);
 }
