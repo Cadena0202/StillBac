@@ -922,7 +922,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-function startBubbles(bc) {
+function startBubbles(bc, direction = 'up') {
   const bctx = bc.getContext('2d');
   bc.width  = window.innerWidth;
   bc.height = window.innerHeight;
@@ -955,12 +955,12 @@ function startBubbles(bc) {
       if (!b.born) { b.born = true; b.startTime = ts; }
 
       const age = ts - b.startTime;
-      b.y -= b.speed;
+     if (direction==='down') b.y +=b.speed; else b.y -= b.speed;
       b.wobble += 0.03;
       const bx = b.x + Math.sin(b.wobble) * b.wobbleAmp;
 
-      if (b.y + b.r < 0) {
-        b.y = BH + b.r;
+      if (direction==='down' ?b.y -b.r > BH:b.y + b.r < 0) {
+        b.y = direction==='down' ?-b.r : BH + b.r;
         b.x = Math.random() * BW;
       }
 
