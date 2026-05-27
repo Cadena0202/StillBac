@@ -1251,11 +1251,7 @@ document.getElementById('modal-close').addEventListener('click', () => document.
 document.getElementById('modal-delete').addEventListener('click', deleteCurrentEntry);
 document.getElementById('new-moon-btn').addEventListener('click', () => document.getElementById('post-modal').classList.add('open'));
 document.getElementById('post-close').addEventListener('click', () => document.getElementById('post-modal').classList.remove('open'));
-document.activeElement.blur();
-setTimeout(() => {
-  document.getElementById('post-modal').classList.remove('open');
-}, 120);
-  .addEventListener('click', () => document.getElementById('post-modal').classList.remove('open'));
+document.getElementById('btn-cancel').addEventListener('click', () => {document.getElementById('post-modal').classList.remove('open');});
 document.getElementById('btn-post').addEventListener('click', postEntry);
 document.getElementById('back-top-btn').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
 document.getElementById('password-submit').addEventListener('click', checkPassword);
