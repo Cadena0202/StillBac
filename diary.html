@@ -961,7 +961,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-function startBubbles(bc, direction = 'up') {
+function startBubbles(bc, direction = 'up', duraction =2600) {
   const bctx = bc.getContext('2d');
   bc.width  = window.innerWidth;
   bc.height = window.innerHeight;
