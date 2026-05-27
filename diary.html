@@ -1011,7 +1011,7 @@ function startBubbles(bc, direction = 'up', duraction =2600) {
         b.y = direction==='down' ?-b.r : BH + b.r;
         b.x = Math.random() * BW;
       }
-    }
+  }
       // 泡の描画
       const grad = bctx.createRadialGradient(bx - b.r*0.3, b.y - b.r*0.3, b.r*0.1, bx, b.y, b.r);
       grad.addColorStop(0,   `rgba(220,235,255,${b.alpha * 0.6})`);
