@@ -922,42 +922,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ---- 権限取得 ----
-const mode = sessionStorage.getItem('mode');
-if (!mode) {
-  const fade =
-    document.getElementById('page-fade');
-  // フェードを再表示
- fade.classList.remove('hide')
-  setTimeout(() => {
-    window.location.href = 'index.html';
-  }, 600);
-  
-} else {
-
-let isOwner = mode === 'owner';
-let allEntries = [];
-let currentCat = 'all';
-const ITEMS_PER_PAGE = 10;
-let currentPage = 1;
-let currentEntryId = null;
-let currentEditingId = null;
-
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-document.getElementById('main-content').classList.add('visible');
-
-if (isOwner) {
-  document.getElementById('new-moon-btn').classList.add('show');
-}
-
-loadEntries();
-   requestAnimationFrame(() =>
-    { requestAnimationFrame(() =>
-    { document.getElementById('page-fade').classList.add('hide'); }); })
-
 function startBubbles(bc) {
   const bctx = bc.getContext('2d');
   bc.width  = window.innerWidth;
@@ -1032,7 +996,42 @@ function startBubbles(bc) {
   requestAnimationFrame(animBubbles);
 }
 
+  
+// ---- 権限取得 ----
+const mode = sessionStorage.getItem('mode');
+if (!mode) {
+  const fade =
+    document.getElementById('page-fade');
+  // フェードを再表示
+ fade.classList.remove('hide')
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 600);
+  
+} else {
 
+let isOwner = mode === 'owner';
+let allEntries = [];
+let currentCat = 'all';
+const ITEMS_PER_PAGE = 10;
+let currentPage = 1;
+let currentEntryId = null;
+let currentEditingId = null;
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+document.getElementById('main-content').classList.add('visible');
+
+if (isOwner) {
+  document.getElementById('new-moon-btn').classList.add('show');
+}
+
+loadEntries();
+   requestAnimationFrame(() =>
+    { requestAnimationFrame(() =>
+    { document.getElementById('page-fade').classList.add('hide'); }); })
 
 async function loadEntries() {
   const grid = document.getElementById('card-grid');
