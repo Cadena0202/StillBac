@@ -122,6 +122,11 @@
 </div>
 
 <div id="loading-overlay"></div>
+ <script>
+if (sessionStorage.getItem('fromDiary') === 'true') {
+  document.getElementById('loading-overlay').classList.add('active');
+}
+</script>
 <div id="white-flash"></div>
 <canvas id="bubble-canvas"></canvas>
 
@@ -310,7 +315,6 @@ function startBubbles(bc) {
 if (sessionStorage.getItem('fromDiary') === 'true') {
   sessionStorage.removeItem('fromDiary');
   const overlay = document.getElementById('loading-overlay');
-  overlay.classList.add('active');
   setTimeout(() => {
     overlay.classList.remove('active');
   }, 1500);
