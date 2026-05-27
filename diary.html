@@ -968,9 +968,10 @@ function startBubbles(bc, direction = 'up', duraction =2600) {
   bc.height = window.innerHeight;
   const BW = bc.width, BH = bc.height;
 
-  const bubbles = Array.from({length: 120}, (_, i) => ({
+  const bubbles = Array.from({length: 120}, (_, i) => ((_, i) => {
+  const b = {
     x: Math.random() * BW,
-    y: direction === 'doown' ? -Math.random()* 80 - 20 : BH + Math.random() * 80 + 20,
+    y: direction === 'down' ? -Math.random() * 80 - 20 : BH + Math.random() * 80 + 20,
     r: Math.random() * 14 + 2,
     speed: Math.random() * 6 + 2.5,
     alpha: Math.random() * 0.35 + 0.12,
@@ -979,14 +980,14 @@ function startBubbles(bc, direction = 'up', duraction =2600) {
     delay: i * 55,
     born: false,
     startTime: null,
-　}
-    if (Math.random() < 0.08) {
-      b.r *= 2.4;
-      b.speed *= 0.7;
-      b.alpha *= 1.4;
+  };
+  if (Math.random() < 0.08) {
+    b.r *= 2.4;
+    b.speed *= 0.7;
+    b.alpha *= 1.4;
+  }
+  return b;
 }
-  return b; 
-  }));
   
   let startTime = null;
   let running = true;
