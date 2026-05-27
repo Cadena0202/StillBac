@@ -1022,8 +1022,10 @@ document.querySelector('.corner-top').addEventListener('click', e => {
     window.location.href = 'index.html';
   }, 600);
 });
-  
-} else {
+
+const mode = sessionStorage.getItem('mode');
+
+if (mode === 'guest' || mode === 'owner') {
 
 let isOwner = mode === 'owner';
 let allEntries = [];
