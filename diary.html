@@ -1292,37 +1292,6 @@ function checkPassword(){
 document.getElementById('detail-modal').addEventListener('click', e => { if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); });
 document.getElementById('post-modal').addEventListener('click', e => { if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); });
   
-window.addEventListener('load', () => {
-
-  const overlay =
-    document.getElementById('loading-overlay');
-
-  const bubbleCanvas =
-    document.getElementById('bubble-canvas');
-
-  // 発光
-  overlay.classList.add('active');
-
-  // 泡Canvas表示
-  bubbleCanvas.classList.add('active');
-
-  // 泡開始
-  startBubbles(bubbleCanvas);
-
-  // 白フェード
-  setTimeout(() => {
-    document
-      .getElementById('page-fade')
-      .classList.add('hide');
-  }, 120);
-
-  // 暗幕解除
-  setTimeout(() => {
-    overlay.classList.remove('active');
-    bubbleCanvas.classList.remove('active');
-  }, 2200);
-
-});
   // リロード・タブ閉じで再認証
 function clearAuth() {
   sessionStorage.removeItem('mode');
