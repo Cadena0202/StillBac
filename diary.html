@@ -30,6 +30,36 @@
   .corner-bl { bottom: 14px; left: 14px;  border-color: rgba(200,220,255,0.50); border-width: 0 0 1px 1px; }
   .corner-br { bottom: 14px; right: 14px; border-color: rgba(200,220,255,0.50); border-width: 0 1px 1px 0; }
 
+  /* ===== コーナーテキスト ===== */
+.corner-label{
+  position:fixed;
+  z-index:52;
+  font-family:'Cormorant Garamond', serif;
+  font-size:10px;
+  letter-spacing:0.28em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:rgba(200,220,255,0.26);
+  transition:
+    opacity 0.35s ease,
+    color 0.35s ease;
+  opacity:0.45;
+}
+/* 左上 TOP */
+.corner-top{
+  top:15px;
+  left:38px;
+}
+/* 右上 鍵 */
+.corner-lock{
+  top:15px;
+  right:38px;
+}
+.corner-label:hover{
+  color:rgba(220,235,255,0.72);
+  opacity:1;
+}
+
   #main-content { display: none; position: relative; z-index: 10; min-height: 100vh; flex-direction: column; }
   #main-content.visible { display: flex; }
 
@@ -541,6 +571,13 @@ header:hover .site-title {
 <div class="corner corner-tr"></div>
 <div class="corner corner-bl"></div>
 <div class="corner corner-br"></div>
+  
+  <a href="index.html" class="corner-label corner-top">
+  TOP
+</a>
+<a href="story.html" class="corner-label corner-lock">
+  🔒
+</a>
 
 <!-- ローディングオーバーレイ -->
 <div id="loading-overlay"></div>
@@ -548,14 +585,7 @@ header:hover .site-title {
 
 <!-- ===== メインコンテンツ ===== -->
 <div id="main-content">
-  <header>
-    <a href="index.html" class="site-title">Remember the promise.</a>
-    <nav>
-      <a href="index.html">Top</a>
-      <a href="story.html" class="active">🔒</a>
-    </nav>
-  </header>
-
+  
   <div class="side-bar"></div>
 
   <div class="log-wrap">
