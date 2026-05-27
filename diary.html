@@ -845,8 +845,19 @@ function renderCards() {
       <div class="card-cat-dot ${dotClass}"></div>
     `;
     card.addEventListener('click', () => askpassword(entry));
-    grid.appendChild(card);
-  });
+    grid.appendChild(card);});
+}
+
+  let pendingEntry = null;
+
+function askpassword(entry){
+  pendingEntry = entry;
+
+  document.getElementById('password-modal')
+    .classList.add('open');
+
+  document.getElementById('password-input')
+    .value = '';
 }
 
 function openDetail(entry) {
@@ -975,6 +986,29 @@ document.getElementById('post-close').addEventListener('click', () => document.g
 document.getElementById('btn-cancel').addEventListener('click', () => document.getElementById('post-modal').classList.remove('open'));
 document.getElementById('btn-post').addEventListener('click', postEntry);
 document.getElementById('back-top-btn').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+document.getElementById('password-submit').addEventListener('click', checkPassword);
+
+function checkPassword(){
+
+  const value =
+    document.getElementById('password-input').value;
+
+  if(value === 'azul'){
+
+    document
+      .getElementById('password-modal')
+      .classList.remove('open');
+
+    openDetail(pendingEntry);
+
+  } else {
+
+    document
+      .getElementById('password-input')
+      .value = '';
+
+  }
+}
 
 // モーダル外クリックで閉じる
 document.getElementById('detail-modal').addEventListener('click', e => { if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); });
