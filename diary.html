@@ -762,8 +762,20 @@ header:hover .site-title {
 const canvas = document.getElementById('bg');
 const ctx = canvas.getContext('2d');
 let W, H;
-function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+let W, H;
+let fixedVH = window.innerHeight;
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = fixedVH;
+}
 resize();
+window.addEventListener('resize', () => {
+  // 横幅変化だけ反応
+  if (window.innerWidth !== W) {
+    fixedVH = window.innerHeight;
+    resize();
+  }
+});
 window.addEventListener('resize', resize);
 
 const SNOW_COUNT = 48;
