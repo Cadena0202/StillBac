@@ -1083,25 +1083,17 @@ const navEntries =
 const isReload =
   navEntries.length &&
   navEntries[0].type === 'reload';
-
 if (isReload) {
 
-  window.location.href = 'index.html';
+  const fade = document.getElementById('page-fade');
 
-} else {
+  fade.classList.add('dark');
+  fade.classList.remove('hide');
 
-  loadEntries();
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 1200);
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      document
-        .getElementById('page-fade')
-        .classList.add('hide');
-    });
-  });
-
-}
-  
 } else {
 
   loadEntries();
