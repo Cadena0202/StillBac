@@ -1090,10 +1090,13 @@ if (isReload) {
 
   fade.classList.add('dark');
   fade.classList.remove('hide');
+  const bc =document.getEventById('bubble-canvas');
+  bc.classList.add('active');
+  startBubbles(bc, 'down');
 
   setTimeout(() => {
     window.location.href = 'index.html';
-  }, 1200);
+  }, 3000);
 
 } else {
 
