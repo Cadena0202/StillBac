@@ -634,7 +634,7 @@ header:hover .site-title {
       rgba(220,235,255,0.88) 35%,
       rgba(170,205,255,0.35) 65%,
       rgba(255,255,255,0) 100%);
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
   transition: opacity 1.2s ease, transform 1.2s ease;
   filter: blur(40px)
@@ -1080,15 +1080,11 @@ if (isReload) {
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-     const fade = document.getElementById('page-fade');
-
-fade.style.opacity = '1';
-
-requestAnimationFrame(() => {
-  requestAnimationFrame(() => {
-    fade.classList.add('hide');
+      document
+        .getElementById('page-fade')
+        .classList.add('hide');
+    });
   });
-});
 
 }
 async function loadEntries() {
