@@ -124,7 +124,12 @@
 <div id="loading-overlay"></div>
  <script>
 if (sessionStorage.getItem('fromDiary') === 'true') {
-  document.getElementById('loading-overlay').style.background = 'rgba(4,6,12,0.97)';
+  sessionStorage.removeItem('fromDiary');
+  const overlay = document.getElementById('loading-overlay');
+  setTimeout(() => {
+    overlay.style.transition = 'background 1.5s ease';
+    overlay.style.background = 'rgba(4,6,12,0)';
+  }, 300);
 }
 </script>
 <div id="white-flash"></div>
