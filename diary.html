@@ -1008,6 +1008,19 @@ document.getElementById('password-modal').addEventListener('click', e => {
     }
 
   });
+document.getElementById('password-input').addEventListener('keydown', e => {
+
+    if (e.key === 'Enter') {
+
+      e.preventDefault();
+
+      checkPassword();
+
+      e.target.blur();
+
+    }
+
+  });
 
 function checkPassword(){
 
