@@ -1278,17 +1278,56 @@ document.getElementById('password-input').addEventListener('keydown', e => {
     }
   });
 function checkPassword(){
+
   const value =
     document.getElementById('password-input').value;
- if(value === 'noct'){
-  document.getElementById('password-input').blur();
-  document.getElementById('password-modal')
-    .classList.remove('open');
-  openDetail(pendingEntry);
+
+  if(value === 'noct'){
+
+    document.getElementById('password-input').blur();
+
+    document.getElementById('password-modal')
+      .classList.remove('open');
+
+    const overlay =
+      document.getElementById('loading-overlay');
+
+    const bubbleCanvas =
+      document.getElementById('bubble-canvas');
+
+    const pageFade =
+      document.getElementById('page-fade');
+
+    // 初期化
+    pageFade.classList.remove('hide');
+
+    // 泡開始
+    overlay.classList.add('active');
+    bubbleCanvas.classList.add('active');
+
+    startBubbles(bubbleCanvas);
+
+    // 白い光
+    setTimeout(() => {
+      pageFade.classList.add('hide');
+    }, 1200);
+
+    // 一覧表示
+    setTimeout(() => {
+
+      overlay.classList.remove('active');
+      bubbleCanvas.classList.remove('active');
+
+      openDetail(pendingEntry);
+
+    }, 2200);
+
   } else {
+
     document
       .getElementById('password-input')
       .value = '';
+
   }
 }
 
