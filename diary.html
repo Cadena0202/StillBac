@@ -173,7 +173,10 @@ header:hover .site-title {
   }
   /* パスワードモーダル */
 #password-modal{
-  display:none;
+  display:flex;
+
+  opacity:0;
+  visibility:hidden;
 
   position:fixed;
   inset:0;
@@ -186,12 +189,14 @@ header:hover .site-title {
   justify-content:center;
 
   padding:40px 24px;
+
+  transition:opacity .3s ease;
 }
 
 #password-modal.open{
-  display:flex;
+  opacity:1;
+  visibility:visible;
 }
-
   .password-inner{
   position:relative;
   z-index:71;
@@ -605,7 +610,7 @@ header:hover .site-title {
       enter
     </button>
     
-  </div>　  
+  </div>
 </div>
 
 <!-- 新月ボタン（オーナー投稿用） -->
