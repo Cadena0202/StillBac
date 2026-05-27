@@ -1234,6 +1234,7 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentCat = btn.dataset.cat;
+    currentPage =1;
     renderCards();
   });
 });
