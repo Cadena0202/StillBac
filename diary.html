@@ -1045,11 +1045,48 @@ if (isOwner) {
   document.getElementById('new-moon-btn').classList.add('show');
 }
 
-loadEntries();
-   requestAnimationFrame(() =>
-    { requestAnimationFrame(() =>
-    { document.getElementById('page-fade').classList.add('hide'); }); })
+/* ===== リロード時演出 ===== */
+const navEntries =
+  performance.getEntriesByType('navigation');
 
+const isReload =
+  navEntries.length &&
+  navEntries[0].type === 'reload';
+
+if (isReload) {
+
+  const fade =
+    document.getElementById('page-fade');
+
+  const bubbleCanvas =
+    document.getElementById('bubble-canvas');
+
+  fade.classList.add('dark');
+  fade.classList.remove('hide');
+
+  bubbleCanvas.classList.add('active');
+
+  startBubbles(bubbleCanvas, 'down');
+
+  setTimeout(() => {
+
+    window.location.href = 'index.html';
+
+  }, 900);
+
+} else {
+
+  loadEntries();
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document
+        .getElementById('page-fade')
+        .classList.add('hide');
+    });
+  });
+
+}
 async function loadEntries() {
   const grid = document.getElementById('card-grid');
   grid.innerHTML = '<div class="loading-note">— loading —</div>';
