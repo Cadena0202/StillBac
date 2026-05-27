@@ -412,7 +412,12 @@ function startBubbles(bc) {
 
   requestAnimationFrame(anim);
 }
- 
+ if (sessionStorage.getItem('fromDiary') === 'true') {
+  sessionStorage.removeItem('fromDiary');
+  const bc = document.getElementById('bubble-canvas');
+  bc.classList.add('active');
+  startReloadBubbles(bc);
+}
 function checkPassword() {
   const val = document.getElementById('pw-input').value.trim();
   const err = document.getElementById('pw-error');
