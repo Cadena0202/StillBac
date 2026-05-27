@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Log — Remember the promise.</title>
 <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -207,7 +207,7 @@ header:hover .site-title {
   box-shadow:
     0 8px 40px rgba(0,0,0,0.45),
     0 0 20px rgba(200,220,255,0.04);
-  transform:translateY(18px) scale(0.96);
+  transform:translateY(18px);
   filter:blur(8px);
   opacity:0;
   transition:
@@ -216,7 +216,7 @@ header:hover .site-title {
     opacity 0.8s ease;
 }
  #password-modal.open .password-inner{
-  transform:translateY(0) scale(1);
+  transform:translateY(0);
   filter:blur(0);
   opacity:1;
 }
@@ -243,6 +243,7 @@ header:hover .site-title {
   color:rgba(220,230,245,0.78);
   font-family:'Shippori Mincho', serif;
   font-size:16px;
+  transform:none;
   padding:8px 2px;
   outline:none;
   letter-spacing:0.08em;
