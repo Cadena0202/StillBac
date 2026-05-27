@@ -1090,6 +1090,8 @@ if (isReload) {
 
   const fade = document.getElementById('page-fade');
 
+  sessionStorage.setItem('fromDiary', 'true')
+  
   fade.classList.add('dark');
   fade.classList.remove('hide');
   const bc =document.getElementById('bubble-canvas');
