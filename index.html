@@ -357,6 +357,13 @@ document.getElementById('pw-input').addEventListener('keydown', e => {
     checkPassword();
   }
 });
+ document.getElementById('pw-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    e.target.blur();
+    checkPassword();
+  }
+});
 </script>
 </body>
 </html>
