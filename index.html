@@ -315,7 +315,6 @@ function startBubbles(bc) {
 if (sessionStorage.getItem('fromDiary') === 'true') {
   sessionStorage.removeItem('fromDiary');
   const overlay = document.getElementById('loading-overlay');
-  setTimeout(() => {
     overlay.classList.remove('active');
   }, 600);
 }
