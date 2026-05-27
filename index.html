@@ -108,6 +108,12 @@
 </head>
 <body>
 
+ <script>
+if (sessionStorage.getItem('fromDiary') === 'true') {
+  document.documentElement.style.background = '#04060c';
+}
+</script>
+
 <canvas id="bg"></canvas>
 <div class="corner corner-tl"></div>
 <div class="corner corner-tr"></div>
@@ -310,7 +316,6 @@ function startBubbles(bc) {
 if (sessionStorage.getItem('fromDiary') === 'true') {
   sessionStorage.removeItem('fromDiary');
   const overlay = document.getElementById('loading-overlay');
-  overlay.classList.add('active');
   setTimeout(() => {
     overlay.classList.remove('active');
   }, 1500);
