@@ -962,88 +962,120 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-function startBubbles(bc, direction = 'up', duraction =2600) {
+function startBubbles(bc, direction = 'up') {
+
   const bctx = bc.getContext('2d');
-  bc.width  = window.innerWidth;
+
+  bc.width = window.innerWidth;
   bc.height = window.innerHeight;
-  const BW = bc.width, BH = bc.height;
 
-  const bubbles = Array.from({length: 120}, (_, i) => {
-  const b = {
-    x: Math.random() * BW,
-    y: direction === 'down' ? -Math.random() * 80 - 20 : BH + Math.random() * 80 + 20,
-    r: Math.random() * 14 + 2,
-    speed: Math.random() * 6 + 2.5,
-    alpha: Math.random() * 0.35 + 0.12,
-    wobble: Math.random() * Math.PI * 2,
-    wobbleAmp: Math.random() * 8 + 1,
-    delay: i * 20,
-    born: false,
-    startTime: null,
-  };
-  if (Math.random() < 0.08) {
-    b.r *= 2.4;
-    b.speed *= 0.7;
-    b.alpha *= 1.4;
-  }
-  return b;
-})
+  const BW = bc.width;
+  const BH = bc.height;
 
-  
-  let startTime = null;
+  const bubbles = Array.from({ length: 120 }, (_, i) => {
+
+    const b = {
+      x: Math.random() * BW,
+      y: direction === 'down' ? -Math.random() * 80 - 20 : BH + Math.random() * 80 + 20,
+
+      r: Math.random() * 14 + 2,
+      speed: Math.random() * 6 + 2.5,
+      alpha: Math.random() * 0.35 + 0.12,
+
+      wobble: Math.random() * Math.PI * 2,
+      wobbleAmp: Math.random() * 8 + 1,
+
+      delay: i * 20,
+
+      born: false,
+      startTime: null,
+    };
+
+    // たまに巨大泡
+    if (Math.random() < 0.08) {
+      b.r *= 2.4;
+      b.speed *= 0.7;
+      b.alpha *= 1.4;
+    }
+
+    return b;
+  });
+
+  let st = null;
   let running = true;
 
-  function animBubbles(ts) {
+  function anim(ts) {
+
     if (!running) return;
-    if (!startTime) startTime = ts;
-    const elapsed = ts - startTime;
+
+    if (!st) st = ts;
+
+    const el = ts - st;
+
     bctx.clearRect(0, 0, BW, BH);
 
     for (const b of bubbles) {
-      if (!b.born && elapsed < b.delay) continue;
-      if (!b.born) { b.born = true; b.startTime = ts; }
 
-      const age = ts - b.startTime;
-     if (direction==='down') b.y +=b.speed; else b.y -= b.speed;
+      if (!b.born && el < b.delay) continue;
+
+      if (!b.born) {
+        b.born = true;
+        b.startTime = ts;
+      }
+
+      if (direction==='down') b.y +=b.speed; else b.y -= b.speed;
       b.wobble += 0.03;
+
       const bx = b.x + Math.sin(b.wobble) * b.wobbleAmp;
 
-      if (direction==='down' ?b.y -b.r > BH:b.y + b.r < 0) {
-        b.y = direction==='down' ?-b.r : BH + b.r;
-        b.x = Math.random() * BW;
-      }
-        
-      // 泡の描画
-      const grad = bctx.createRadialGradient(bx - b.r*0.3, b.y - b.r*0.3, b.r*0.1, bx, b.y, b.r);
-      grad.addColorStop(0,   `rgba(220,235,255,${b.alpha * 0.6})`);
-      grad.addColorStop(0.5, `rgba(180,210,255,${b.alpha * 0.25})`);
-      grad.addColorStop(1,   `rgba(140,185,240,${b.alpha * 0.08})`);
+      if (direction === 'down' ) ? b.y - b.r > BH : b.y + b.r < 0) continue;
+
+      const g = bctx.createRadialGradient(
+        bx - b.r * 0.3,
+        b.y - b.r * 0.3,
+        b.r * 0.1,
+        bx,
+        b.y,
+        b.r
+      );
+
+      g.addColorStop(0, `rgba(220,235,255,${b.alpha * 0.6})`);
+      g.addColorStop(0.5, `rgba(180,210,255,${b.alpha * 0.25})`);
+      g.addColorStop(1, `rgba(140,185,240,${b.alpha * 0.08})`);
 
       bctx.beginPath();
       bctx.arc(bx, b.y, b.r, 0, Math.PI * 2);
-      bctx.fillStyle = grad;
+      bctx.fillStyle = g;
       bctx.fill();
 
-      // 縁
       bctx.beginPath();
       bctx.arc(bx, b.y, b.r, 0, Math.PI * 2);
       bctx.strokeStyle = `rgba(200,225,255,${b.alpha * 0.40})`;
       bctx.lineWidth = 0.7;
       bctx.stroke();
 
-      // 光沢
       bctx.beginPath();
-      bctx.arc(bx - b.r*0.28, b.y - b.r*0.28, b.r*0.22, 0, Math.PI*2);
+      bctx.arc(
+        bx - b.r * 0.28,
+        b.y - b.r * 0.28,
+        b.r * 0.22,
+        0,
+        Math.PI * 2
+      );
+
       bctx.fillStyle = `rgba(255,255,255,${b.alpha * 0.45})`;
       bctx.fill();
     }
 
-    if (elapsed < 4000) requestAnimationFrame(animBubbles);
-    else { bctx.clearRect(0,0,BW,BH); running = false; }
+    if (el < 3400) {
+      requestAnimationFrame(anim);
+    } else {
+      running = false;
+    }
   }
 
+  requestAnimationFrame(anim);
 
-  requestAnimationFrame(animBubbles);
 }
 
   
