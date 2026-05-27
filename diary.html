@@ -926,8 +926,8 @@ if (!mode) {
   const fade =
     document.getElementById('page-fade');
   // フェードを再表示
-  requestAnimationFrame(()
-    { requestAnimationFrame(()
+  requestAnimationFrame(() =>
+    { requestAnimationFrame(() =>
     { fade.classList.remove('hide'); }); })
   setTimeout(() => {
     window.location.href = 'index.html';
@@ -954,8 +954,8 @@ if (isOwner) {
 }
 
 loadEntries();
-   requestAnimationFrame(()
-    { requestAnimationFrame(()
+   requestAnimationFrame(() =>
+    { requestAnimationFrame(() =>
     { document.getElementById('page-fade').classList.add('hide'); }); })
 
 function startBubbles(bc) {
