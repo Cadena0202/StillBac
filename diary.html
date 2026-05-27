@@ -624,29 +624,25 @@ header:hover .site-title {
     pointer-events: auto;
   }
   /* 白フェードイン */
-#page-fade{
-  position:fixed;
-  inset:0;
-  z-index:999;
+#page-fade {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
   background:
-    linear-gradient(
-      to bottom,
-      rgba(240,245,255,0.92) 0%,
-      rgba(210,225,255,0.55) 18%,
-      rgba(140,180,255,0.10) 45%,
-      rgba(255,255,255,0) 100%
-    );
-  opacity:0;
-  pointer-events:none;
-  transition:
-    opacity 1.8s ease;
+    radial-gradient(circle at 50% 38%,
+      rgba(180,210,255,0.22) 0%,
+      rgba(120,160,220,0.14) 22%,
+      rgba(80,120,180,0.06) 48%,
+      rgba(255,255,255,0) 78%);
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 2.4s ease;
 }
-#page-fade.hide{
-  opacity:0;
+
+#page-fade.hide {
+  opacity: 0;
 }
-#page-fade:not(.hide){
-  opacity:1;
-}
+  
   #bubble-canvas {
     position: fixed; inset: 0; z-index: 56; pointer-events: none;
     opacity: 0; transition: opacity 0.4s ease;
@@ -1278,56 +1274,17 @@ document.getElementById('password-input').addEventListener('keydown', e => {
     }
   });
 function checkPassword(){
-
   const value =
     document.getElementById('password-input').value;
-
-  if(value === 'noct'){
-
-    document.getElementById('password-input').blur();
-
-    document.getElementById('password-modal')
-      .classList.remove('open');
-
-    const overlay =
-      document.getElementById('loading-overlay');
-
-    const bubbleCanvas =
-      document.getElementById('bubble-canvas');
-
-    const pageFade =
-      document.getElementById('page-fade');
-
-    // 初期化
-    pageFade.classList.remove('hide');
-
-    // 泡開始
-    overlay.classList.add('active');
-    bubbleCanvas.classList.add('active');
-
-    startBubbles(bubbleCanvas);
-
-    // 白い光
-    setTimeout(() => {
-      pageFade.classList.add('hide');
-    }, 1200);
-
-    // 一覧表示
-    setTimeout(() => {
-
-      overlay.classList.remove('active');
-      bubbleCanvas.classList.remove('active');
-
-      openDetail(pendingEntry);
-
-    }, 2200);
-
+ if(value === 'noct'){
+  document.getElementById('password-input').blur();
+  document.getElementById('password-modal')
+    .classList.remove('open');
+  openDetail(pendingEntry);
   } else {
-
     document
       .getElementById('password-input')
       .value = '';
-
   }
 }
 
@@ -1335,6 +1292,11 @@ function checkPassword(){
 document.getElementById('detail-modal').addEventListener('click', e => { if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); });
 document.getElementById('post-modal').addEventListener('click', e => { if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); });
   
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('page-fade').classList.add('hide');
+  }, 200);
+});
   // リロード・タブ閉じで再認証
 function clearAuth() {
   sessionStorage.removeItem('mode');
