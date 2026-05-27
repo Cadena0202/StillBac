@@ -1068,7 +1068,7 @@ function renderCards() {
   
   renderPagination(filtered.length);
 }
- function renderPagination(totalItems){
+function renderPagination(totalItems){
 
   const pagination =
     document.getElementById('pagination');
@@ -1106,9 +1106,10 @@ function renderCards() {
     });
 
     pagination.appendChild(btn);
-      }
   }
-  let pendingEntry = null;
+}
+
+let pendingEntry = null;
 
 function askpassword(entry){
   pendingEntry = entry;
