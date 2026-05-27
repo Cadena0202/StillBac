@@ -926,7 +926,15 @@ const db = getFirestore(app);
 const mode = sessionStorage.getItem('mode');
 
 if (!mode) {
-  window.location.href = 'index.html';
+
+  const fade =
+    document.getElementById('deep-fade');
+
+  fade.classList.add('active');
+
+  setTimeout(() => {
+    window.location.replace('index.html');
+  }, 500);
 }
 
 let isOwner = mode === 'owner';
