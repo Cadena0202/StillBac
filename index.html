@@ -62,7 +62,7 @@
   /* ローディング */
   #loading-overlay {
     position: fixed; inset: 0; z-index: 55;
-    background: rgba(4,6,12,0); pointer-events: none; transition: background 0.3s ease;
+    background: rgba(4,6,12,0); pointer-events: none; transition: background 0.8s ease;
   }
   #loading-overlay.active { background: rgba(4,6,12,0.97); pointer-events: auto; }
   #bubble-canvas {
@@ -317,7 +317,7 @@ if (sessionStorage.getItem('fromDiary') === 'true') {
   const overlay = document.getElementById('loading-overlay');
     setTimeout(() => {
     overlay.classList.remove('active');
-  }, 600);
+  }, 0);
 }
 function checkPassword() {
   const val = document.getElementById('pw-input').value.trim();
