@@ -930,6 +930,7 @@ if (!mode) {
   setTimeout(() => {
     window.location.href = 'index.html';
   }, 1200);
+  
 } else {
 
 let isOwner = mode === 'owner';
@@ -1289,11 +1290,6 @@ function checkPassword(){
 document.getElementById('detail-modal').addEventListener('click', e => { if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); });
 document.getElementById('post-modal').addEventListener('click', e => { if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); });
   
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('page-fade').classList.add('hide');
-  }, 200);
-});
   // リロード・タブ閉じで再認証
 function clearAuth() {
   sessionStorage.removeItem('mode');
