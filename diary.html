@@ -1028,6 +1028,15 @@ document.getElementById('back-top-btn').addEventListener('click', () => window.s
 document.getElementById('password-submit').addEventListener('click', checkPassword);
 document.getElementById('password-close').addEventListener('click', () => {
 document.getElementById('password-modal').classList.remove('open');});
+document.getElementById('password-modal').addEventListener('click', e => {
+
+    if(e.target === e.currentTarget){
+
+      e.currentTarget.classList.remove('open');
+
+    }
+
+  });
 
 function checkPassword(){
 
