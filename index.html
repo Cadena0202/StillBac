@@ -108,15 +108,6 @@
 </head>
 <body>
 
-<script>
-if (sessionStorage.getItem('fromDiary') === 'true') {
-  document.addEventListener('DOMContentLoaded', () => {
-    const ol = document.getElementById('loading-overlay');
-    ol.style.background = 'rgba(4,6,12,0.97)';
-  });
-}
-</script>
- 
 <canvas id="bg"></canvas>
 <div class="corner corner-tl"></div>
 <div class="corner corner-tr"></div>
@@ -131,6 +122,11 @@ if (sessionStorage.getItem('fromDiary') === 'true') {
 </div>
 
 <div id="loading-overlay"></div>
+ <script>
+if (sessionStorage.getItem('fromDiary') === 'true') {
+  document.getElementById('loading-overlay').style.background = 'rgba(4,6,12,0.97)';
+}
+</script>
 <div id="white-flash"></div>
 <canvas id="bubble-canvas"></canvas>
 
