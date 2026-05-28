@@ -1035,9 +1035,9 @@ function startBubbles(bc, direction = 'up') {
         b.r
       );
 
-      g.addColorStop(0, `rgba(200,180,255,${b.alpha * fadOut * 0.6})`);
-      g.addColorStop(0.5, `rgba(160,130,240,${b.alpha * fadOut * 0.25})`);
-      g.addColorStop(1, `rgba(120,90,200,${b.alpha * fadOut * 0.08})`);
+      g.addColorStop(0, `rgba(200,180,255,${b.alpha * fadeOut * 0.6})`);
+      g.addColorStop(0.5, `rgba(160,130,240,${b.alpha * fadeOut * 0.25})`);
+      g.addColorStop(1, `rgba(120,90,200,${b.alpha * fadeOut * 0.08})`);
 
       bctx.beginPath();
       bctx.arc(bx, b.y, b.r, 0, Math.PI * 2);
