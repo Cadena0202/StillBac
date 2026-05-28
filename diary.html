@@ -1135,11 +1135,6 @@ if (isReload) {
   
   fade.classList.add('dark');
   fade.classList.remove('hide');
-  const bc =document.getElementById('bubble-canvas');
-  bc.classList.add('active');
-  fade.classList.add('hide');
-  document.getElementById('main-content').style.display = 'none';
-  startBubbles(bc, 'down');
 
   setTimeout(() => {
     window.location.href = 'index.html';
