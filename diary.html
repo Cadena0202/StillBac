@@ -263,6 +263,7 @@ header:hover .site-title {
   height: 1px;
   opacity: 0.55;
   margin-bottom: 4px;
+  flex: 1;
 }
   .card-line.line-to  { background: rgba(90,180,240,0.70); }
   .card-line.line-me  { background: rgba(140,100,200,0.65); }
@@ -1182,11 +1183,11 @@ function renderCards() {
     const preview = (entry.body || '');
     const dotClass = `dot-${entry.category || 'all'}`;
     card.innerHTML = `
-      <div class="card-meta">
-        <span class="card-date">${escHtml(entry.date || '')}</span>
-      </div>      
-      <div class="card-body">${escHtml(preview)}</div>
-      <div class="card-line line-${entry.category || 'all'}"></div>
+<div class="card-meta">
+  <span class="card-date">${escHtml(entry.date || '')}</span>
+  <div class="card-line line-${entry.category || 'all'}"></div>
+</div>
+<div class="card-body">${escHtml(preview)}</div>
     `;
     card.addEventListener('click', () => askpassword(entry));
     grid.appendChild(card);});
