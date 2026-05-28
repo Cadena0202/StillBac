@@ -258,6 +258,7 @@ header:hover .site-title {
   .card-meta {
     display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
   }
+   /* カテゴリ色のライン */
   .card-line {
   height: 1px;
   opacity: 0.55;
@@ -300,13 +301,6 @@ header:hover .site-title {
   opacity: 0.75;
 }
   /* カテゴリ色の丸（左下） */
-  .card-cat-dot {
-    position: absolute; bottom: 0; left: 0;
-    width: 28px; height: 28px; border-radius: 0 28px 0 0;
-  }
-  .dot-to   { background: rgba(90,180,240,0.35); }
-  .dot-me   { background: rgba(140,100,200,0.30); }
-  .dot-all  { background: rgba(180,180,180,0.20); }
 
   /* 詳細モーダル */
   #detail-modal {
@@ -1192,7 +1186,7 @@ function renderCards() {
         <span class="card-date">${escHtml(entry.date || '')}</span>
       </div>      
       <div class="card-body">${escHtml(preview)}</div>
-      <div class="card-cat-dot ${dotClass}"></div>
+      <div class="card-line line-${entry.category || 'all'}"></div>
     `;
     card.addEventListener('click', () => askpassword(entry));
     grid.appendChild(card);});
