@@ -844,7 +844,7 @@ const pwInput=document.getElementById('pw-input');
 pwInput.addEventListener('keydown',e=>{
   if(e.key==='Enter'){
     e.preventDefault();
-    e.targetblur();
+    e.target.blur();
     checkPassword();
   }
 });
