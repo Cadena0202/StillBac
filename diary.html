@@ -1413,6 +1413,12 @@ document.getElementById('post-modal').addEventListener('click', e => { if(e.targ
 function clearAuth() {
   sessionStorage.removeItem('mode');
 }
+  window.addEventListener('pageshow', (e) => {
+  if (e.persisted) {
+    window.location.reload();
+  }
+});
+
 // PC
 window.addEventListener('beforeunload', () => {
 
