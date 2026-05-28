@@ -302,12 +302,15 @@ header:hover .site-title {
   opacity: 0.75;
 }
 
-  .ln-card {
-  padding: 8px 0;
+ .ln-card {
+  padding: 12px 0 0 0;
   border-bottom: 1px solid rgba(200,220,255,0.07);
   opacity: 0;
   transform: translateY(6px);
   animation: cardrise 0.55s ease forwards;
+  display: flex;
+  flex-direction: column;
+  min-height: 160px;
 }
 .ln-date {
   font-family: 'Cormorant Garamond', serif;
@@ -318,11 +321,15 @@ header:hover .site-title {
   margin-bottom: 6px;
 }
 .ln-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
   font-size: 10px;
   line-height: 2.2;
   color: rgba(200,218,245,0.70);
   letter-spacing: 0.05em;
   white-space: pre-wrap;
+  padding: 8px 0 12px 0;
 }
 .ln-header {
   display: flex;
