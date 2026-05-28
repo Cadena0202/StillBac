@@ -1421,7 +1421,8 @@ function clearAuth() {
 }
   window.addEventListener('pageshow', (e) => {
   if (e.persisted) {
-    window.location.reload();
+    sessionStorage.setItem('fromDiary', 'true');
+    window.location.herf = 'index.html';
   }
 });
 
