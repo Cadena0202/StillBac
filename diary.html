@@ -301,6 +301,29 @@ header:hover .site-title {
   filter: blur(2px);
   opacity: 0.75;
 }
+
+  .ln-card {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(200,220,255,0.07);
+  opacity: 0;
+  transform: translateY(6px);
+  animation: cardrise 0.55s ease forwards;
+}
+.ln-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 10px;
+  color: rgba(200,169,58,0.45);
+  letter-spacing: 0.18em;
+  margin-bottom: 10px;
+}
+.ln-body {
+  font-size: 10px;
+  line-height: 2.2;
+  color: rgba(200,218,245,0.70);
+  letter-spacing: 0.05em;
+  white-space: pre-wrap;
+}
   /* カテゴリ色の丸（左下） */
 
   /* 詳細モーダル */
@@ -1198,6 +1221,49 @@ function renderCards() {
     `;
     card.addEventListener('click', () => askpassword(entry));
     grid.appendChild(card);});
+  
+  renderPagination(filtered.length);
+}
+function renderPagination(totalItems){
+
+  const pagination =
+    document.getElementById('pagination');
+
+  pagination.innerHTML = '';
+
+  const totalPages =
+    Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+  if(totalPages <= 1) return;
+
+  for(let i = 1; i <= totalPages; i++){
+
+    const btn = document.createElement('button');
+
+    btn.className = 'page-btn';
+
+    if(i === currentPage){
+      btn.classList.add('active');
+    }
+
+    btn.textContent = i;
+
+    btn.addEventListener('click', () => {
+
+      currentPage = i;
+
+      renderCards();
+
+      window.scrollTo({
+        top:0,
+        behavior:'smooth'
+      });
+
+    });
+
+    pagination.appendChild(btn);
+  }
+}
   
   renderPagination(filtered.length);
 }
