@@ -1097,7 +1097,7 @@ document.querySelector('.corner-top').addEventListener('click', e => {
 
 const mode = sessionStorage.getItem('mode');
 
-if (mode === 'guest' || mode === 'owner') {
+if (mode === 'reader' || mode === 'owner') {
 
 let isOwner = mode === 'owner';
 let allEntries = [];
