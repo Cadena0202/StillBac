@@ -1023,7 +1023,8 @@ function startBubbles(bc, direction = 'up') {
       const bx = b.x + Math.sin(b.wobble) * b.wobbleAmp;
 
       if (direction === 'down' ? b.y - b.r > BH : b.y + b.r < 0) continue;
-      
+
+      const fadeOut = Math.max(0, 1 - el / 4000);
       const g = bctx.createRadialGradient(
         bx - b.r * 0.3,
         b.y - b.r * 0.3,
@@ -1033,9 +1034,9 @@ function startBubbles(bc, direction = 'up') {
         b.r
       );
 
-      g.addColorStop(0, `rgba(200,2180,255,${b.alpha * 0.6})`);
-      g.addColorStop(0.5, `rgba(160,130,240,${b.alpha * 0.25})`);
-      g.addColorStop(1, `rgba(120,90,200,${b.alpha * 0.08})`);
+      g.addColorStop(0, `rgba(200,2180,255,${b.alpha * fadOut * 0.6})`);
+      g.addColorStop(0.5, `rgba(160,130,240,${b.alpha * fadOut * 0.25})`);
+      g.addColorStop(1, `rgba(120,90,200,${b.alpha * fadOut * 0.08})`);
 
       bctx.beginPath();
       bctx.arc(bx, b.y, b.r, 0, Math.PI * 2);
@@ -1044,7 +1045,7 @@ function startBubbles(bc, direction = 'up') {
 
       bctx.beginPath();
       bctx.arc(bx, b.y, b.r, 0, Math.PI * 2);
-      bctx.strokeStyle = `rgba(180,160,255,${b.alpha * 0.40})`;
+      bctx.strokeStyle = `rgba(180,160,255,${b.alpha * fadOut * 0.40})`;
       bctx.lineWidth = 0.7;
       bctx.stroke();
 
