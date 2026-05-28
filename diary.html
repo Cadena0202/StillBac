@@ -1207,20 +1207,28 @@ function renderCards() {
     return;
   }
   paginated.forEach((entry, i) => {
-    const card = document.createElement('div');
-    card.className = 'log-card';
-    card.style.animationDelay = `${i * 0.07}s`;
-    const preview = (entry.body || '');
-    const dotClass = `dot-${entry.category || 'all'}`;
+  const card = document.createElement('div');
+  card.style.animationDelay = `${i * 0.07}s`;
+
+  if (currentCat === 'Ln') {
+    card.className = 'ln-card';
     card.innerHTML = `
-<div class="card-meta">
-  <span class="card-date">${escHtml(entry.date || '')}</span>
-  <div class="card-line line-${entry.category || 'all'}"></div>
-</div>
-<div class="card-body">${escHtml(preview)}</div>
+      <div class="ln-date">${escHtml(entry.date || '')}</div>
+      <div class="ln-body">${escHtml(entry.body || '')}</div>
+    `;
+  } else {
+    card.className = 'log-card';
+    card.innerHTML = `
+      <div class="card-meta">
+        <span class="card-date">${escHtml(entry.date || '')}</span>
+        <div class="card-line line-${entry.category || 'all'}"></div>
+      </div>
+      <div class="card-body">${escHtml(preview)}</div>
     `;
     card.addEventListener('click', () => askpassword(entry));
-    grid.appendChild(card);});
+  }
+  grid.appendChild(card);
+});
   
   renderPagination(filtered.length);
 }
@@ -1266,46 +1274,6 @@ function renderPagination(totalItems){
 }
   
   renderPagination(filtered.length);
-}
-function renderPagination(totalItems){
-
-  const pagination =
-    document.getElementById('pagination');
-
-  pagination.innerHTML = '';
-
-  const totalPages =
-    Math.ceil(totalItems / ITEMS_PER_PAGE);
-
-  if(totalPages <= 1) return;
-
-  for(let i = 1; i <= totalPages; i++){
-
-    const btn = document.createElement('button');
-
-    btn.className = 'page-btn';
-
-    if(i === currentPage){
-      btn.classList.add('active');
-    }
-
-    btn.textContent = i;
-
-    btn.addEventListener('click', () => {
-
-      currentPage = i;
-
-      renderCards();
-
-      window.scrollTo({
-        top:0,
-        behavior:'smooth'
-      });
-
-    });
-
-    pagination.appendChild(btn);
-  }
 }
 
 let pendingEntry = null;
@@ -1487,7 +1455,6 @@ function checkPassword(){
   currentPage = 1;
   renderCards();
 }
-  openDetail(pendingEntry);
   } else {
     document
       .getElementById('password-input')
