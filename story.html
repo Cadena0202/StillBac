@@ -870,6 +870,17 @@ document.getElementById('story-modal').addEventListener('click',e=>{
   }
 });
 document.getElementById('post-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open');});  
+  
+// リロード・タブ閉じで再認証
+function clearAuth() {
+  sessionStorage.removeItem('mode');
+}
+  window.addEventListener('pageshow', (e) => {
+  if (e.persisted) {
+    window.location.href ='index.html';
+  }
+});
+  
 </script> 
 </body>
 </html>
