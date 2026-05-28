@@ -1223,7 +1223,7 @@ function renderCards() {
         <span class="card-date">${escHtml(entry.date || '')}</span>
         <div class="card-line line-${entry.category || 'all'}"></div>
       </div>
-      <div class="card-body">${escHtml(preview)}</div>
+      <div class="card-body">${escHtml(entry.body || '')}</div>
     `;
     card.addEventListener('click', () => askpassword(entry));
   }
@@ -1272,9 +1272,7 @@ function renderPagination(totalItems){
     pagination.appendChild(btn);
   }
 }
-  
-  renderPagination(filtered.length);
-}
+
 
 let pendingEntry = null;
 
