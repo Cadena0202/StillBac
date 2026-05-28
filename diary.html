@@ -1080,6 +1080,7 @@ document.querySelector('.corner-top').addEventListener('click', e => {
   const fade = document.getElementById('page-fade');
   const bubbleCanvas = document.getElementById('bubble-canvas');
 
+  document.getElementById('loading-overlay').classList.add('active')
   bubbleCanvas.classList.add('active');
   startBubbles(bubbleCanvas, 'down', 130);
 
