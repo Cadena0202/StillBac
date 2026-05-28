@@ -782,6 +782,7 @@ if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
       <button class="cat-btn" data-cat="to">to</button>
       <button class="cat-btn" data-cat="me">me</button>
       <button class="cat-btn active" data-cat="all">all</button>
+      <button class="cat-btn active" data-cat="Ln">Ln</button>
       <div class="cat-line"></div>
     </div>
 
@@ -1364,10 +1365,15 @@ async function postEntry() {
 // カテゴリフィルター
 document.querySelectorAll('.cat-btn').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (btn.dataset.cat === 'Ln') {
+      document.getElementById('password-modal').classList.add('open');
+      document.getElementById('password-input').value = '';
+      return;
+    }
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentCat = btn.dataset.cat;
-    currentPage =1;
+    currentPage = 1;
     renderCards();
   });
 });
@@ -1406,6 +1412,15 @@ function checkPassword(){
   document.getElementById('password-input').blur();
   document.getElementById('password-modal')
     .classList.remove('open');
+   if (pendingEntry) {
+  openDetail(pendingEntry);
+} else {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('[data-cat="Ln"]').classList.add('active');
+  currentCat = 'Ln';
+  currentPage = 1;
+  renderCards();
+}
   openDetail(pendingEntry);
   } else {
     document
