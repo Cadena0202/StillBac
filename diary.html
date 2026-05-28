@@ -1231,7 +1231,7 @@ function renderCards() {
   if (currentCat === 'Ln') {
     card.className = 'ln-card';
     card.innerHTML = `
-      <div class="ln-date">${escHtml(entry.date || '')}</div><div class="ln-header">
+      <div class="ln-header">
   <div class="ln-date">${escHtml(entry.date || '')}</div>
   ${isOwner ? `<button class="ln-delete" data-id="${entry.id}">×</button>` : ''}
 </div>
