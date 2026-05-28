@@ -1061,7 +1061,7 @@ function startBubbles(bc, direction = 'up') {
       bctx.fill();
     }
 
-    if (el < 3400) {
+    if (el < 4000) {
       requestAnimationFrame(anim);
     } else {
       running = false;
@@ -1086,7 +1086,7 @@ document.querySelector('.corner-top').addEventListener('click', e => {
 
   setTimeout(() => {
     window.location.href = 'story.html';
-  }, 4300);
+  }, 4200);
 });
 
 const mode = sessionStorage.getItem('mode');
