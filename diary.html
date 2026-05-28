@@ -1236,7 +1236,6 @@ function renderCards() {
   ${isOwner ? `<button class="ln-delete" data-id="${entry.id}">×</button>` : ''}
 </div>
 <div class="ln-body">${escHtml(entry.body || '')}</div>
-      <div class="ln-body">${escHtml(entry.body || '')}</div>
     `;
   } else {
     card.className = 'log-card';
@@ -1250,6 +1249,7 @@ function renderCards() {
     card.addEventListener('click', () => askpassword(entry));
   }
   grid.appendChild(card);
+    
 if (isOwner && currentCat === 'Ln') {
   const delBtn = card.querySelector('.ln-delete');
   if (delBtn) {
