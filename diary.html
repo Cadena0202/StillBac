@@ -1024,7 +1024,7 @@ function startBubbles(bc, direction = 'up') {
 
       if (direction === 'down' ? b.y - b.r > BH : b.y + b.r < 0) continue;
 
-      const fadeOut = Math.max(0, 1 - el / 4000);
+      const fadeOut = Math.max(0, 1 - el / 3000);
       console.log(fadeOut)
       const g = bctx.createRadialGradient(
         bx - b.r * 0.3,
@@ -1063,7 +1063,7 @@ function startBubbles(bc, direction = 'up') {
       bctx.fill();
     }
 
-    if (el < 4000) {
+    if (el < 4500) {
       requestAnimationFrame(anim);
     } else {
       running = false;
