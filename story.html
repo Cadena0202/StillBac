@@ -439,6 +439,7 @@
 <div id="new-moon-btn" title="New story"></div>  
   
 <script>  
+sessionStorage.setItem('fromStory', 'true');
 const canvas=document.getElementById('bg'),ctx=canvas.getContext('2d');  
 let W,H;  
 function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}  
