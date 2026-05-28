@@ -1421,7 +1421,8 @@ function clearAuth() {
   sessionStorage.removeItem('mode');
 }
   window.addEventListener('pageshow', (e) => {
-  if (e.persisted) {
+    console.log(e.persisted);
+    if (e.persisted) {
     sessionStorage.setItem('fromDiary', 'true');
     const fade = document.getElementById('page-fade');
     fade.classList.add('dark');
