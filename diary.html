@@ -1497,6 +1497,7 @@ function checkPassword(){
   currentCat = 'Ln';
   currentPage = 1;
   renderCards();
+　requestAnimationFrame(() => { window.scrollTo(0, 0); });
 }
   } else {
     document
