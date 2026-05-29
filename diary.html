@@ -1220,6 +1220,11 @@ function renderCards() {
   const start = (currentPage - 1) * ITEMS_PER_PAGE;
   const end = start + ITEMS_PER_PAGE;
   const paginated = filtered.slice(start, end);
+  if (currentCat === 'Ln') {
+  grid.style.gridTemplateColumns = '1fr';
+} else {
+  grid.style.gridTemplateColumns = '';
+}
   grid.innerHTML = '';
   if (filtered.length === 0) {
     grid.innerHTML = '<div class="empty-note">— まだ何も書かれていない —</div>';
