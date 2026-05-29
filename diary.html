@@ -1495,8 +1495,11 @@ function checkPassword(){
   document.querySelector('[data-cat="Ln"]').classList.add('active');
   currentCat = 'Ln';
   currentPage = 1;
-  renderCards();
-　setTimeout(() => { window.scrollTo(0, 0); }, 100);
+renderCards();
+setTimeout(() => {
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}, 150);
 }
   } else {
     document
