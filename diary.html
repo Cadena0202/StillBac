@@ -1266,7 +1266,6 @@ if (isOwner && currentCat === 'Ln') {
         await deleteDoc(doc(db, 'entries', id));
         allEntries = allEntries.filter(e => e.id !== id);
         renderCards();
-        requestAnimationFrame(() => { window.scrollTo(0, 0); })
       } catch(err) {
         alert('削除に失敗しました。');
       }
