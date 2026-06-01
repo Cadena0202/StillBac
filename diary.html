@@ -1206,7 +1206,7 @@ async function loadEntries() {
   const grid = document.getElementById('card-grid');
   grid.innerHTML = '<div class="loading-note">— loading —</div>';
   try {
-    const q = query(collection(db,'entries'), orderBy('createdAt','desc'));
+    const q = query(collection(db,'entries'), orderBy('date','desc'));
     const snap = await getDocs(q);
     allEntries = [];
     snap.forEach(d => allEntries.push({ id: d.id, ...d.data() }));
