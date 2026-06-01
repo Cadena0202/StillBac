@@ -1450,6 +1450,16 @@ async function postEntry() {
 document.querySelectorAll('.cat-btn').forEach(btn => {
   btn.addEventListener('click', () => {
 if (btn.dataset.cat === 'Ln') {
+  
+   if (localStorage.getItem('authenticated') === 'true') {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = 'Ln';
+    currentPage = 1;
+    renderCards();
+    return;
+  }
+
   pendingEntry = null;  // ← ここ
   document.getElementById('password-modal').classList.add('open');
   document.getElementById('password-input').value = '';
