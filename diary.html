@@ -1325,6 +1325,10 @@ function renderPagination(totalItems){
 let pendingEntry = null;
 
 function askpassword(entry){
+  if (localStorage.getItem('authenticated') === 'true') {
+    openDetail(entry);
+    return;
+  }
   pendingEntry = entry;
 
   document.getElementById('password-modal')
