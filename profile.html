@@ -464,32 +464,40 @@ function changeWorld(world,btn){
 
   btn.classList.add('active');
 
-const data =
-worldData[world][currentCharacter];
+const content =
+document.getElementById('character-content');
 
-document.getElementById('name').textContent =
-data.name;
+content.classList.add('fade');
 
-document.getElementById('age').textContent =
-data.age;
+setTimeout(()=>{
 
-document.getElementById('job').textContent =
-data.job;
+  const data =
+  worldData[world][currentCharacter];
 
-document.getElementById('birthday').textContent =
-data.birthday;
+  document.getElementById('name').textContent =
+  data.name;
 
-document.getElementById('origin').textContent =
-data.origin;
+  document.getElementById('age').textContent =
+  data.age;
 
-  
+  document.getElementById('job').textContent =
+  data.job;
+
+  document.getElementById('birthday').textContent =
+  data.birthday;
+
+  document.getElementById('origin').textContent =
+  data.origin;
+
   if(world === 'real'){
     document.body.classList.add('real-mode');
   }else{
     document.body.classList.remove('real-mode');
   }
 
-}
+  content.classList.remove('fade');
+
+},1200);
 
 
 function openProfile(){
