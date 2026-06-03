@@ -428,7 +428,28 @@ body.real-mode .accordion-trigger{
   top:80%;
   transform:translateY(-50%);
 }
-  
+
+.gate-input{
+  position:absolute;
+  background:none;
+  border:none;
+  border-bottom:1px solid rgba(212,176,106,.4);
+  color:#d4b06a;
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;
+  letter-spacing:3px;
+  text-align:center;
+  width:180px;
+  outline:none;
+  opacity:0;
+  transition:opacity .8s ease;
+  padding:5px 0;
+}
+
+.gate-input.show{
+  opacity:1;
+}
+
 }
 </style>
 </head>
@@ -437,9 +458,16 @@ body.real-mode .accordion-trigger{
 <!-- GATE -->
 
 <div id="gate">
-  <div class="gate-text" onclick="openProfile()">
+  <div class="gate-text" id="gate-question" onclick="showPasswordInput()">
     Would you like to view it?
   </div>
+  <input
+    class="gate-input"
+    id="gate-input"
+    type="password"
+    onkeydown="checkPassword(event)"
+    autocomplete="off"
+  >
 </div>
 
 <!-- PROFILE -->
@@ -607,13 +635,39 @@ setTimeout(()=>{
 }
 
   
-function openProfile(){
-  document.getElementById('gate').classList.add('fade-out');
+const PASSWORD = 'pisces';
+
+function showPasswordInput(){
+  const question = document.getElementById('gate-question');
+  const input = document.getElementById('gate-input');
+
+  question.classList.add('fade-out');
 
   setTimeout(()=>{
-    document.getElementById('gate').style.display='none';
-    document.getElementById('profile').classList.add('show');
-  },1200);
+    question.style.display='none';
+    input.classList.add('show');
+    input.focus();
+  },800);
+}
+
+function checkPassword(e){
+  if(e.key !== 'Enter') return;
+
+  const input = document.getElementById('gate-input');
+
+  if(input.value === PASSWORD){
+    document.getElementById('gate').classList.add('fade-out');
+    setTimeout(()=>{
+      document.getElementById('gate').style.display='none';
+      document.getElementById('profile').classList.add('show');
+    },800);
+  }else{
+    input.value='';
+    input.style.borderBottomColor='rgba(255,80,80,.6)';
+    setTimeout(()=>{
+      input.style.borderBottomColor='rgba(212,176,106,.4)';
+    },600);
+  }
 }
 
 const characters = {
