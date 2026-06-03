@@ -583,6 +583,7 @@ const worldData = {
       job:'Cafe Owner / Investor',
       birthday:'2.24',
       origin:'Coral Sea'
+      image;'';
     },
     kadena:{
       name:'Kadena',
@@ -590,6 +591,7 @@ const worldData = {
       job:'Merchant',
       birthday:'--',
       origin:'Jewel Country'
+      image;'';
     }
   },
 
@@ -600,6 +602,7 @@ const worldData = {
       job:'University Student',
       birthday:'2.24',
       origin:'Japan'
+      image;'';
     },
     kadena:{
       name:'Kadena',
@@ -607,6 +610,7 @@ const worldData = {
       job:'Office Worker',
       birthday:'--',
       origin:'Japan'
+      image;'';
     }
   }
 
@@ -647,6 +651,9 @@ function changeCharacter(id,btn){
 
   document.getElementById('origin').textContent =
   data.origin;
+
+  document.getElementById('banner-image').src =
+  data.image;
 
   content.classList.remove('fade');
 
