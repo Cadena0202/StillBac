@@ -51,6 +51,9 @@ body{
   0 0 20px rgba(212,176,106,.4);
 
   animation: glow 3s infinite ease-in-out;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
 }
 
 @keyframes glow{
@@ -444,6 +447,10 @@ body.real-mode .accordion-trigger{
   opacity:0;
   transition:opacity .8s ease;
   padding:5px 0;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+
 }
 
 .gate-input.show{
