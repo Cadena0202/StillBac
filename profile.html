@@ -295,6 +295,37 @@ body{
   margin:0 12px;
   opacity:.25;
 }
+
+body.real-mode{
+  background:#cfcfcf;
+  color:#1f2a35;
+}
+
+body.real-mode .profile-card,
+body.real-mode .record-btn,
+body.real-mode .modal-content{
+  border-color:rgba(31,42,53,.25);
+}
+
+body.real-mode .record-btn{
+  color:#1f2a35;
+}
+
+body.real-mode .record-btn:hover{
+  background:rgba(31,42,53,.08);
+}
+
+body.real-mode .label{
+  color:#46515d;
+}
+
+body.real-mode .header a,
+body.real-mode .lock,
+body.real-mode .world,
+body.real-mode .switch-btn,
+body.real-mode .name{
+  color:#1f2a35;
+}
   
 }
 </style>
@@ -408,6 +439,26 @@ close
 </div>
 
 <script>
+
+let currentWorld = 'twst';
+function changeWorld(world,btn){
+
+  currentWorld = world;
+
+  document
+    .querySelectorAll('.world')
+    .forEach(w=>w.classList.remove('active'));
+
+  btn.classList.add('active');
+
+  if(world === 'real'){
+    document.body.classList.add('real-mode');
+  }else{
+    document.body.classList.remove('real-mode');
+  }
+
+}
+
 
 function openProfile(){
   document.getElementById('gate').classList.add('fade-out');
