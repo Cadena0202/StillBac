@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Record</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#050505;
+  color:#d4b06a;
+  font-family:'Cormorant Garamond', serif;
+  overflow-x:hidden;
+}
+
+/* --------------------------
+   GATE
+-------------------------- */
+
+#gate{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.gate-text{
+  font-size:1.8rem;
+  letter-spacing:3px;
+  color:#d4b06a;
+  cursor:pointer;
+  text-align:center;
+
+  text-shadow:
+  0 0 8px rgba(212,176,106,.7),
+  0 0 20px rgba(212,176,106,.4);
+
+  animation: glow 3s infinite ease-in-out;
+}
+
+@keyframes glow{
+  0%,100%{
+    opacity:.6;
+  }
+  50%{
+    opacity:1;
+  }
+}
+
+.fade-out{
+  opacity:0;
+  transition:.8s;
+  pointer-events:none;
+}
+
+/* --------------------------
+   PROFILE
+-------------------------- */
+
+#profile{
+  opacity:0;
+  transition:.8s;
+  min-height:100vh;
+}
+
+#profile.show{
+  opacity:1;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:25px;
+}
+
+.header a{
+  color:#d4b06a;
+  text-decoration:none;
+  letter-spacing:2px;
+  font-size:.95rem;
+}
+
+.lock{
+  font-size:1.2rem;
+}
+
+/* --------------------------
+   CARD
+-------------------------- */
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+.character-switch{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  margin-bottom:40px;
+}
+
+.switch-btn{
+  background:none;
+  border:none;
+  color:#6e5a33;
+  font-size:1.2rem;
+  letter-spacing:2px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.switch-btn.active{
+  color:#d4b06a;
+}
+
+.profile-card{
+  border:1px solid rgba(212,176,106,.25);
+  padding:35px;
+  margin-bottom:40px;
+  background:rgba(255,255,255,.01);
+}
+
+.name{
+  font-size:2.8rem;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  opacity:.7;
+  margin-bottom:30px;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.info-item{
+  border-bottom:1px solid rgba(212,176,106,.15);
+  padding-bottom:8px;
+}
+
+.label{
+  font-size:.8rem;
+  opacity:.55;
+  letter-spacing:2px;
+}
+
+.value{
+  margin-top:5px;
+  font-size:1.1rem;
+}
+
+/* --------------------------
+   RECORD BUTTONS
+-------------------------- */
+
+.section-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+}
+
+.record-btn{
+  background:none;
+  border:1px solid rgba(212,176,106,.25);
+  color:#d4b06a;
+  padding:15px;
+  cursor:pointer;
+  transition:.3s;
+  font-family:inherit;
+  letter-spacing:1px;
+}
+
+.record-btn:hover{
+  background:rgba(212,176,106,.08);
+}
+
+/* --------------------------
+   MODAL
+-------------------------- */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modal-content{
+  width:min(90%,800px);
+  max-height:80vh;
+  overflow-y:auto;
+
+  border:1px solid rgba(212,176,106,.25);
+
+  padding:35px;
+  background:#080808;
+
+  animation: fadeUp .4s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.modal-title{
+  font-size:1.8rem;
+  margin-bottom:20px;
+}
+
+.modal-body{
+  line-height:2;
+  white-space:pre-wrap;
+}
+
+.close{
+  margin-top:25px;
+  cursor:pointer;
+  opacity:.7;
+}
+
+/* --------------------------
+   CHARACTER FADE
+-------------------------- */
+
+.character-content{
+  transition:.4s;
+}
+
+.character-content.fade{
+  opacity:0;
+}
+
+/* --------------------------
+   MOBILE
+-------------------------- */
+
+@media(max-width:700px){
+
+.info-grid{
+  grid-template-columns:1fr;
+}
+
+.name{
+  font-size:2rem;
+}
+
+}
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+
+<div id="gate">
+  <div class="gate-text" onclick="openProfile()">
+    Would you like to view it?
+  </div>
+</div>
+
+<!-- PROFILE -->
+
+<div id="profile">
+
+<div class="header">
+  <a href="diary.html">← DIARY</a>
+  <div class="lock">🔒</div>
+</div>
+
+<div class="container">
+
+<div class="character-switch">
+  <button class="switch-btn active" onclick="changeCharacter('azul',this)">AZUL</button>
+  <button class="switch-btn" onclick="changeCharacter('kadena',this)">KADENA</button>
+</div>
+
+<div id="character-content" class="character-content">
+
+<div class="profile-card">
+
+<div class="name" id="name">Azul Ashengrotto</div>
+<div class="subtitle" id="subtitle">Record File</div>
+
+<div class="info-grid">
+
+<div class="info-item">
+<div class="label">AGE</div>
+<div class="value" id="age">22</div>
+</div>
+
+<div class="info-item">
+<div class="label">OCCUPATION</div>
+<div class="value" id="job">Cafe Owner / Investor</div>
+</div>
+
+<div class="info-item">
+<div class="label">BIRTHDAY</div>
+<div class="value" id="birthday">2.24</div>
+</div>
+
+<div class="info-item">
+<div class="label">ORIGIN</div>
+<div class="value" id="origin">Coral Sea</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="section-grid">
+
+<button class="record-btn" onclick="openModal('personality')">Personality</button>
+<button class="record-btn" onclick="openModal('likes')">Likes</button>
+<button class="record-btn" onclick="openModal('dislikes')">Dislikes</button>
+<button class="record-btn" onclick="openModal('past')">Past</button>
+<button class="record-btn" onclick="openModal('feelings')">Feelings</button>
+<button class="record-btn" onclick="openModal('memories')">Memories</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="modal-content">
+
+<div class="modal-title" id="modal-title"></div>
+
+<div class="modal-body" id="modal-body">
+ここに長文を入れる
+</div>
+
+<div class="close" onclick="closeModal()">
+close
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function openProfile(){
+  document.getElementById('gate').classList.add('fade-out');
+
+  setTimeout(()=>{
+    document.getElementById('gate').style.display='none';
+    document.getElementById('profile').classList.add('show');
+  },800);
+}
+
+const characters = {
+
+azul:{
+  name:'Azul Ashengrotto',
+  age:'22',
+  job:'Cafe Owner / Investor',
+  birthday:'2.24',
+  origin:'Coral Sea',
+
+  personality:`ここにアズの性格`,
+  likes:`ここに好きなもの`,
+  dislikes:`ここに苦手なもの`,
+  past:`ここに過去`,
+  feelings:`ここに相手への気持ち`,
+  memories:`ここに思い出`
+},
+
+kadena:{
+  name:'Kadena',
+  age:'24',
+  job:'Merchant',
+  birthday:'--',
+  origin:'Jewel Country',
+
+  personality:`ここにカデナの性格`,
+  likes:`ここに好きなもの`,
+  dislikes:`ここに苦手なもの`,
+  past:`ここに過去`,
+  feelings:`ここに相手への気持ち`,
+  memories:`ここに思い出`
+}
+
+};
+
+let currentCharacter='azul';
+
+function changeCharacter(id,btn){
+
+  document.querySelectorAll('.switch-btn')
+  .forEach(b=>b.classList.remove('active'));
+
+  btn.classList.add('active');
+
+  const content =
+  document.getElementById('character-content');
+
+  content.classList.add('fade');
+
+  setTimeout(()=>{
+
+    currentCharacter=id;
+
+    document.getElementById('name').textContent=
+    characters[id].name;
+
+    document.getElementById('age').textContent=
+    characters[id].age;
+
+    document.getElementById('job').textContent=
+    characters[id].job;
+
+    document.getElementById('birthday').textContent=
+    characters[id].birthday;
+
+    document.getElementById('origin').textContent=
+    characters[id].origin;
+
+    content.classList.remove('fade');
+
+  },400);
+
+}
+
+function openModal(type){
+
+  document.getElementById('modal')
+  .classList.add('open');
+
+  document.getElementById('modal-title')
+  .textContent =
+  type.charAt(0).toUpperCase() + type.slice(1);
+
+  document.getElementById('modal-body')
+  .textContent =
+  characters[currentCharacter][type];
+
+}
+
+function closeModal(){
+  document.getElementById('modal')
+  .classList.remove('open');
+}
+
+</script>
+
+</body>
+</html>
