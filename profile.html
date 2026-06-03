@@ -357,6 +357,7 @@ body.real-mode .name{
   height:80px;
   overflow:hidden;
   margin-bottom:20px;
+  position:relative;
 }
 
 .profile-banner img{
@@ -365,6 +366,12 @@ body.real-mode .name{
   object-fit:cover;
   display:block;
 }  
+
+.banner-overlay{
+  position:absolute;
+  left:15px;
+  bottom:12px;
+}
   
 }
 </style>
@@ -412,11 +419,15 @@ body.real-mode .name{
 <div class="profile-card">
 
 <div class="profile-banner">
-  <img id="banner-image" src="イラスト9814.png">
-</div>
 
-<div class="name" id="name">Azul Ashengrotto</div>
-<div class="subtitle" id="subtitle">Record File</div>
+  <img id="banner-image" src="">
+
+  <div class="banner-overlay">
+    <div class="name" id="name">Azul Ashengrotto</div>
+    <div class="subtitle" id="subtitle">Record File</div>
+  </div>
+
+</div>
 
 <div class="info-grid">
 
