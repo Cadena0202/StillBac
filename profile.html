@@ -275,6 +275,27 @@ body{
   font-size:2rem;
 }
 
+.world-switch{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.world-btn{
+  background:none;
+  border:none;
+  color:#6e5a33;
+  font-size:.9rem;
+  letter-spacing:3px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.world-btn.active{
+  color:#d4b06a;
+}
+  
 }
 </style>
 </head>
@@ -299,6 +320,11 @@ body{
 
 <div class="container">
 
+<div class="world-switch">
+  <button class="world-btn active" onclick="changeWorld('twst',this)">TWST</button>
+  <button class="world-btn" onclick="changeWorld('real',this)">REAL</button>
+</div>
+  
 <div class="character-switch">
   <button class="switch-btn active" onclick="changeCharacter('azul',this)">AZUL</button>
   <button class="switch-btn" onclick="changeCharacter('kadena',this)">KADENA</button>
