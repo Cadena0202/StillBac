@@ -469,6 +469,12 @@ document.getElementById('character-content');
 
 content.classList.add('fade');
 
+  if(world === 'real'){
+    document.body.classList.add('real-mode');
+  }else{
+    document.body.classList.remove('real-mode');
+  }
+
 setTimeout(()=>{
 
   const data =
@@ -488,12 +494,6 @@ setTimeout(()=>{
 
   document.getElementById('origin').textContent =
   data.origin;
-
-  if(world === 'real'){
-    document.body.classList.add('real-mode');
-  }else{
-    document.body.classList.remove('real-mode');
-  }
 
   content.classList.remove('fade');
 
