@@ -601,7 +601,7 @@ function changeCharacter(id,btn){
 
 }
 
-function openModal(type){
+async function openModal(type){
 
   document.getElementById('modal')
   .classList.add('open');
@@ -611,10 +611,38 @@ function openModal(type){
   type.charAt(0).toUpperCase() + type.slice(1);
 
   document.getElementById('modal-body')
-  .textContent =
-  characters[currentCharacter][type];
+  .textContent = 'Loading...';
+
+  const charId =
+    currentCharacter === 'azul'
+      ? 'az'
+      : 'cd';
+
+  const docId =
+    `${currentWorld}_${charId}`;
+
+  const snap = await getDoc(
+    doc(window.db, 'profiles', docId)
+  );
+
+  if(snap.exists()){
+
+    const data = snap.data();
+
+    document.getElementById('modal-body')
+    .textContent =
+    data[type] || 'No data';
+
+  }else{
+
+    document.getElementById('modal-body')
+    .textContent =
+    'Document not found';
+
+  }
 
 }
+
 
 function closeModal(){
   document.getElementById('modal')
