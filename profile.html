@@ -190,25 +190,60 @@ body.real-mode .info-item{
    RECORD BUTTONS
 -------------------------- */
 
-.section-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
+.accordion-list{
+  display:flex;
+  flex-direction:column;
+  gap:0;
 }
 
-.record-btn{
+.accordion-item{
+  border-bottom:1px solid rgba(212,176,106,.15);
+}
+
+.accordion-trigger{
+  width:100%;
   background:none;
-  border:1px solid rgba(212,176,106,.25);
+  border:none;
   color:#d4b06a;
-  padding:15px;
-  cursor:pointer;
-  transition:.3s;
   font-family:inherit;
-  letter-spacing:1px;
+  font-size:1rem;
+  letter-spacing:2px;
+  padding:18px 5px;
+  cursor:pointer;
+  text-align:left;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.record-btn:hover{
-  background:rgba(212,176,106,.08);
+.accordion-trigger::after{
+  content:'＋';
+  font-size:.9rem;
+  opacity:.5;
+  transition:opacity .3s;
+}
+
+.accordion-trigger.open::after{
+  content:'－';
+}
+
+.accordion-body{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:max-height .4s ease, opacity .4s ease;
+}
+
+.accordion-body.open{
+  max-height:600px;
+  opacity:1;
+}
+
+.accordion-body-inner{
+  padding:5px 5px 20px;
+  line-height:2;
+  white-space:pre-wrap;
+  font-size:.95rem;
 }
 
 /* --------------------------
@@ -468,37 +503,42 @@ body.real-mode .switch-btn{
 
 </div>
 
-<div class="section-grid">
+<div class="accordion-list">
 
-<button class="record-btn" onclick="openModal('personality')">Personality</button>
-<button class="record-btn" onclick="openModal('likes')">Likes</button>
-<button class="record-btn" onclick="openModal('dislikes')">Dislikes</button>
-<button class="record-btn" onclick="openModal('past')">Past</button>
-<button class="record-btn" onclick="openModal('feelings')">Feelings</button>
-<button class="record-btn" onclick="openModal('memories')">Memories</button>
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAccordion(this,'personality')">Personality</button>
+<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+</div>
 
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAccordion(this,'likes')">Likes</button>
+<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+</div>
+
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAccordion(this,'dislikes')">Dislikes</button>
+<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+</div>
+
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAccordion(this,'past')">Past</button>
+<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+</div>
+
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAccordion(this,'feelings')">Feelings</button>
+<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+</div>
+
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAccordion(this,'memories')">Memories</button>
+<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
 </div>
 
 </div>
 
 </div>
 
-</div>
-
-<!-- MODAL -->
-
-<div class="modal" id="modal">
-
-<div class="modal-content">
-
-<div class="modal-title" id="modal-title"></div>
-
-<div class="modal-body" id="modal-body">
-ここに長文を入れる
-</div>
-
-<div class="close" onclick="closeModal()">
-close
 </div>
 
 </div>
@@ -688,52 +728,41 @@ function changeCharacter(id,btn){
 
 }
 
-async function openModal(type){
+async function toggleAccordion(trigger, type){
 
-  document.getElementById('modal')
-  .classList.add('open');
+  const body = trigger.nextElementSibling;
+  const isOpen = body.classList.contains('open');
 
-  document.getElementById('modal-title')
-  .textContent =
-  type.charAt(0).toUpperCase() + type.slice(1);
+  // 全部閉じる
+  document.querySelectorAll('.accordion-body').forEach(b=>{
+    b.classList.remove('open');
+  });
+  document.querySelectorAll('.accordion-trigger').forEach(t=>{
+    t.classList.remove('open');
+  });
 
-  document.getElementById('modal-body')
-  .textContent = 'Loading...';
+  if(isOpen) return;
 
-  const charId =
-    currentCharacter === 'azul'
-      ? 'az'
-      : 'cd';
+  trigger.classList.add('open');
+  body.classList.add('open');
 
-  const docId =
-    `${currentWorld}_${charId}`;
+  const inner = body.querySelector('.accordion-body-inner');
+  inner.textContent = 'Loading...';
+
+  const charId = currentCharacter === 'azul' ? 'az' : 'cd';
+  const docId = `${currentWorld}_${charId}`;
 
   const snap = await getDoc(
     doc(window.db, 'profiles', docId)
   );
 
   if(snap.exists()){
-
     const data = snap.data();
-
-    document.getElementById('modal-body')
-    .textContent =
-    data[type] || 'No data';
-
+    inner.textContent = data[type] || 'No data';
   }else{
-
-    document.getElementById('modal-body')
-    .textContent =
-    'Document not found';
-
+    inner.textContent = 'Document not found';
   }
 
-}
-
-
-function closeModal(){
-  document.getElementById('modal')
-  .classList.remove('open');
 }
 
 </script>
