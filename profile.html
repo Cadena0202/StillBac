@@ -451,6 +451,25 @@ function changeWorld(world,btn){
 
   btn.classList.add('active');
 
+const data =
+worldData[world][currentCharacter];
+
+document.getElementById('name').textContent =
+data.name;
+
+document.getElementById('age').textContent =
+data.age;
+
+document.getElementById('job').textContent =
+data.job;
+
+document.getElementById('birthday').textContent =
+data.birthday;
+
+document.getElementById('origin').textContent =
+data.origin;
+
+  
   if(world === 'real'){
     document.body.classList.add('real-mode');
   }else{
@@ -500,6 +519,43 @@ kadena:{
   feelings:`ここに相手への気持ち`,
   memories:`ここに思い出`
 }
+
+};
+const worldData = {
+
+  twst:{
+    azul:{
+      name:'Azul Ashengrotto',
+      age:'22',
+      job:'Cafe Owner / Investor',
+      birthday:'2.24',
+      origin:'Coral Sea'
+    },
+    kadena:{
+      name:'Kadena',
+      age:'24',
+      job:'Merchant',
+      birthday:'--',
+      origin:'Jewel Country'
+    }
+  },
+
+  real:{
+    azul:{
+      name:'Az',
+      age:'22',
+      job:'University Student',
+      birthday:'2.24',
+      origin:'Japan'
+    },
+    kadena:{
+      name:'Kadena',
+      age:'24',
+      job:'Office Worker',
+      birthday:'--',
+      origin:'Japan'
+    }
+  }
 
 };
 
