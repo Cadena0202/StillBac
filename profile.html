@@ -638,6 +638,16 @@ body.real-mode .accordion-trigger{
   <button onclick="editProfile('memories')">Feelings編集</button>
 </div>
 
+<div id="edit-modal" style="display:none;">
+  <div class="edit-box">
+    <textarea id="edit-text"></textarea>
+
+    <div class="edit-actions">
+      <button onclick="closeEditor()">Cancel</button>
+      <button onclick="saveEditor()">Save</button>
+    </div>
+  </div>
+</div>
 
 </div>
 
