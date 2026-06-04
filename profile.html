@@ -904,10 +904,28 @@ async function toggleAccordion(trigger, type){
 
 async function editProfile(type){
 
-  const text = prompt('新しい内容を入力');
+  const charId = currentCharacter === 'azul' ? 'az' : 'cd';
+  const docId = `${currentWorld}_${charId}`;
+
+  const snap = await getDoc(
+    doc(window.db, 'profiles', docId)
+  );
+
+  if(!snap.exists()){
+    alert('Document not found');
+    return;
+  }
+
+  const data = snap.data();
+
+  const text = prompt(
+    '編集してください',
+    data[type] || ''
+  );
 
   if(text === null) return;
 
+  console.log(type);
   console.log(text);
 
 }
