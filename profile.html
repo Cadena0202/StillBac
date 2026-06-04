@@ -141,6 +141,22 @@ body{
   color:#d4b06a;
 }
 
+.switch-btn:first-child{
+  color:#909090;
+}
+
+.switch-btn:first-child.active{
+  color:#909090;
+}
+
+.switch-btn:last-child{
+  color:#f0f0f0;
+}
+
+.switch-btn:last-child.active{
+  color:#f0f0f0;
+}
+
 .profile-card{
   border:1px solid rgba(212,176,106,.25);
   padding:35px;
@@ -537,8 +553,8 @@ body.real-mode .accordion-trigger{
 </div>
   
 <div class="character-switch">
-  <button class="switch-btn active" onclick="changeCharacter('azul',this)">AZUL</button>
-  <button class="switch-btn" onclick="changeCharacter('kadena',this)">CADENA</button>
+  <button class="switch-btn active" onclick="changeCharacter('azul',this)">♥</button>
+  <button class="switch-btn" onclick="changeCharacter('kadena',this)">♥</button>
 </div>
 
 <div id="character-content" class="character-content">
