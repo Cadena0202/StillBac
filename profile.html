@@ -535,7 +535,7 @@ body.real-mode .accordion-trigger{
 
 <div class="header">
   <a href="index.html">⌂</a>
-  <div class="lock">♪</div>
+  <div class="lock" oneclick="toggleMusic()">♪</div>
 </div>
 
 <div class="container">
@@ -982,9 +982,20 @@ window.getDoc = getDoc;
 window.doc = doc;
   
 <audio id="bgm" loop>
-  <source src="music.mp3" type="audio/mpeg">
+  <source src="mergo.mp3" type="audio/mpeg">
 </audio>
 
+function toggleMusic(){
+  const bgm = document.getElementById('bgm');
+
+  if(bgm.paused){
+    bgm.play();
+  }else{
+    bgm.pause();
+  }
+}
+
+  
 </script>
 
 </body>
