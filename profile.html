@@ -651,6 +651,8 @@ function changeWorld(world,btn){
   const bgm = document.getElementById('bgm');
   const source = bgm.querySelector('source');
 
+  const wasPlaying = !bgm.paused;
+
   if(world === 'real'){
     source.src = 'absorb.mp3';
   }else{
@@ -658,6 +660,11 @@ function changeWorld(world,btn){
   }
 
   bgm.load();
+
+  if(wasPlaying){
+    bgm.play();
+  }
+
 
   document
     .querySelectorAll('.world')
