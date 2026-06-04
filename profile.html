@@ -673,11 +673,16 @@ setTimeout(()=>{
   data.image;
 
   const cadenaBtn = document.querySelectorAll('.switch-btn')[1];
-  if(world === 'real'){
-    cadenaBtn.textContent = 'MISA';
-  }else{
-    cadenaBtn.textContent = 'CADENA';
-  }
+  cadenaBtn.style.transition = 'opacity .4s ease';
+  cadenaBtn.style.opacity = '0';
+  setTimeout(()=>{
+    if(world === 'real'){
+      cadenaBtn.textContent = 'MISA';
+    }else{
+      cadenaBtn.textContent = 'CADENA';
+    }
+    cadenaBtn.style.opacity = '1';
+  }, 400);
 
   
   content.classList.remove('fade');
