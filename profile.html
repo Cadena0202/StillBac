@@ -975,6 +975,22 @@ async function editProfile(type){
     }
   );
 
+async function saveEditor(){
+
+  const text =
+    document.getElementById('edit-text').value;
+
+  await updateDoc(
+    doc(window.db, 'profiles', currentEditDocId),
+    {
+      [currentEditType]: text
+    }
+  );
+
+  closeEditor();
+
+}
+
 alert('保存しました');
 
 }
