@@ -989,11 +989,11 @@ window.addEventListener('resize', ()=>{
 
 function toggleMusic(){
   const bgm = document.getElementById('bgm');
-  console.log(bgm.volume);
   const btn = document.querySelector('.lock');
 
   if(bgm.paused){
     bgm.volume = 0.2;
+    console.log(bgm.volume);
     bgm.play();
     btn.classList.add('playing');
   }else{
