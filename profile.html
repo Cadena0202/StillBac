@@ -631,6 +631,13 @@ body.real-mode .accordion-trigger{
 <div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
 </div>
 
+<div id="admin-panel" style="display:none;">
+  <button onclick="editProfile('personality')">Profile編集</button>
+  <button onclick="editProfile('past')">History編集</button>
+  <button onclick="editProfile('feelings')">Mind編集</button>
+  <button onclick="editProfile('memories')">Feelings編集</button>
+</div>
+
 
 </div>
 
@@ -739,6 +746,7 @@ function checkPassword(e){
   if(input.value === OWNER_PASSWORD){
 
     window.userRole = 'owner';
+    document.getElementById('admin-panel').style.display = 'block';
 
     document.getElementById('gate').classList.add('fade-out');
 
