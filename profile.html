@@ -958,6 +958,15 @@ window.addEventListener('resize', ()=>{
   resizeCanvas();
 });
 
+function toggleMusic(){
+  console.log("押された");
+  const bgm = document.getElementById('bgm');
+
+  if(bgm.paused){
+    bgm.play();
+  }else{
+    bgm.pause();
+  }
 
 
 </script>
@@ -983,15 +992,7 @@ window.db = db;
 window.getDoc = getDoc;
 window.doc = doc;
 
-function toggleMusic(){
-  console.log("押された");
-  const bgm = document.getElementById('bgm');
 
-  if(bgm.paused){
-    bgm.play();
-  }else{
-    bgm.pause();
-  }
 }
 
   
