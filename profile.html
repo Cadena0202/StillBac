@@ -967,13 +967,7 @@ async function editProfile(type){
     .classList.add('open');
 
   return;
-
-  await updateDoc(
-    doc(window.db, 'profiles', docId),
-    {
-      [type]: text
-    }
-  );
+  } 
 
 async function saveEditor(){
 
