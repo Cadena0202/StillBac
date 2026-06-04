@@ -881,12 +881,12 @@ let angle2 = 0.8;
 function drawREAL(){
   ctx.clearRect(0, 0, W, H);
 
-  const cx = W / 2;
-  const cy = H / 2;
-  const rx = Math.min(W, H) * 0.28;
-  const ry = Math.min(W, H) * 0.18;
-  const offset = Math.min(W, H) * 0.07;
-
+  const cx = W * 0.75;
+  const cy = H * 0.78;
+  const rx = Math.min(W, H) * 0.45;
+  const ry = Math.min(W, H) * 0.28;
+  const offset = Math.min(W, H) * 0.1;
+  
   ctx.save();
   ctx.translate(cx - offset, cy);
   ctx.rotate(angle1);
