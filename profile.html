@@ -648,6 +648,17 @@ function changeWorld(world,btn){
 
   currentWorld = world;
 
+  const bgm = document.getElementById('bgm');
+  const source = bgm.querySelector('source');
+
+  if(world === 'real'){
+    source.src = 'absorb.mp3';
+  }else{
+    source.src = 'mergo.mp3';
+  }
+
+  bgm.load();
+
   document
     .querySelectorAll('.world')
     .forEach(w=>w.classList.remove('active'));
