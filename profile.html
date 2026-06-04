@@ -931,6 +931,14 @@ async function toggleAccordion(trigger, type){
   }
 
 }
+let currentEditType = null;
+let currentEditDocId = null;
+
+function closeEditor(){
+  document
+    .getElementById('edit-modal')
+    .classList.remove('open');
+}
 
 async function editProfile(type){
 
@@ -948,12 +956,17 @@ async function editProfile(type){
 
   const data = snap.data();
 
-  const text = prompt(
-    '編集してください',
-    data[type] || ''
-  );
+  currentEditType = type;
+  currentEditDocId = docId;
 
-  if(text === null) return;
+  document.getElementById('edit-text').value =
+    data[type] || '';
+
+  document
+    .getElementById('edit-modal')
+    .classList.add('open');
+
+  return;
 
   await updateDoc(
     doc(window.db, 'profiles', docId),
