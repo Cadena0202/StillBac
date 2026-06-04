@@ -612,24 +612,98 @@ body.real-mode .accordion-trigger{
 <div class="accordion-list">
 
 <div class="accordion-item">
-<button class="accordion-trigger" onclick="toggleAccordion(this,'personality')">Profile</button>
-<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+
+<div style="display:flex;align-items:center;gap:8px;">
+
+<button class="accordion-trigger"
+onclick="toggleAccordion(this,'personality')">
+Profile
+</button>
+
+<button id="edit-personality"
+onclick="editProfile('personality')"
+style="display:none;background:none;border:none;color:#d4b06a;cursor:pointer;">
+✎
+</button>
+
+</div>
+
+<div class="accordion-body">
+<div class="accordion-body-inner">Loading...</div>
+</div>
+</div>
+
+
+<div class="accordion-item">
+
+<div style="display:flex;align-items:center;gap:8px;">
+
+<button class="accordion-trigger"
+onclick="toggleAccordion(this,'past')">
+History
+</button>
+
+<button id="edit-personality"
+onclick="editProfile('personality')"
+style="display:none;background:none;border:none;color:#d4b06a;cursor:pointer;">
+✎
+</button>
+
+</div>
+
+<div class="accordion-body">
+<div class="accordion-body-inner">Loading...</div>
+</div>
+
+</div>
+
+
+<div class="accordion-item">
+
+<div style="display:flex;align-items:center;gap:8px;">
+
+<button class="accordion-trigger"
+onclick="toggleAccordion(this,'feelings')">
+Mind
+</button>
+
+<button id="edit-personality"
+onclick="editProfile('personality')"
+style="display:none;background:none;border:none;color:#d4b06a;cursor:pointer;">
+✎
+</button>
+
+</div>
+
+<div class="accordion-body">
+<div class="accordion-body-inner">Loading...</div>
+</div>
+
 </div>
 
 <div class="accordion-item">
-<button class="accordion-trigger" onclick="toggleAccordion(this,'past')">History</button>
-<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+
+<div style="display:flex;align-items:center;gap:8px;">
+
+<button class="accordion-trigger"
+onclick="toggleAccordion(this,'memories')">
+Feelings
+</button>
+
+<button id="edit-personality"
+onclick="editProfile('personality')"
+style="display:none;background:none;border:none;color:#d4b06a;cursor:pointer;">
+✎
+</button>
+
 </div>
 
-<div class="accordion-item">
-<button class="accordion-trigger" onclick="toggleAccordion(this,'feelings')">Mind</button>
-<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+<div class="accordion-body">
+<div class="accordion-body-inner">Loading...</div>
 </div>
 
-<div class="accordion-item">
-<button class="accordion-trigger" onclick="toggleAccordion(this,'memories')">Feelings</button>
-<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
 </div>
+7:
 
 </div>
 
@@ -738,6 +812,7 @@ function checkPassword(e){
   if(input.value === OWNER_PASSWORD){
 
     window.userRole = 'owner';
+    document.getElementById('edit-personality').style.display = 'block';
 
     document.getElementById('gate').classList.add('fade-out');
 
@@ -892,6 +967,11 @@ async function toggleAccordion(trigger, type){
   }
 
 }
+
+function editProfile(type){
+  alert(type);
+}
+
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 
