@@ -992,6 +992,7 @@ function toggleMusic(){
   const btn = document.querySelector('.lock');
 
   if(bgm.paused){
+    bgm.volum = 0.3;
     bgm.play();
     btn.classList.add('playing');
   }else{
