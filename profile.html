@@ -135,7 +135,6 @@ body{
   font-size:1.2rem;
   letter-spacing:2px;
   cursor:pointer;
-  transition: opacity .4s ease, filter .4s ease, color .3s;
 }
 
 .switch-btn.active{
@@ -672,22 +671,6 @@ setTimeout(()=>{
   document.getElementById('banner-image').src =
   data.image;
 
-  const cadenaBtn = document.querySelectorAll('.switch-btn')[1];
-  cadenaBtn.style.opacity = '0';
-  cadenaBtn.style.filter = 'blur(4px)';
-
-  setTimeout(()=>{
-    if(world === 'real'){
-      cadenaBtn.textContent = 'MISA';
-    }else{
-      cadenaBtn.textContent = 'CADENA';
-    }
-    cadenaBtn.style.opacity = '1';
-    cadenaBtn.style.filter = 'blur(0px)';
-  }, 1200);
-
-
-  
   content.classList.remove('fade');
 
 },1200);
