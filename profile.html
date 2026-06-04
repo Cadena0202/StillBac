@@ -108,7 +108,18 @@ body{
 
 .lock{
   font-size:1.2rem;
+  transition: all .8s ease;
+  opacity:.55;
 }
+
+.lock.playing{
+  opacity: 1;
+  text-shadow:
+    0 0 8px rgba(255,255,255,.6),
+    0 0 16px rgba(255,255,255,.4),
+    0 0 28px rgba(255,255,255,.2);
+}
+
 
 /* --------------------------
    CARD
@@ -959,16 +970,18 @@ window.addEventListener('resize', ()=>{
 });
 
 function toggleMusic(){
-  console.log("押された");
   const bgm = document.getElementById('bgm');
+  const btn = document.querySelector('.lock');
 
   if(bgm.paused){
     bgm.play();
+    btn.classList.add('playing');
   }else{
     bgm.pause();
+    btn.classList.remove('playing');
   }
 }
-
+  
 </script>
 <script type="module">
 
