@@ -958,6 +958,10 @@ window.addEventListener('resize', ()=>{
   resizeCanvas();
 });
 
+<audio id="bgm" loop>
+  <source src="mergo.mp3" type="audio/mpeg">
+</audio>
+
 </script>
 <script type="module">
 
@@ -980,10 +984,6 @@ const db = getFirestore(app);
 window.db = db;
 window.getDoc = getDoc;
 window.doc = doc;
-  
-<audio id="bgm" loop>
-  <source src="mergo.mp3" type="audio/mpeg">
-</audio>
 
 function toggleMusic(){
   const bgm = document.getElementById('bgm');
