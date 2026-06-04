@@ -902,9 +902,14 @@ async function toggleAccordion(trigger, type){
 
 }
 
-function editProfile(type){
-  console.log(type);
-  alert(type);
+async function editProfile(type){
+
+  const text = prompt('新しい内容を入力');
+
+  if(text === null) return;
+
+  console.log(text);
+
 }
 
 const canvas = document.getElementById('bg-canvas');
