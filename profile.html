@@ -702,6 +702,7 @@ function checkPassword(e){
     document.getElementById('gate').classList.add('fade-out');
     setTimeout(()=>{
       document.getElementById('gate').style.display='none';
+      window.scrollTo(0, 0);
       document.getElementById('profile').classList.add('show');
     },800);
   }else{
