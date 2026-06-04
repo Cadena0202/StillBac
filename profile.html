@@ -671,6 +671,14 @@ setTimeout(()=>{
 
   document.getElementById('banner-image').src =
   data.image;
+
+  const cadenaBtn = document.querySelectorAll('.switch-btn')[1];
+  if(world === 'real'){
+    cadenaBtn.textContent = 'MISA';
+  }else{
+    cadenaBtn.textContent = 'CADENA';
+  }
+
   
   content.classList.remove('fade');
 
