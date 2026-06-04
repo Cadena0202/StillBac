@@ -177,10 +177,6 @@ body{
   border-bottom:1px solid rgba(212,176,106,.15);
   padding-bottom:8px;
 }
-
-body.real-mode .info-item{
-  border-bottom:1px solid rgba(31,42,53,.15);
-}
   
 .label{
   font-size:.8rem;
@@ -329,6 +325,46 @@ body.real-mode .modal-content{
 }
 
 /* --------------------------
+   REAL MODE
+-------------------------- */
+
+body.real-mode{
+  background:#1a1a1a;
+  color:#c0c0c0;
+}
+
+body.real-mode .profile-card{
+  border-color:rgba(192,192,192,.2);
+}
+
+body.real-mode .info-item{
+  border-bottom:1px solid rgba(192,192,192,.15);
+}
+
+body.real-mode .label{
+  color:#909090;
+}
+
+body.real-mode .header a,
+body.real-mode .lock,
+body.real-mode .world,
+body.real-mode .switch-btn{
+  color:#c0c0c0;
+}
+
+body.real-mode .switch-btn.active{
+  color:#e8e8e8;
+}
+
+body.real-mode .accordion-item{
+  border-bottom:1px solid rgba(192,192,192,.15);
+}
+
+body.real-mode .accordion-trigger{
+  color:#c0c0c0;
+}
+
+/* --------------------------
    MOBILE
 -------------------------- */
 
@@ -363,52 +399,6 @@ body.real-mode .modal-content{
   opacity:.25;
 }
 
-body.real-mode{
-  background:#1a1a1a;
-  color:#1f2a35;
-}
-
-body.real-mode .profile-card,
-body.real-mode .record-btn,
-body.real-mode .modal-content{
-  border-color:rgba(31,42,53,.25);
-}
-
-body.real-mode .record-btn{
-  color:#1f2a35;
-}
-
-body.real-mode .record-btn:hover{
-  background:rgba(31,42,53,.08);
-}
-
-body.real-mode .label{
-  color:#46515d;
-}
-
-body.real-mode .header a,
-body.real-mode .lock,
-body.real-mode .world,
-body.real-mode .switch-btn{
-  color:#1f2a35;
-}
-
-.character-content{
-  opacity:1;
-  transition:opacity .8s ease;
-}
-
-.character-content.fade{
-  opacity:0;
-}
-
-body.real-mode .accordion-item{
-  border-bottom:1px solid rgba(31,42,53,.15);
-}
-
-body.real-mode .accordion-trigger{
-  color:#1f2a35;
-}
   
 /* --------------------------
   イラスト
