@@ -925,8 +925,14 @@ async function editProfile(type){
 
   if(text === null) return;
 
-  console.log(type);
-  console.log(text);
+  await updateDoc(
+    doc(window.db, 'profiles', docId),
+    {
+      [type]: text
+    }
+  );
+
+alert('保存しました');
 
 }
 
@@ -1082,6 +1088,7 @@ const db = getFirestore(app);
 window.db = db;
 window.getDoc = getDoc;
 window.doc = doc;
+window.updateDoc = updateDoc;
 
 </script>
   
