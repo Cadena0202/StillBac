@@ -713,7 +713,9 @@ setTimeout(()=>{
 }
 
   
-const PASSWORD = 'pisces';
+const VIEWER_PASSWORD = 'pisces';
+const OWNER_PASSWORD = '2243';
+
 
 function showPasswordInput(){
   const question = document.getElementById('gate-question');
@@ -733,14 +735,32 @@ function checkPassword(e){
 
   const input = document.getElementById('gate-input');
 
-  if(input.value === PASSWORD){
+  if(input.value === OWNER_PASSWORD){
+
+    window.userRole = 'owner';
+
     document.getElementById('gate').classList.add('fade-out');
+
     setTimeout(()=>{
       document.getElementById('gate').style.display='none';
       window.scrollTo(0, 0);
       document.getElementById('profile').classList.add('show');
     },800);
+
+  }else if(input.value === VIEWER_PASSWORD){
+
+    window.userRole = 'viewer';
+
+    document.getElementById('gate').classList.add('fade-out');
+
+    setTimeout(()=>{
+      document.getElementById('gate').style.display='none';
+      window.scrollTo(0, 0);
+      document.getElementById('profile').classList.add('show');
+    },800);
+
   }else{
+
     input.value='';
     input.style.borderBottomColor='rgba(255,80,80,.6)';
     setTimeout(()=>{
