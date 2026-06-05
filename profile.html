@@ -996,6 +996,8 @@ async function openAbout(){
   if(!snap.exists()) return;
 
   const data = snap.data();
+  currentEditDocId = 'about';
+  currentEditType = currentWorld;
 
   document.getElementById('edit-text').value =
     data[currentWorld] || '';
