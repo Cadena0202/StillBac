@@ -929,6 +929,15 @@ function changeCharacter(id,btn){
 
   content.classList.remove('fade');
 
+　document.querySelectorAll('.accordion-body').forEach(b=>{
+    b.classList.remove('open');
+  });
+
+  document.querySelectorAll('.accordion-trigger').forEach(t=>{
+    t.classList.remove('open');
+  });
+
+
 },1200);
 
 }
