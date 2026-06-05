@@ -986,6 +986,24 @@ function closeEditor(){
     .getElementById('edit-modal')
     .classList.remove('open');
 }
+
+async function openAbout(){
+
+  const snap = await getDoc(
+    doc(window.db, 'profiles', 'about')
+  );
+
+  if(!snap.exists()) return;
+
+  const data = snap.data();
+
+  document.getElementById('edit-text').value =
+    data[currentWorld] || '';
+
+  document
+    .getElementById('edit-modal')
+    .classList.add('open');
+}
   
 async function editProfile(type){
 
