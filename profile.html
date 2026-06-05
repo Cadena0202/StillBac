@@ -691,7 +691,7 @@ body.real-mode .accordion-trigger{
 
     <div id="about-text" style="display:none;"></div>
 
-    <div class="close">
+    <div id="modal-buttons" class="close">
       <button onclick="closeEditor()">Cancel</button>
       <button id="save-btn" onclick="saveEditor()">Save</button>
     </div>
@@ -1016,6 +1016,8 @@ async function openAbout(){
 
   aboutText.textContent =
     data[currentWorld] || '';
+
+  document.getElementById('modal-buttons').style.display = 'none';
 
 
   document.getElementById('edit-text').value =
