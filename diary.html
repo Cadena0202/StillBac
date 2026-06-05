@@ -685,6 +685,10 @@ header:hover .site-title {
     background: rgba(6,10,18,0.96);
     pointer-events: auto;
   }
+
+  #loading-overlay.profile-fade{
+  background: rgba(0,0,0,1);
+  }
   /* 白フェードイン */
 #page-fade {
   position: fixed;
@@ -1193,9 +1197,10 @@ document.querySelector('.corner-top').addEventListener('click', e => {
 document.getElementById('profile-link').addEventListener('click', e => {
   e.preventDefault();
 
-  document
-    .getElementById('loading-overlay')
-    .classList.add('active');
+  const overlay = document.getElementById('loading-overlay');
+
+  overlay.classList.add('profile-fade');
+  overlay.classList.add('active');
 
   setTimeout(() => {
     window.location.href = 'profile.html';
