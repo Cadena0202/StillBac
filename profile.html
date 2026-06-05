@@ -986,6 +986,7 @@ async function toggleAccordion(trigger, type){
 
   const charId = currentCharacter === 'azul' ? 'az' : 'cd';
   const docId = `${currentWorld}_${charId}`;
+  console.log(type, docId);
 
   const snap = await getDoc(
     doc(window.db, 'profiles', docId)
@@ -1048,6 +1049,7 @@ async function editProfile(type){
 
   const charId = currentCharacter === 'azul' ? 'az' : 'cd';
   const docId = `${currentWorld}_${charId}`;
+  console.log(type, docId);
 
   const snap = await getDoc(
     doc(window.db, 'profiles', docId)
