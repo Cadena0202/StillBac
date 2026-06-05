@@ -1478,6 +1478,20 @@ async function postEntry() {
   }
 }
 
+function toggleMusic(){
+  const bgm = document.getElementById('bgm');
+  const btn = document.querySelector('.lock');
+
+  if(bgm.paused){
+    bgm.volume = 0.01;
+    bgm.play();
+    btn.classList.add('playing');
+  }else{
+    bgm.pause();
+    btn.classList.remove('playing');
+  }
+}
+  
 // カテゴリフィルター
 document.querySelectorAll('.cat-btn').forEach(btn => {
   btn.addEventListener('click', () => {
