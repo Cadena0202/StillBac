@@ -1048,8 +1048,11 @@ async function openAbout(){
 async function editProfile(type){
 
   const charId = currentCharacter === 'azul' ? 'az' : 'cd';
-  const docId = `${currentWorld}_${charId}`;
-  console.log(type, docId);
+
+  const docId =
+    (type === 'twst' || type === 'real')
+      ? 'about'
+      : `${currentWorld}_${charId}`;
 
   const snap = await getDoc(
     doc(window.db, 'profiles', docId)
