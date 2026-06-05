@@ -1037,8 +1037,14 @@ async function editProfile(type){
   currentEditType = type;
   currentEditDocId = docId;
 
-  document.getElementById('edit-text').value =
-    data[type] || '';
+  const editText = document.getElementById('edit-text');
+  const aboutText = document.getElementById('about-text');
+
+  editText.style.display = 'none';
+  aboutText.style.display = 'block';
+
+  aboutText.textContent =
+    data[currentWorld] || '';
 
   document
     .getElementById('edit-modal')
