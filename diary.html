@@ -1190,6 +1190,17 @@ document.querySelector('.corner-top').addEventListener('click', e => {
   }, 3000);
 });
 
+document.getElementById('profile-link').addEventListener('click', e => {
+  e.preventDefault();
+
+  document
+    .getElementById('loading-overlay')
+    .classList.add('active');
+
+  setTimeout(() => {
+    window.location.href = 'profile.html';
+  }, 800);
+});
 const mode = sessionStorage.getItem('mode');
 
 if (mode === 'reader' || mode === 'owner') {
