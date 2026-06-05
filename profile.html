@@ -1063,6 +1063,12 @@ async function editProfile(type){
   currentEditType = type;
   currentEditDocId = docId;
 
+  const editText = document.getElementById('edit-text');
+  const aboutText = document.getElementById('about-text');
+
+  editText.style.display = 'block';
+  aboutText.style.display = 'none';
+
   document.getElementById('edit-text').value =
   data[currentWorld] || '';
   
