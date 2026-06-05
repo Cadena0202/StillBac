@@ -450,7 +450,35 @@ body.real-mode .accordion-trigger{
 .name{
   font-size:18px;
 }
+/* --------------------------
+   編集ボタン
+-------------------------- */
 
+#admin-panel{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:0;
+  margin-top:30px;
+  color:#b89b5e;
+}
+
+#admin-panel button{
+  background:none;
+  border:none;
+  color:#b89b5e;
+  font-family:inherit;
+  font-size:14px;
+  letter-spacing:2px;
+  cursor:pointer;
+  padding:0;
+}
+
+#admin-panel button:not(:last-child)::after{
+  content:"｜";
+  margin:0 10px;
+  color:#7f6a3e;
+}
 
 /* --------------------------
   イラスト
