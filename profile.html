@@ -697,11 +697,6 @@ body.real-mode .accordion-trigger{
   </div>
 
 </div>
-
-<button onclick="openAbout()">
-  ABOUT
-</button>
-
   
 </div>
 
@@ -990,36 +985,6 @@ function closeEditor(){
   document
     .getElementById('edit-modal')
     .classList.remove('open');
-}
-
-async function openAbout(){
-
-  const snap = await getDoc(
-    doc(window.db, 'profiles', 'about')
-  );
-
-  if(!snap.exists()){
-    alert('Document not found');
-    return;
-  }
-
-  const data = snap.data();
-
-  document.getElementById('edit-text').value =
-    data[currentWorld] || '';
-
-  const saveBtn = document.getElementById('save-btn');
-
-  if(window.userRole === 'owner'){
-    saveBtn.style.display = 'block';
-  }else{
-    saveBtn.style.display = 'none';
-  }
-
-  document
-    .getElementById('edit-modal')
-    .classList.add('open');
-
 }
   
 async function editProfile(type){
