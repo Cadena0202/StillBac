@@ -999,6 +999,15 @@ async function openAbout(){
   currentEditDocId = 'about';
   currentEditType = currentWorld;
 
+  const saveBtn = document.getElementById('save-btn');
+
+  if(window.userRole === 'owner'){
+    saveBtn.style.display = '';
+  }else{
+    saveBtn.style.display = 'none';
+  }
+
+
   document.getElementById('edit-text').value =
     data[currentWorld] || '';
 
