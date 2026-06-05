@@ -727,6 +727,17 @@ header:hover .site-title {
   opacity:1;
 }
 
+  .lock{
+  font-size:1.2rem;
+  transition: all .8s ease;
+  opacity:.55;
+  }
+
+  .lock.playing{
+    opacity:1;
+    text-shadow: ...
+  }
+
 /* ===== ページネーション ===== */
 .pagination{
   display:flex;
@@ -809,6 +820,7 @@ if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
   <a href="profile.html" class="center-label">
     ◐
   </a>
+  <div class="lock" onclick="toggleMusic()">♪</div>
 </div>
 
 <!-- ローディングオーバーレイ -->
