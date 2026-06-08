@@ -605,7 +605,9 @@ body.real-mode .modal-content{
   -webkit-backdrop-filter:blur(25px);
 
   transform:translateY(100%);
-  transition:.3s;
+  transition:
+  transform .3s,
+  opacity .2s;
 }
 
 .song-sheet-overlay.show{
@@ -1117,23 +1119,36 @@ let currentSong = 0;
 
 function renderSong(){
 
-  const song = songs[currentSong];
+  const sheet =
+    document.getElementById('song-sheet');
 
-  document.getElementById('sheet-lyric').textContent =
-    song.lyric;
+  sheet.style.opacity = '0';
 
-  document.getElementById('sheet-title').textContent =
-    song.title;
+  setTimeout(() => {
 
-  document.getElementById('sheet-artist').textContent =
-    song.artist;
+    const song = songs[currentSong];
 
-  document.getElementById('preview-lyric').textContent =
-    song.lyric;
+    document.getElementById('sheet-lyric').textContent =
+      song.lyric;
 
-  document.getElementById('preview-title').textContent =
-    '/ ' + song.title;
+    document.getElementById('sheet-title').textContent =
+      song.title;
+
+    document.getElementById('sheet-artist').textContent =
+      song.artist;
+
+    document.getElementById('preview-lyric').textContent =
+      song.lyric;
+
+    document.getElementById('preview-title').textContent =
+      '/ ' + song.title;
+
+    sheet.style.opacity = '1';
+
+  },100);
+
 }
+
 renderSong();
 
   function nextSong(){
