@@ -556,6 +556,28 @@ body.real-mode .modal-content{
   opacity:1;
 }
 
+  /* --------------------------
+   imagesong
+-------------------------- */
+
+.song-preview{
+  margin-top:24px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.12);
+  cursor:pointer;
+}
+
+.song-lyric{
+  margin-top:8px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.song-title{
+  margin-top:4px;
+  opacity:.6;
+  font-size:12px;
+}
 /* --------------------------
    CANVAS
 -------------------------- */
@@ -661,6 +683,26 @@ body.real-mode .modal-content{
 <div class="label">ORIGIN</div>
 <div class="value" id="origin">Coral Sea</div>
 </div>
+
+</div> <!-- info-grid終了 -->
+
+<div class="song-preview" onclick="openSongSheet()">
+
+  <div class="label">SONG RECORD</div>
+
+  <div class="song-lyric">
+    「歌詞の一節」
+  </div>
+
+  <div class="song-title">
+    / 曲名
+  </div>
+
+</div>
+
+</div>
+
+<div class="accordion-list">
 
 </div>
 
