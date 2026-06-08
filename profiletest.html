@@ -1099,6 +1099,42 @@ function closeSongSheet(){
     .classList.remove('show');
 }
 
+const songs = [
+  {
+    lyric:'「一曲目の歌詞」',
+    title:'曲名1',
+    artist:'artist1'
+  },
+  {
+    lyric:'「二曲目の歌詞」',
+    title:'曲名2',
+    artist:'artist2'
+  }
+];
+
+let currentSong = 0;
+
+function renderSong(){
+
+  const song = songs[currentSong];
+
+  document.getElementById('sheet-lyric').textContent =
+    song.lyric;
+
+  document.getElementById('sheet-title').textContent =
+    song.title;
+
+  document.getElementById('sheet-artist').textContent =
+    song.artist;
+
+  document.getElementById('preview-lyric').textContent =
+    song.lyric;
+
+  document.getElementById('preview-title').textContent =
+    '/ ' + song.title;
+}
+renderSong();
+  
 async function toggleAccordion(trigger, type){
 
   const body = trigger.nextElementSibling;
