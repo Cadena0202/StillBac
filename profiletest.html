@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Record</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#050505;
+  color:#d4b06a;
+  font-family:'Cormorant Garamond', serif;
+  overflow-x:hidden;
+
+  transition:
+    background-color 1.2s ease,
+    color 1.2s ease;
+}
+
+/* --------------------------
+   GATE
+-------------------------- */
+
+#gate{
+  position:fixed;
+  flex-direction:column;
+  inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+  height:100vh;
+  width:100vw;
+}
+
+.gate-text{
+  font-size:12px;
+  letter-spacing:8px;
+  filter:blur(8px);
+  color:#d4b06a;
+  width:100%;
+  cursor:pointer;
+  text-align:center;
+
+  opacity:0;
+
+  text-shadow:
+  0 0 8px rgba(212,176,106,.7),
+  0 0 20px rgba(212,176,106,.4);
+
+  animation: glow 3s infinite ease-in-out;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+
+  transition:
+    opacity 1.2s ease,
+    letter-spacing 2s ease;
+}
+
+.gate-text.show{
+  opacity:1;
+  letter-spacing:3px;
+  filter:blur(0);
+}
+
+@keyframes glow{
+  0%,100%{
+    opacity:.6;
+  }
+  50%{
+    opacity:1;
+  }
+}
+
+.fade-out{
+  opacity:0;
+  transition:.8s;
+  pointer-events:none;
+}
+
+/* --------------------------
+   PROFILE
+-------------------------- */
+
+#profile{
+  opacity:0;
+  transition:.8s;
+  position:fixed;
+  inset:0;
+  overflow-y:auto;
+}
+
+#profile.show{
+  opacity:1;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:25px;
+}
+
+.header a{
+  color:#d4b06a;
+  text-decoration:none;
+  letter-spacing:2px;
+  font-size:15px;
+}
+
+.lock{
+  font-size:1.2rem;
+  transition: all .8s ease;
+  opacity:.55;
+}
+
+.lock.playing{
+  opacity: 1;
+  text-shadow:
+    0 0 8px rgba(255,255,255,.6),
+    0 0 16px rgba(255,255,255,.4),
+    0 0 28px rgba(255,255,255,.2);
+}
+
+
+/* --------------------------
+   CARD
+-------------------------- */
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+.character-switch{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  margin-bottom:40px;
+}
+
+.switch-btn{
+  background:none;
+  font-family:'Cormorant Garamond', serif;
+  border:none;
+  color:#6e5a33;
+  font-size:1.2rem;
+  letter-spacing:2px;
+  cursor:pointer;
+}
+
+.switch-btn.active{
+  color:#d4b06a;
+}
+
+.switch-btn:first-child{
+  color:#909090;
+}
+
+.switch-btn:first-child.active{
+  color:#909090;
+}
+
+.switch-btn:last-child{
+  color:#f0f0f0;
+}
+
+.switch-btn:last-child.active{
+  color:#f0f0f0;
+}
+
+.profile-card{
+  border:1px solid rgba(212,176,106,.25);
+  padding:35px;
+  margin-bottom:40px;
+  background:rgba(255,255,255,.01);
+}
+
+.name{
+  font-size:18px;
+  color:#f5f5f5;
+  margin-bottom:0px;
+  text-shadow:
+    0 0 5px rgba(0,0,0,1),
+    0 0 10px rgba(0,0,0,1),
+    0 0 15px rgba(0,0,0,.9);
+
+}
+
+.subtitle{
+  opacity:.7;
+  color:#f5f5f5;
+  font-size:0.8rem;
+  margin-bottom:7px;
+  text-shadow:
+    0 0 5px rgba(0,0,0,1),
+    0 0 10px rgba(0,0,0,1),
+    0 0 15px rgba(0,0,0,.9);
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.info-item{
+  border-bottom:1px solid rgba(212,176,106,.15);
+  padding-bottom:8px;
+}
+  
+.label{
+  font-size:.8rem;
+  opacity:.55;
+  letter-spacing:2px;
+}
+
+.value{
+  margin-top:5px;
+  font-size:0.7rem;
+}
+
+/* --------------------------
+   RECORD BUTTONS
+-------------------------- */
+
+.accordion-list{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+.accordion-item{
+  border-bottom:1px solid rgba(212,176,106,.15);
+}
+
+.accordion-trigger{
+  width:100%;
+  background:none;
+  border:none;
+  color:#d4b06a;
+  font-family:inherit;
+  font-size:1rem;
+  letter-spacing:2px;
+  padding:18px 5px;
+  cursor:pointer;
+  text-align:left;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.accordion-trigger::after{
+  content:'＋';
+  font-size:.9rem;
+  opacity:.5;
+  transition:opacity .3s;
+}
+
+.accordion-trigger.open::after{
+  content:'－';
+}
+
+.accordion-body{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:max-height .4s ease, opacity .4s ease;
+}
+
+.accordion-body.open{
+  max-height:5000px;
+  opacity:1;
+}
+
+.accordion-body-inner{
+  padding:5px 5px 20px;
+  line-height:2;
+  white-space:pre-wrap;
+  font-size:.6rem;
+}
+
+/* --------------------------
+   MODAL
+-------------------------- */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modal-content{
+  width:min(90%,800px);
+  max-height:80vh;
+  overflow-y:auto;
+
+  border:1px solid rgba(212,176,106,.25);
+
+  padding:35px;
+  background:#080808;
+
+  animation: fadeUp .4s ease;
+}
+
+body.real-mode .modal-content{
+  background:##0F1A45;
+  border:1px solid rgba(31,42,53,.25);
+}
+  
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.modal-title{
+  font-size:1.8rem;
+  margin-bottom:20px;
+}
+
+.modal-body{
+  line-height:2;
+  white-space:pre-wrap;
+}
+
+.close{
+  margin-top:25px;
+  cursor:pointer;
+  opacity:.7;
+
+  background:none;
+  border:none;
+  padding:0;
+  font:inherit;
+
+  color:#d4b06a;
+}
+6
+}
+
+/* --------------------------
+   CHARACTER FADE
+-------------------------- */
+
+.character-content{
+  transition:.4s;
+}
+
+.character-content.fade{
+  opacity:0;
+}
+
+/* --------------------------
+   REAL MODE
+-------------------------- */
+
+body.real-mode{
+  background:#1a1a1a;
+  color:#c0c0c0;
+}
+
+body.real-mode .profile-card{
+  border-color:rgba(192,192,192,.2);
+}
+
+body.real-mode .info-item{
+  border-bottom:1px solid rgba(192,192,192,.15);
+}
+
+body.real-mode .label{
+  color:#909090;
+}
+
+body.real-mode .header a,
+body.real-mode .lock,
+body.real-mode .world,
+body.real-mode .switch-btn{
+  color:#c0c0c0;
+}
+
+body.real-mode .switch-btn.active{
+  color:#e8e8e8;
+}
+
+body.real-mode .accordion-item{
+  border-bottom:1px solid rgba(192,192,192,.15);
+}
+
+body.real-mode .accordion-trigger{
+  color:#c0c0c0;
+}
+
+body.real-mode .close{
+  color:#c0c0c0;
+}
+
+body.real-mode .modal-content{
+  background:#1a1a1a;
+}
+
+.profile-banner{
+  width:100%;
+  height:80px;
+  overflow:hidden;
+  margin-bottom:20px;
+  position:relative;
+}
+
+.profile-banner img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:brightness(.7);
+}
+
+.banner-overlay{
+  position:absolute;
+  left:15px;
+  top:80%;
+  transform:translateY(-50%);
+}
+
+.world-switch{
+  text-align:center;
+  margin-bottom:35px;
+  letter-spacing:3px;
+}
+
+.world{
+  cursor:pointer;
+  opacity:.35;
+  transition:.4s;
+}
+
+.world.active{
+  opacity:1;
+}
+
+.divider{
+  margin:0 12px;
+  opacity:.25;
+}
+/* --------------------------
+   MOBILE
+-------------------------- */
+
+@media(max-width:700px){
+
+.info-grid{
+  grid-template-columns:1fr;
+}
+
+.name{
+  font-size:18px;
+}
+/* --------------------------
+   編集ボタン
+-------------------------- */
+
+#admin-panel{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:0;
+  margin-top:30px;
+  color:#b89b5e;
+}
+
+#admin-panel button{
+  background:none;
+  border:none;
+  color:#b89b5e;
+  font-family:inherit;
+  font-size:10px;
+  letter-spacing:2px;
+  cursor:pointer;
+  padding:0;
+}
+
+#admin-panel button:not(:last-child)::after{
+  content:"｜";
+  margin:0 10px;
+  color:#7f6a3e;
+}
+
+/* --------------------------
+  イラスト
+-------------------------- */
+.profile-banner{
+  width:100%;
+  height:80px;
+  overflow:hidden;
+  margin-bottom:20px;
+  position:relative;
+}
+
+.profile-banner img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:brightness(.7);
+}  
+
+.banner-overlay{
+  position:absolute;
+  left:15px;
+  top:80%;
+  transform:translateY(-50%);
+}
+
+.gate-input{
+  background:none;
+  border:none;
+  border-bottom:1px solid rgba(212,176,106,.4);
+  color:#d4b06a;
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;
+  letter-spacing:3px;
+  text-align:center;
+  width:180px;
+  outline:none;
+  opacity:0;
+  transition:opacity .8s ease;
+  padding:5px 0;
+  display:block;
+  margin-top:20px;
+}
+
+.gate-input.show{
+  opacity:1;
+}
+
+/* --------------------------
+   CANVAS
+-------------------------- */
+
+#bg-canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+
+#gate, #profile{
+  position:relative;
+}
+
+  
+}
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<canvas id="bg-canvas"></canvas>
+  
+<div id="gate">
+  <div class="gate-text" id="gate-question" onclick="showPasswordInput()">
+    Would you like to view it?
+  </div>
+  <input
+    class="gate-input"
+    id="gate-input"
+    type="password"
+    onkeydown="checkPassword(event)"
+    autocomplete="off"
+  >
+</div>
+
+<!-- PROFILE -->
+
+<div id="profile">
+
+<div class="header">
+  <a href="#" onclick="openAbout(); return false;">✦</a>
+  <a href="index.html">Moon</a>
+  <div class="lock" onclick="toggleMusic()">♪</div>
+</div>
+
+<div class="container">
+
+<div class="world-switch">
+  <span class="world active" onclick="changeWorld('twst',this)">
+    TWST
+  </span>
+
+  <span class="divider">/</span>
+
+  <span class="world" onclick="changeWorld('real',this)">
+    REAL
+  </span>
+</div>
+  
+<div class="character-switch">
+  <button class="switch-btn active" onclick="changeCharacter('azul',this)">♥</button>
+  <button class="switch-btn" onclick="changeCharacter('kadena',this)">♥</button>
+</div>
+
+<div id="character-content" class="character-content">
+
+<div class="profile-card">
+
+<div class="profile-banner">
+
+  <img id="banner-image" src="イラスト9814.png">
+
+  <div class="banner-overlay">
+    <div class="name" id="name">Azul Ashengrotto</div>
+    <div class="subtitle" id="subtitle">Record File</div>
+  </div>
+
+</div>
+
+<div class="info-grid">
+
+<div class="info-item">
+<div class="value">AGE</div>
+<div class="value" id="age">17</div>
+</div>
+
+<div class="info-item">
+<div class="label">OCCUPATION</div>
+<div class="value" id="job">high school student / CEO</div>
+</div>
+
+<div class="info-item">
+<div class="label">BIRTHDAY</div>
+<div class="value" id="birthday">2.24</div>
+</div>
+
+<div class="info-item">
+<div class="label">ORIGIN</div>
+<div class="value" id="origin">Coral Sea</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="accordion-list">
+
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAccordion(this,'personality')">Profile</button>
+<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+</div>
+
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAccordion(this,'past')">History</button>
+<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+</div>
+
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAccordion(this,'feelings')">Mind</button>
+<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+</div>
+
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAccordion(this,'memories')">Feelings</button>
+<div class="accordion-body"><div class="accordion-body-inner">Loading...</div></div>
+</div>
+
+<div id="admin-panel" style="display:none;">
+  <button onclick="editProfile('personality')">Profile</button>
+  <button onclick="editProfile('past')">History</button>
+  <button onclick="editProfile('feelings')">Mind</button>
+  <button onclick="editProfile('memories')">Feelings</button>
+  <button onclick="editProfile('twst')">twst</button>
+  <button onclick="editProfile('real')">real</button>
+</div>
+
+<div id="edit-modal" class="modal">
+
+  <div class="modal-content">
+
+    <div class="modal-title">
+      Currnt State
+    </div>
+
+    <textarea
+      id="edit-text"
+      style="
+      width:100%;
+      height:300px;
+      background:transparent;
+      color:inherit;
+      border:1px solid rgba(212,176,106,.25);
+      padding:15px;
+      resize:vertical;
+      box-sizing:border-box;
+      fontsize:16px;
+      ">
+    </textarea>
+
+    <div id="about-text" style="display:none;"></div>
+
+    <div class="close">
+      <button class="close" onclick="closeEditor()">Close</button>
+      <button id="save-btn" onclick="saveEditor()">Save</button>
+    </div>
+
+  </div>
+
+</div>
+  
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let currentWorld = 'twst';
+function changeWorld(world,btn){
+
+  currentWorld = world;
+
+  const bgm = document.getElementById('bgm');
+  const source = bgm.querySelector('source');
+
+  const wasPlaying = !bgm.paused;
+
+  if(world === 'real'){
+    source.src = 'absorb.mp3';
+  }else{
+    source.src = 'mergo.mp3';
+  }
+
+  bgm.load();
+
+  if(wasPlaying){
+    bgm.play();
+  }
+
+
+  document
+    .querySelectorAll('.world')
+    .forEach(w=>w.classList.remove('active'));
+
+  btn.classList.add('active');
+
+const content =
+document.getElementById('character-content');
+
+content.classList.add('fade');
+
+  if(world === 'real'){
+    document.body.classList.add('real-mode');
+  }else{
+    document.body.classList.remove('real-mode');
+  }
+
+setTimeout(()=>{
+
+  const data =
+  worldData[world][currentCharacter];
+
+  document.getElementById('name').textContent =
+  data.name;
+
+  document.getElementById('age').textContent =
+  data.age;
+
+  document.getElementById('job').textContent =
+  data.job;
+
+  document.getElementById('birthday').textContent =
+  data.birthday;
+
+  document.getElementById('origin').textContent =
+  data.origin;
+
+  document.getElementById('banner-image').src =
+  data.image;
+
+  content.classList.remove('fade');
+
+  document.querySelectorAll('.accordion-body').forEach(b=>{
+    b.classList.remove('open');
+  });
+
+  document.querySelectorAll('.accordion-trigger').forEach(t=>{
+    t.classList.remove('open');
+  });
+
+
+},1200);
+
+}
+
+  
+const VIEWER_PASSWORD = 'pisces';
+const OWNER_PASSWORD = '2243';
+
+
+function showPasswordInput(){
+  const question = document.getElementById('gate-question');
+  const input = document.getElementById('gate-input');
+
+  question.classList.add('fade-out');
+
+  setTimeout(()=>{
+    question.style.display='none';
+    input.classList.add('show');
+    input.focus();
+  },800);
+}
+
+function checkPassword(e){
+  if(e.key !== 'Enter') return;
+
+  const input = document.getElementById('gate-input');
+
+  if(input.value === OWNER_PASSWORD){
+
+    window.userRole = 'owner';
+    document.getElementById('admin-panel').style.display = 'block';
+
+    document.getElementById('gate').classList.add('fade-out');
+
+    setTimeout(()=>{
+      document.getElementById('gate').style.display='none';
+      window.scrollTo(0, 0);
+      document.getElementById('profile').classList.add('show');
+    },800);
+
+  }else if(input.value === VIEWER_PASSWORD){
+
+    window.userRole = 'viewer';
+
+    document.getElementById('gate').classList.add('fade-out');
+
+    setTimeout(()=>{
+      document.getElementById('gate').style.display='none';
+      window.scrollTo(0, 0);
+      document.getElementById('profile').classList.add('show');
+    },800);
+
+  }else{
+
+    input.value='';
+    input.style.borderBottomColor='rgba(255,80,80,.6)';
+    setTimeout(()=>{
+      input.style.borderBottomColor='rgba(212,176,106,.4)';
+    },600);
+  }
+}
+
+const worldData = {
+
+  twst:{
+    azul:{
+      name:'Azul Ashengrotto',
+      age:'17',
+      job:'high school student / CEO',
+      birthday:'2.24',
+      origin:'Coral Sea',
+      image:'イラスト9814.png'
+    },
+    kadena:{
+      name:'Cadena Sviate',
+      age:'17',
+      job:'high school student',
+      birthday:'1.12',
+      origin:'Shaftlands',
+      image:'イラスト98 (14).png'
+    }
+  },
+
+  real:{
+    azul:{
+      name:'Azul',
+      age:'24',
+      job:'CEO',
+      birthday:'2.24',
+      origin:'--',
+      image:'bd9fa45243d7863e41635592c73b8b19.jpg'
+    },
+    kadena:{
+      name:'Misa',
+      age:'27',
+      job:'--',
+      birthday:'1.12',
+      origin:'--',
+      image:'fcbe0571958296889581c7b5cf794ab0.jpg'
+    }
+  }
+
+};
+
+let currentCharacter='azul';
+
+function changeCharacter(id,btn){
+
+  document.querySelectorAll('.switch-btn')
+  .forEach(b=>b.classList.remove('active'));
+
+  btn.classList.add('active');
+
+  const content =
+  document.getElementById('character-content');
+
+  content.classList.add('fade');
+
+  setTimeout(()=>{
+
+  currentCharacter=id;
+
+  const data =
+  worldData[currentWorld][id];
+
+  document.getElementById('name').textContent =
+  data.name;
+
+  document.getElementById('age').textContent =
+  data.age;
+
+  document.getElementById('job').textContent =
+  data.job;
+
+  document.getElementById('birthday').textContent =
+  data.birthday;
+
+  document.getElementById('origin').textContent =
+  data.origin;
+
+  document.getElementById('banner-image').src =
+  data.image;
+
+  content.classList.remove('fade');
+
+　document.querySelectorAll('.accordion-body').forEach(b=>{
+    b.classList.remove('open');
+  });
+
+  document.querySelectorAll('.accordion-trigger').forEach(t=>{
+    t.classList.remove('open');
+  });
+
+
+},1200);
+
+}
+
+async function toggleAccordion(trigger, type){
+
+  const body = trigger.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+
+  // 全部閉じる
+  document.querySelectorAll('.accordion-body').forEach(b=>{
+    b.classList.remove('open');
+  });
+  document.querySelectorAll('.accordion-trigger').forEach(t=>{
+    t.classList.remove('open');
+  });
+
+  if(isOpen) return;
+
+  trigger.classList.add('open');
+  body.classList.add('open');
+
+  const inner = body.querySelector('.accordion-body-inner');
+  inner.textContent = 'Loading...';
+
+  const charId = currentCharacter === 'azul' ? 'az' : 'cd';
+  const docId = `${currentWorld}_${charId}`;
+  console.log(type, docId);
+
+  const snap = await getDoc(
+    doc(window.db, 'profiles', docId)
+  );
+
+  if(snap.exists()){
+    const data = snap.data();
+    inner.textContent = data[type] || 'No data';
+  }else{
+    inner.textContent = 'Document not found';
+  }
+
+}
+let currentEditType = null;
+let currentEditDocId = null;
+
+function closeEditor(){
+  document
+    .getElementById('edit-modal')
+    .classList.remove('open');
+}
+
+async function openAbout(){
+
+  const snap = await getDoc(
+    doc(window.db, 'profiles', 'about')
+  );
+
+  if(!snap.exists()) return;
+
+  const data = snap.data();
+  currentEditDocId = 'about';
+  currentEditType = currentWorld;
+
+  const saveBtn = document.getElementById('save-btn');
+
+  if(window.userRole === 'owner'){
+    saveBtn.style.display = '';
+  }else{
+    saveBtn.style.display = 'none';
+  }
+  const editText = document.getElementById('edit-text');
+  const aboutText = document.getElementById('about-text');
+
+  editText.style.display = 'none';
+  aboutText.style.display = 'block';
+
+  aboutText.textContent =
+    data[currentWorld] || '';
+
+  document.getElementById('edit-text').value =
+    data[currentWorld] || '';
+
+  document
+    .getElementById('edit-modal')
+    .classList.add('open');
+}
+  
+async function editProfile(type){
+
+  const charId = currentCharacter === 'azul' ? 'az' : 'cd';
+
+  const docId =
+    (type === 'twst' || type === 'real')
+      ? 'about'
+      : `${currentWorld}_${charId}`;
+
+  const snap = await getDoc(
+    doc(window.db, 'profiles', docId)
+  );
+
+  if(!snap.exists()){
+    alert('Document not found');
+    return;
+  }
+
+  const data = snap.data();
+
+  currentEditType = type;
+  currentEditDocId = docId;
+
+  const editText = document.getElementById('edit-text');
+  const aboutText = document.getElementById('about-text');
+
+  editText.style.display = 'block';
+  aboutText.style.display = 'none';
+
+  document.getElementById('edit-text').value =
+  data[type] || '';
+  
+  document
+    .getElementById('edit-modal')
+    .classList.add('open');
+
+  return;
+  } 
+
+async function saveEditor(){
+
+  const text =
+    document.getElementById('edit-text').value;
+
+  await updateDoc(
+    doc(window.db, 'profiles', currentEditDocId),
+    {
+      [currentEditType]: text
+    }
+  );
+
+  closeEditor();
+  alert('保存しました');
+
+}
+
+
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+
+let dots = [];
+let W, H;
+
+function resizeCanvas(){
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function initDots(){
+  dots = [];
+  for(let i = 0; i < 60; i++){
+    dots.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.2 + 0.3,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      op: Math.random() * 0.5 + 0.1
+    });
+  }
+}
+
+function drawTWST(){
+  ctx.clearRect(0, 0, W, H);
+
+  for(let i = 0; i < dots.length; i++){
+    const a = dots[i];
+
+    for(let j = i+1; j < dots.length; j++){
+      const b = dots[j];
+      const dx = a.x - b.x;
+      const dy = a.y - b.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+
+      if(dist < 120){
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(212,176,106,${(1 - dist/120) * 0.12})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+
+    ctx.beginPath();
+    ctx.arc(a.x, a.y, a.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(212,176,106,${a.op})`;
+    ctx.fill();
+
+    a.x += a.vx;
+    a.y += a.vy;
+
+    if(a.x < 0) a.x = W;
+    if(a.x > W) a.x = 0;
+    if(a.y < 0) a.y = H;
+    if(a.y > H) a.y = 0;
+  }
+}
+
+let angle1 = 0;
+let angle2 = 0.8;
+
+function drawREAL(){
+  ctx.clearRect(0, 0, W, H);
+
+  const cx = W * 0.75;
+  const cy = H * 0.78;
+  const rx = Math.min(W, H) * 0.45;
+  const ry = Math.min(W, H) * 0.28;
+  const offset = Math.min(W, H) * 0.1;
+  
+  ctx.save();
+  ctx.translate(cx - offset, cy);
+  ctx.rotate(angle1);
+  ctx.beginPath();
+  ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(192,192,192,0.12)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.save();
+  ctx.translate(cx + offset, cy);
+  ctx.rotate(angle2);
+  ctx.beginPath();
+  ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(192,192,192,0.12)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.restore();
+
+  angle1 += 0.002;
+  angle2 -= 0.0015;
+}
+
+function animate(){
+  if(document.body.classList.contains('real-mode')){
+    drawREAL();
+  }else{
+    drawTWST();
+  }
+  requestAnimationFrame(animate);
+}
+
+resizeCanvas();
+initDots();
+animate();
+
+window.addEventListener('resize', ()=>{
+  resizeCanvas();
+});
+
+function toggleMusic(){
+  const bgm = document.getElementById('bgm');
+  const btn = document.querySelector('.lock');
+
+  if(bgm.paused){
+    bgm.volume = 0.01;
+    console.log(bgm.volume);
+    bgm.play();
+    btn.classList.add('playing');
+  }else{
+    bgm.pause();
+    btn.classList.remove('playing');
+  }
+}
+window.addEventListener('load', () => {
+  document
+    .getElementById('gate-question')
+    .classList.add('show');
+});  
+</script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDeO0QZ1wmxGmEcyu9W3SgSos1Y4T-4TYA",
+  authDomain: "azul-1a3c9.firebaseapp.com",
+  projectId: "azul-1a3c9",
+  storageBucket: "azul-1a3c9.firebasestorage.app",
+  messagingSenderId: "107176111624",
+  appId: "1:107176111624:web:78bc25fbe09bcd3b47ebbd",
+  measurementId: "G-N409CFN5J6"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.db = db;
+window.getDoc = getDoc;
+window.doc = doc;
+window.updateDoc = updateDoc;
+
+</script>
+  
+<audio id="bgm" loop>
+  <source src="mergo.mp3" type="audio/mpeg">
+</audio>
+  
+</body>
+</html>
