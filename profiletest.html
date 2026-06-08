@@ -577,6 +577,43 @@ body.real-mode .modal-content{
   opacity:.6;
   font-size:8px;
 }
+
+.song-sheet-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(8px);
+
+  display:flex;
+  align-items:flex-end;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:.3s;
+  z-index:9999;
+}
+
+.song-sheet{
+  width:100%;
+  padding:24px;
+  border-radius:24px 24px 0 0;
+
+  background:#111;
+
+  transform:translateY(100%);
+  transition:.3s;
+}
+
+.song-sheet-overlay.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.song-sheet-overlay.show .song-sheet{
+  transform:translateY(0);
+}
+  
 /* --------------------------
    CANVAS
 -------------------------- */
@@ -1034,6 +1071,12 @@ function changeCharacter(id,btn){
 
 },1200);
 
+}
+
+function openSongSheet(){
+  document
+    .getElementById('song-sheet-overlay')
+    .classList.add('show');
 }
 
 async function toggleAccordion(trigger, type){
