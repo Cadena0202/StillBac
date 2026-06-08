@@ -734,9 +734,12 @@ body.real-mode .modal-content{
 
 </div>
 
-<div id="song-sheet-overlay" class="song-sheet-overlay">
+<div id="song-sheet-overlay"
+     class="song-sheet-overlay"
+     onclick="closeSongSheet()">
 
-  <div id="song-sheet" class="song-sheet">
+  <div id="song-sheet" class="song-sheet"
+     onclick="event.stopPropagation()">
 
     <div class="sheet-handle"></div>
 
@@ -1077,6 +1080,12 @@ function openSongSheet(){
   document
     .getElementById('song-sheet-overlay')
     .classList.add('show');
+}
+
+function closeSongSheet(){
+  document
+    .getElementById('song-sheet-overlay')
+    .classList.remove('show');
 }
 
 async function toggleAccordion(trigger, type){
