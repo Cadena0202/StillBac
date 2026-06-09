@@ -775,6 +775,9 @@ body.real-mode .modal-content{
     artist
   </div>
 
+  <div id="sheet-memo" class="sheet-memo">
+  </div>
+
 </div>
   </div>
 
@@ -1112,10 +1115,18 @@ function closeSongSheet(){
 
 const songs = [
   {
-    lyric:'「一曲目の歌詞」',
-    title:'曲名1',
-    artist:'artist1'
-  },
+  lyric:'「一曲目の歌詞」',
+  title:'曲名1',
+  artist:'artist1',
+
+  memo:`
+ここにメモを書く。
+
+この曲を選んだ理由とか、
+アズを連想する部分とか、
+好きな歌詞の意味とか。
+`
+}
   {
     lyric:'「二曲目の歌詞」',
     title:'曲名2',
@@ -1143,6 +1154,9 @@ function renderSong(){
 
   document.getElementById('preview-title').textContent =
     '/ ' + song.title;
+
+  document.getElementById('sheet-memo').textContent =
+  song.memo;
 }
 
 renderSong();
