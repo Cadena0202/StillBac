@@ -1188,40 +1188,41 @@ requestAnimationFrame(() => {
 
 function prevSong(){
 
-  currentSong--;
+  const content =
+    document.getElementById('song-content');
 
-  if(currentSong < 0){
-    currentSong = songs.length - 1;
-  }
+  content.style.transform =
+    'translateX(30px)';
 
-  renderSong();
+  content.style.opacity = '0';
+
+  setTimeout(() => {
+
+    currentSong--;
+
+    if(currentSong < 0){
+      currentSong = songs.length - 1;
+    }
+
+    renderSong();
+
+    content.style.transition = 'none';
+    content.style.transform = 'translateX(-30px)';
+
+    requestAnimationFrame(() => {
+
+      content.style.transition = '.25s';
+
+      content.style.transform =
+        'translateX(0)';
+
+      content.style.opacity = '1';
+
+    });
+
+  },250);
+
 }
-
-let startX = 0;
-
-const sheet =
-  document.getElementById('song-sheet');
-
-sheet.addEventListener('touchstart', e => {
-  startX = e.touches[0].clientX;
-});
-
-sheet.addEventListener('touchend', e => {
-
-  const endX =
-    e.changedTouches[0].clientX;
-
-  const diff = endX - startX;
-
-  if(diff < -50){
-    nextSong();
-  }
-
-  if(diff > 50){
-    prevSong();
-  }
-
-});
   
 async function toggleAccordion(trigger, type){
 
