@@ -1144,14 +1144,18 @@ function openSongSheet(){
   document
     .getElementById('song-sheet-overlay')
     .classList.add('show');
+
+  document.body.style.overflow = 'hidden';
 }
 
 function closeSongSheet(){
+
   document
     .getElementById('song-sheet-overlay')
     .classList.remove('show');
-}
 
+  document.body.style.overflow = '';
+}
 const songs = [
   {
   lyric:`
