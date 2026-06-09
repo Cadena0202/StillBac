@@ -673,6 +673,11 @@ body.real-mode .modal-content{
 
 .song-count{
   text-align:right;
+
+  font-size:10px;
+  opacity:.5;
+
+  margin-bottom:16px;
 }
 /* --------------------------
    CANVAS
@@ -1248,6 +1253,9 @@ function renderSong(){
 
   document.getElementById('sheet-title').textContent =
     song.title;
+
+  document.getElementById('song-count').textContent =
+  `${String(currentSong + 1).padStart(2,'0')} / ${String(songs.length).padStart(2,'0')}`;
 
   document.getElementById('sheet-artist').textContent =
     song.artist;
