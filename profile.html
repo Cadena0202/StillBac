@@ -556,6 +556,129 @@ body.real-mode .modal-content{
   opacity:1;
 }
 
+  /* --------------------------
+   imagesong
+-------------------------- */
+
+.song-preview{
+  margin-top:0px;
+  padding-top:0px;
+  cursor:pointer;
+}
+
+.song-lyric{
+  margin-top:8px;
+  font-size:10px;
+  line-height:1.6;
+  white-space:pre-wrap;
+}
+
+.song-title{
+  margin-top:4px;
+  opacity:.6;
+  font-size:8px;
+}
+
+.song-sheet-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(8px);
+
+  display:flex;
+  align-items:flex-end;
+
+  overflow:hidden;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:.3s;
+  z-index:9999;
+}
+  
+.song-sheet{
+  width:100%;
+  padding:24px;
+  border-radius:32px 32px 0 0;
+
+  background:rgba(255,255,255,.05);
+
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+
+  max-height:80vh;
+  overflow-y:auto;
+
+  transform:translateY(100%);
+  transition:
+  transform .3s,
+  opacity .2s;
+}
+
+.song-sheet-overlay.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.song-sheet-overlay.show .song-sheet{
+  transform:translateY(0);
+}
+
+.sheet-handle{
+  width:48px;
+  height:5px;
+  border-radius:999px;
+  background:rgba(255,255,255,.25);
+
+  margin:0 auto 20px;
+}
+
+#song-content{
+  transition:.35s;
+}
+
+.sheet-memo{
+  margin-top:24px;
+  padding-top:20px;
+
+  border-top:1px solid rgba(255,255,255,.08);
+
+  font-size:10px;
+  line-height:2;
+
+  opacity:.40;
+  white-space:pre-wrap;
+}
+
+.sheet-lyric{
+  font-size:12px;
+  line-height:1.8;
+
+  margin-bottom:16px;
+
+  white-space:pre-wrap;
+}
+
+.sheet-title{
+  font-size:18px;
+}
+
+.sheet-artist{
+  margin-top:4px;
+
+  font-size:12px;
+  opacity:.6;
+}
+
+.song-count{
+  text-align:right;
+
+  font-size:10px;
+  opacity:.5;
+
+  margin-bottom:16px;
+}
 /* --------------------------
    CANVAS
 -------------------------- */
@@ -643,7 +766,7 @@ body.real-mode .modal-content{
 <div class="info-grid">
 
 <div class="info-item">
-<div class="value">AGE</div>
+<div class="label">AGE</div>
 <div class="value" id="age">17</div>
 </div>
 
@@ -661,6 +784,59 @@ body.real-mode .modal-content{
 <div class="label">ORIGIN</div>
 <div class="value" id="origin">Coral Sea</div>
 </div>
+
+</div> <!-- info-grid終了 -->
+
+<div class="song-preview" onclick="openSongSheet()">
+
+  <div id="preview-lyric" class="song-lyric">
+    「歌詞の一節」
+  </div>
+
+  <div id="preview-title" class="song-title">
+    / 曲名
+  </div>
+
+</div>
+
+<div id="song-sheet-overlay"
+     class="song-sheet-overlay"
+     onclick="closeSongSheet()">
+
+  <div id="song-sheet" class="song-sheet"
+     onclick="event.stopPropagation()">
+
+<div class="sheet-handle"></div>
+
+    <div id="song-count" class="song-count">
+  01 / 12
+   </div>
+
+<div id="song-content">
+
+  <div id="sheet-lyric" class="sheet-lyric">
+    「歌詞の一節」
+  </div>
+
+  <div id="sheet-title" class="sheet-title">
+    曲名
+  </div>
+
+  <div id="sheet-artist" class="sheet-artist">
+    artist
+  </div>
+
+  <div id="sheet-memo" class="sheet-memo">
+  </div>
+
+</div>
+  </div>
+
+</div>
+
+</div>
+
+<div class="accordion-list">
 
 </div>
 
@@ -816,6 +992,9 @@ setTimeout(()=>{
     t.classList.remove('open');
   });
 
+  currentSong = 0;
+　renderSong();
+
 
 },1200);
 
@@ -942,6 +1121,9 @@ function changeCharacter(id,btn){
   const data =
   worldData[currentWorld][id];
 
+  currentSong = 0;
+　renderSong();
+
   document.getElementById('name').textContent =
   data.name;
 
@@ -975,6 +1157,303 @@ function changeCharacter(id,btn){
 
 }
 
+function openSongSheet(){
+
+  document
+    .getElementById('song-sheet-overlay')
+    .classList.add('show');
+
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSongSheet(){
+
+  document
+    .getElementById('song-sheet-overlay')
+    .classList.remove('show');
+
+  document.body.style.overflow = '';
+}
+const songs = {
+  twst:{
+    azul:[
+  {
+  lyric:`
+君が選んだ答えはほら、僕が選んできた答えの
+果てにたどり着いた結末だ。だからそんな顔はよしてよ
+`,
+  title:'飽和',
+  artist:'Ayase.',
+
+  memo:`
+この結末を選んだのは貴女だとそう言って。
+私のせいにしていて欲しい。
+
+その夢を選んで隣で見たかったのは紛れもない私だから。
+さよならはつたえそびれたままで。
+`
+},
+       {
+  lyric:`
+感情的にはなれない、君は僕と踊ればいい
+ずっと僕と！
+`,
+  title:'愛のレンタル',
+  artist:'マカロニえんぴつ',
+
+  memo:`
+愛の貸し借り。
+何時まで経っても自分の好意すら損得勘定で割り切ってしまう酷い人。
+
+夢の中でも探すから、その中でくらい私を見つけて。
+`
+},
+            {
+  lyric:`
+辛いのに笑うなよ。
+痛いなら隠すなよ。
+`,
+  title:'終着',
+  artist:'rinri',
+
+  memo:`
+私は貴方の根拠にはきっとなれない。
+
+なりたい。だから今日も言葉を重ねるという愚行を繰り返している。
+`
+},
+                  {
+  lyric:`
+君の心臓は僕の心臓の命の色がよく似ている
+もう全部喰らいついて一つになりたい
+あなた以外の世界はけだるい。
+`,
+  title:'心臓',
+  artist:'DUSTCELL',
+
+  memo:`
+どうか全ての季節に私を連れて行って。
+
+今年しか見れない桜を、
+今年しか出来ない花火を、
+今年しか食べれない旬を、
+今年しか感じれない雪を、
+
+私の生きる理由。
+`
+},
+],
+
+  kadena:[
+  {
+    lyric:`
+このザマさらす僕の心が
+末永く痛み続けますように
+    `,
+    title:'ディアブロ',
+    artist:'あ子',
+    memo:'メモ'
+  },
+      {
+    lyric:`
+過去も未来も無くなれば僕も自由に飛び立てるかな
+感情一つ消せるのなら「好き」を消せば楽になれるかな
+    `,
+    title:'Calc.',
+    artist:'ジミーサム',
+    memo:'メモ'
+  },
+    {
+    lyric:`
+過去も未来も無くなれば僕も自由に飛び立てるかな
+感情一つ消せるのなら「好き」を消せば楽になれるかな
+    `,
+    title:'Calc.',
+    artist:'ジミーサム',
+    memo:'メモ'
+}
+]
+
+},
+real:{
+  azul:[
+   {
+  lyric:`
+恋なんて後から、愛なんて後から
+辻褄を合わせよう
+  `,
+  title:'釣られませ貴女',
+  artist:'あ子',
+  memo:'メモ'
+}
+  ],
+
+  kadena:[
+  {
+    lyric:`
+ふたりぼっちになんてなれやしないから
+幸せなまま一緒に死んじゃおうよ
+    `,
+    title:'ふたりぼっち',
+    artist:'ミオヤマザキ',
+    memo:'メモ'
+  },
+    {
+    lyric:`
+あなたがいるそんな世界を創り出して
+笑い合って二人きりずっと繋いだ手
+    `,
+    title:'あなたのいる世界',
+    artist:'楓遥登',
+    memo:'メモ'
+  }
+]
+
+}
+};
+
+let currentSong = 0;
+
+function renderSong(){
+
+  const song = songs[currentWorld][currentCharacter][currentSong];
+
+  document.getElementById('sheet-lyric').textContent =
+    song.lyric;
+
+  document.getElementById('sheet-title').textContent =
+    song.title;
+
+  document.getElementById('song-count').textContent =
+  `${String(currentSong + 1).padStart(2,'0')} / ${String(songs[currentWorld][currentCharacter].length).padStart(2,'0')}`;
+  
+  document.getElementById('sheet-artist').textContent =
+    song.artist;
+
+  document.getElementById('preview-lyric').textContent =
+    song.lyric;
+
+  document.getElementById('preview-title').textContent =
+    '/ ' + song.title;
+
+  document.getElementById('sheet-memo').textContent =
+  song.memo;
+}
+
+renderSong();
+
+  function nextSong(){
+
+  const content =
+    document.getElementById('song-content');
+
+  content.style.transform =
+    'translateX(-30px)';
+
+  content.style.opacity = '0';
+
+  setTimeout(() => {
+
+    currentSong++;
+
+    if(currentSong >= songs.length){
+      currentSong = 0;
+    }
+
+renderSong();
+
+content.style.transition = 'none';
+content.style.transform = 'translateX(30px)';
+
+requestAnimationFrame(() => {
+
+  content.style.transition = '.25s';
+
+  content.style.transform =
+    'translateX(0)';
+
+  content.style.opacity = '1';
+
+});
+    content.style.opacity = '1';
+
+  },250);
+
+}
+
+function prevSong(){
+
+  const content =
+    document.getElementById('song-content');
+
+  content.style.transform =
+    'translateX(30px)';
+
+  content.style.opacity = '0';
+
+  setTimeout(() => {
+
+    currentSong--;
+
+    if(currentSong < 0){
+      currentSong = songs.length - 1;
+    }
+
+    renderSong();
+
+    content.style.transition = 'none';
+    content.style.transform = 'translateX(-30px)';
+
+    requestAnimationFrame(() => {
+
+      content.style.transition = '.25s';
+
+      content.style.transform =
+        'translateX(0)';
+
+      content.style.opacity = '1';
+
+    });
+
+  },250);
+
+}
+
+let startX = 0;
+let startY = 0;
+
+const sheet =
+  document.getElementById('song-sheet');
+
+sheet.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+});
+
+sheet.addEventListener('touchend', e => {
+
+  const endX =
+    e.changedTouches[0].clientX;
+  const endY =
+  e.changedTouches[0].clientY;
+
+  const diff = endX - startX;
+  const diffY = endY - startY;
+
+  if(diff < -50){
+    nextSong();
+  }
+
+  if(diff > 50){
+    prevSong();
+  }
+
+  if(diffY > 80){
+  closeSongSheet();
+  }
+
+});
+  
 async function toggleAccordion(trigger, type){
 
   const body = trigger.nextElementSibling;
