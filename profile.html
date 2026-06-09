@@ -297,7 +297,12 @@ body{
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.92);
+
+  background:rgba(0,0,0,.55);
+
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
   display:none;
   justify-content:center;
   align-items:center;
@@ -316,13 +321,16 @@ body{
   border:1px solid rgba(212,176,106,.25);
 
   padding:35px;
-  background:#080808;
+  background:rgba(8,8,8,.55);
+
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
 
   animation: fadeUp .4s ease;
 }
 
 body.real-mode .modal-content{
-  background:##0F1A45;
+  background:#0F1A45;
   border:1px solid rgba(31,42,53,.25);
 }
   
