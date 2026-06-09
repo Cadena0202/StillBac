@@ -961,6 +961,8 @@ body.real-mode .timeline-item::after{
     </textarea>
 
     <div id="about-timeline"></div>
+
+    <div id="about-song"></div>
     
     <div id="about-text" style="display:none;"></div>
 
@@ -1567,6 +1569,24 @@ sheet.addEventListener('touchend', e => {
     '現在 恋人'
   ]
 };
+
+  const relationSongs = {
+  twst:{
+    lyric:`
+ここに歌詞
+`,
+    title:'曲名',
+    artist:'artist'
+  },
+
+  real:{
+    lyric:`
+ここに歌詞
+`,
+    title:'曲名',
+    artist:'artist'
+  }
+};
   
 async function toggleAccordion(trigger, type){
 
@@ -1641,6 +1661,26 @@ async function openAbout(){
 
   const timelineBox =
   document.getElementById('about-timeline');
+
+  const songBox =
+  document.getElementById('about-song');
+
+  const song =
+    relationSongs[currentWorld];
+
+  songBox.innerHTML = `
+    <div class="about-song-lyric">
+      ${song.lyric}
+    </div>
+
+    <div class="about-song-title">
+      / ${song.title}
+    </div>
+
+    <div class="about-song-artist">
+      ${song.artist}
+    </div>
+  `;  
 
   timelineBox.innerHTML =
     timelines[currentWorld]
