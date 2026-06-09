@@ -1168,7 +1168,8 @@ function closeSongSheet(){
 
   document.body.style.overflow = '';
 }
-const songs = [
+const songs = {
+  twst:[
   {
   lyric:`
 君が選んだ答えはほら、僕が選んできた答えの
@@ -1241,12 +1242,22 @@ const songs = [
 好きな歌詞の意味とか。
 `
 }
-];
+],
+
+real:[
+  {
+    lyric:'REAL側の一曲目',
+    title:'曲名',
+    artist:'artist',
+    memo:'メモ'
+  }
+]
+};
 let currentSong = 0;
 
 function renderSong(){
 
-  const song = songs[currentSong];
+  const song = songs[currentWorld][currentSong];
 
   document.getElementById('sheet-lyric').textContent =
     song.lyric;
@@ -1255,8 +1266,8 @@ function renderSong(){
     song.title;
 
   document.getElementById('song-count').textContent =
-  `${String(currentSong + 1).padStart(2,'0')} / ${String(songs.length).padStart(2,'0')}`;
-
+  `${String(currentSong + 1).padStart(2,'0')} / ${String(songs[currentWorld].length).padStart(2,'0')}`;
+  
   document.getElementById('sheet-artist').textContent =
     song.artist;
 
