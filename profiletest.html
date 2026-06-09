@@ -1121,6 +1121,9 @@ function changeCharacter(id,btn){
   const data =
   worldData[currentWorld][id];
 
+  currentSong = 0;
+　renderSong();
+
   document.getElementById('name').textContent =
   data.name;
 
@@ -1260,7 +1263,8 @@ let currentSong = 0;
 
 function renderSong(){
 
-  const song = songs[currentWorld][currentSong];
+  const song =
+  songs[currentWorld][currentCharacter][currentSong];
 
   document.getElementById('sheet-lyric').textContent =
     song.lyric;
@@ -1269,7 +1273,7 @@ function renderSong(){
     song.title;
 
   document.getElementById('song-count').textContent =
-  `${String(currentSong + 1).padStart(2,'0')} / ${String(songs[currentWorld].length).padStart(2,'0')}`;
+  `${String(currentSong + 1).padStart(2,'0')} / ${String(songs[currentWorld][currentCharacter].length).padStart(2,'0')}`;
   
   document.getElementById('sheet-artist').textContent =
     song.artist;
