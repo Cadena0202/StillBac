@@ -1326,20 +1326,25 @@ function prevSong(){
 }
 
 let startX = 0;
+let startY = 0;
 
 const sheet =
   document.getElementById('song-sheet');
 
 sheet.addEventListener('touchstart', e => {
   startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
 });
 
 sheet.addEventListener('touchend', e => {
 
   const endX =
     e.changedTouches[0].clientX;
+  const endY =
+  e.changedTouches[0].clientY;
 
   const diff = endX - startX;
+  const diffY = endY - startY;
 
   if(diff < -50){
     nextSong();
@@ -1347,6 +1352,10 @@ sheet.addEventListener('touchend', e => {
 
   if(diff > 50){
     prevSong();
+  }
+
+  if(diffY > 80){
+  closeSongSheet();
   }
 
 });
