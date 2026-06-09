@@ -897,6 +897,8 @@ body.real-mode .modal-content{
       ">
     </textarea>
 
+    <div id="about-timeline"></div>
+    
     <div id="about-text" style="display:none;"></div>
 
     <div class="close">
@@ -1486,6 +1488,20 @@ sheet.addEventListener('touchend', e => {
   }
 
 });
+
+  const timelines = {
+  twst:[
+    '出逢い',
+    '転機',
+    '約束'
+  ],
+
+  real:[
+    '出逢い',
+    '再会',
+    '現在'
+  ]
+};
   
 async function toggleAccordion(trigger, type){
 
@@ -1557,6 +1573,16 @@ async function openAbout(){
 
   editText.style.display = 'none';
   aboutText.style.display = 'block';
+
+  const timelineBox =
+  document.getElementById('about-timeline');
+
+  timelineBox.innerHTML =
+    timelines[currentWorld]
+      .map(item =>
+        `<div class="timeline-item">${item}</div>`
+      )
+      .join('');
 
   aboutText.textContent =
     data[currentWorld] || '';
