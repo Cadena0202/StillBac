@@ -1688,11 +1688,11 @@ async function openAbout(){
     relationSongs[currentWorld];
 
   songBox.innerHTML = `
-    <div class="about-song-lyric">
+    <div class="about-song-preview">
       ${song.lyric}
     </div>
-  `;  
-
+  `;
+  
   timelineBox.innerHTML =
     timelines[currentWorld]
       .map(item =>
