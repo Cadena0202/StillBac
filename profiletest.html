@@ -627,6 +627,10 @@ body.real-mode .modal-content{
 
   margin:0 auto 20px;
 }
+
+#song-content{
+  transition:.25s;
+}
   
 /* --------------------------
    CANVAS
@@ -1157,13 +1161,31 @@ renderSong();
 
   function nextSong(){
 
-  currentSong++;
+  const content =
+    document.getElementById('song-content');
 
-  if(currentSong >= songs.length){
-    currentSong = 0;
-  }
+  content.style.transform =
+    'translateX(-30px)';
 
-  renderSong();
+  content.style.opacity = '0';
+
+  setTimeout(() => {
+
+    currentSong++;
+
+    if(currentSong >= songs.length){
+      currentSong = 0;
+    }
+
+    renderSong();
+
+    content.style.transform =
+      'translateX(0)';
+
+    content.style.opacity = '1';
+
+  },250);
+
 }
 
 function prevSong(){
