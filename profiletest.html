@@ -1165,11 +1165,21 @@ renderSong();
       currentSong = 0;
     }
 
-    renderSong();
+renderSong();
 
-    content.style.transform =
-      'translateX(0)';
+content.style.transition = 'none';
+content.style.transform = 'translateX(30px)';
 
+requestAnimationFrame(() => {
+
+  content.style.transition = '.25s';
+
+  content.style.transform =
+    'translateX(0)';
+
+  content.style.opacity = '1';
+
+});
     content.style.opacity = '1';
 
   },250);
