@@ -1223,6 +1223,32 @@ function prevSong(){
   },250);
 
 }
+
+let startX = 0;
+
+const sheet =
+  document.getElementById('song-sheet');
+
+sheet.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+});
+
+sheet.addEventListener('touchend', e => {
+
+  const endX =
+    e.changedTouches[0].clientX;
+
+  const diff = endX - startX;
+
+  if(diff < -50){
+    nextSong();
+  }
+
+  if(diff > 50){
+    prevSong();
+  }
+
+});
   
 async function toggleAccordion(trigger, type){
 
