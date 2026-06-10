@@ -1920,6 +1920,9 @@ async function openAbout(){
   document.getElementById('sheet-memo').textContent =
     song.memo;
 
+  document.getElementById('song-count').textContent =
+  `${String(currentRelationSong + 1).padStart(2,'0')} / ${String(relationSongsData.length).padStart(2,'0')}`;
+
   openSongSheet();
 }
   
