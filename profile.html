@@ -1466,31 +1466,57 @@ renderSong();
 
   function nextSong(){
 
-    if(relationSongMode){
+  const content =
+    document.getElementById('song-content');
+
+  if(relationSongMode){
+
+    content.style.transform =
+      'translateX(-30px)';
+
+    content.style.opacity = '0';
+
+    setTimeout(() => {
 
       currentRelationSong++;
 
-    if(currentRelationSong >= relationSongsData.length){
-      currentRelationSong = 0;
-    }
+      if(currentRelationSong >= relationSongsData.length){
+        currentRelationSong = 0;
+      }
 
-    const song =
-      relationSongsData[currentRelationSong];
+      const song =
+        relationSongsData[currentRelationSong];
 
-    document.getElementById('sheet-lyric').textContent =
-      song.lyric;
+      document.getElementById('sheet-lyric').textContent =
+        song.lyric;
 
-    document.getElementById('sheet-title').textContent =
-      song.title;
+      document.getElementById('sheet-title').textContent =
+        song.title;
 
-   document.getElementById('sheet-artist').textContent =
-      song.artist;
+      document.getElementById('sheet-artist').textContent =
+        song.artist;
 
-    document.getElementById('sheet-memo').textContent =
-      song.memo;
+      document.getElementById('sheet-memo').textContent =
+        song.memo;
+
+      content.style.transition = 'none';
+      content.style.transform = 'translateX(30px)';
+
+      requestAnimationFrame(() => {
+
+        content.style.transition = '.25s';
+
+        content.style.transform =
+          'translateX(0)';
+
+        content.style.opacity = '1';
+
+      });
+
+    },250);
 
     return;
- }
+  }
   const content =
     document.getElementById('song-content');
 
