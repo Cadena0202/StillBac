@@ -1466,8 +1466,31 @@ renderSong();
 
   function nextSong(){
 
-    if(relationSongMode) return;
+    if(relationSongMode){
 
+      currentRelationSong++;
+
+    if(currentRelationSong >= relationSongsData.length){
+      currentRelationSong = 0;
+    }
+
+    const song =
+      relationSongsData[currentRelationSong];
+
+    document.getElementById('sheet-lyric').textContent =
+      song.lyric;
+
+    document.getElementById('sheet-title').textContent =
+      song.title;
+
+   document.getElementById('sheet-artist').textContent =
+      song.artist;
+
+    document.getElementById('sheet-memo').textContent =
+      song.memo;
+
+    return;
+ }
   const content =
     document.getElementById('song-content');
 
