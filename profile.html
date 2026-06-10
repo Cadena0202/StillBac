@@ -1731,10 +1731,15 @@ async function openAbout(){
 
   function openRelationSong(){
 
-    relationSongMode = true;
+  relationSongMode = true;
+
+  relationSongsData =
+    relationSongs[currentWorld];
+
+  currentRelationSong = 0;
 
   const song =
-  relationSongs[currentWorld][0];
+    relationSongsData[currentRelationSong];
     
   document.getElementById('sheet-lyric').textContent =
     song.lyric;
