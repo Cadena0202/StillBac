@@ -1508,11 +1508,13 @@ renderSong();
 
   setTimeout(() => {
 
-    if(currentSong >= songs[currentWorld][currentCharacter].length){
-      currentSong = 0;
-    }
+  currentSong++;
 
-renderSong();
+  if(currentSong >= songs[currentWorld][currentCharacter].length){
+    currentSong = 0;
+  }
+
+  renderSong();
 
 content.style.transition = 'none';
 content.style.transform = 'translateX(30px)';
