@@ -1428,12 +1428,17 @@ real:{
 
 let currentSong = 0;
 
+let currentRelationSong = 0;
+
 let relationSongMode = false;
 
 function renderSong(){
 
-  const song = songs[currentWorld][currentCharacter][currentSong];
+  currentRelationSong = 0;
 
+  const song =
+    relationSongs[currentWorld][currentRelationSong];
+  
   document.getElementById('sheet-lyric').textContent =
     song.lyric;
 
@@ -1591,27 +1596,29 @@ sheet.addEventListener('touchend', e => {
 };
 
   const relationSongs = {
-  twst:{
-    lyric:`
-ここに歌詞
-`,
-    title:'曲名',
-    artist:'artist',
-    memo:`
-メモ
-`
-  },
+  twst:[
+    {
+      lyric:`...`,
+      title:'...',
+      artist:'...',
+      memo:`...`
+    },
+    {
+      lyric:`...`,
+      title:'...',
+      artist:'...',
+      memo:`...`
+    }
+  ],
 
-  real:{
-    lyric:`
-ここに歌詞
-`,
-    title:'曲名',
-    artist:'artist',
-    memo:`
-メモ
-`
-  }
+  real:[
+    {
+      lyric:`...`,
+      title:'...',
+      artist:'...',
+      memo:`...`
+    }
+  ]
 };
   
 async function toggleAccordion(trigger, type){
@@ -1726,8 +1733,8 @@ async function openAbout(){
     relationSongMode = true;
 
   const song =
-    relationSongs[currentWorld];
-
+  relationSongs[currentWorld][0];
+    
   document.getElementById('sheet-lyric').textContent =
     song.lyric;
 
