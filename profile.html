@@ -1554,10 +1554,58 @@ requestAnimationFrame(() => {
 
 function prevSong(){
 
-  if(relationSongMode) return;
-
   const content =
     document.getElementById('song-content');
+
+  if(relationSongMode){
+
+    content.style.transform =
+      'translateX(30px)';
+
+    content.style.opacity = '0';
+
+    setTimeout(() => {
+
+      currentRelationSong--;
+
+      if(currentRelationSong < 0){
+        currentRelationSong =
+          relationSongsData.length - 1;
+      }
+
+      const song =
+        relationSongsData[currentRelationSong];
+
+      document.getElementById('sheet-lyric').textContent =
+        song.lyric;
+
+      document.getElementById('sheet-title').textContent =
+        song.title;
+
+      document.getElementById('sheet-artist').textContent =
+        song.artist;
+
+      document.getElementById('sheet-memo').textContent =
+        song.memo;
+
+      content.style.transition = 'none';
+      content.style.transform = 'translateX(-30px)';
+
+      requestAnimationFrame(() => {
+
+        content.style.transition = '.25s';
+
+        content.style.transform =
+          'translateX(0)';
+
+        content.style.opacity = '1';
+
+      });
+
+    },250);
+
+    return;
+  }
 
   content.style.transform =
     'translateX(30px)';
@@ -1591,7 +1639,6 @@ function prevSong(){
   },250);
 
 }
-
 let startX = 0;
 let startY = 0;
 
