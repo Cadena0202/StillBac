@@ -1434,10 +1434,10 @@ let relationSongMode = false;
 
 function renderSong(){
 
-  currentRelationSong = 0;
+  function renderSong(){
 
   const song =
-    relationSongs[currentWorld][currentRelationSong];
+    songs[currentWorld][currentCharacter][currentSong];
   
   document.getElementById('sheet-lyric').textContent =
     song.lyric;
