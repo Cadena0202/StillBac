@@ -1508,9 +1508,7 @@ renderSong();
 
   setTimeout(() => {
 
-    currentSong++;
-
-    if(currentSong >= songs.length){
+    if(currentSong >= songs[currentWorld][currentCharacter].length){
       currentSong = 0;
     }
 
