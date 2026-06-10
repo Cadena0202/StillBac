@@ -1870,7 +1870,7 @@ async function openAbout(){
   songBox.innerHTML = `
     <div class="about-song-preview"
          onclick="openRelationSong()">
-      ${song.lyric}
+      ${song.lyric.trim()}
     </div>
   `;
  
