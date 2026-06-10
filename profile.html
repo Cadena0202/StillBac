@@ -1428,6 +1428,8 @@ real:{
 
 let currentSong = 0;
 
+let relationSongMode = false;
+
 function renderSong(){
 
   const song = songs[currentWorld][currentCharacter][currentSong];
@@ -1457,6 +1459,8 @@ function renderSong(){
 renderSong();
 
   function nextSong(){
+
+    if(relationSongMode) return;
 
   const content =
     document.getElementById('song-content');
@@ -1496,6 +1500,8 @@ requestAnimationFrame(() => {
 }
 
 function prevSong(){
+
+  if(relationSongMode) return;
 
   const content =
     document.getElementById('song-content');
@@ -1716,6 +1722,8 @@ async function openAbout(){
 
 
   function openRelationSong(){
+
+    relationSongMode = true;
 
   const song =
     relationSongs[currentWorld];
