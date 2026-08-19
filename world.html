@@ -1246,15 +1246,17 @@
             .map(name => {
 
               return allEntries.find(
-                item =>
+  item => {
+    console.log(
+      "比較:",
+      JSON.stringify(item.title),
+      JSON.stringify(name)
+    );
 
-                  item.title
-                    .toLowerCase() ===
-
-                  String(name)
-                    .toLowerCase()
-
-              );
+    return item.title.toLowerCase() ===
+      String(name).toLowerCase();
+  }
+);
 
             })
 
