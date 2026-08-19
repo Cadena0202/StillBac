@@ -148,7 +148,6 @@ body{
   gap:16px;
 }
 
-
 #world-search{
   width:100%;
   max-width:620px;
@@ -174,16 +173,13 @@ body{
   appearance:none;
 }
 
-
 #world-search::placeholder{
   color:var(--ink-faint);
 }
 
-
 #world-search:focus{
   border-color:var(--ink-light);
 }
-
 
 #search-button{
   min-width:80px;
@@ -207,7 +203,6 @@ body{
 
   -webkit-tap-highlight-color:transparent;
 }
-
 
 #search-button:active{
   background:rgba(23,43,77,.07);
@@ -236,7 +231,6 @@ body{
   padding-top:22px;
 }
 
-
 .category-button{
   appearance:none;
   border:0;
@@ -263,11 +257,9 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 
-
 .category-button:hover{
   opacity:1;
 }
-
 
 .category-button.active{
   opacity:1;
@@ -286,7 +278,6 @@ body{
   margin:8vh auto 0;
 }
 
-
 .result-label{
   margin-bottom:24px;
 
@@ -300,7 +291,6 @@ body{
 
   letter-spacing:.18em;
 }
-
 
 .world-results{
   width:100%;
@@ -327,16 +317,13 @@ body{
     opacity .25s ease;
 }
 
-
 .result-entry:first-child{
   border-top:1px solid var(--ink-faint);
 }
 
-
 .result-entry:active{
   padding-left:8px;
 }
-
 
 .result-entry-title{
   color:var(--ink);
@@ -345,7 +332,6 @@ body{
 
   line-height:1.6;
 }
-
 
 .result-entry-meta{
   margin-top:5px;
@@ -360,7 +346,6 @@ body{
 
   text-transform:uppercase;
 }
-
 
 .loading-text,
 .empty-text{
@@ -399,14 +384,10 @@ body{
     visibility .35s ease;
 }
 
-
 .article-modal.open{
   opacity:1;
   visibility:visible;
 }
-
-
-/* 背景 */
 
 .modal-backdrop{
   position:absolute;
@@ -417,9 +398,6 @@ body{
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
 }
-
-
-/* 記事本体 */
 
 .article-window{
   position:relative;
@@ -447,7 +425,6 @@ body{
 
   animation:articleOpen .35s ease;
 }
-
 
 @keyframes articleOpen{
   from{
@@ -511,7 +488,6 @@ body{
   text-transform:uppercase;
 }
 
-
 .article-title{
   margin:0;
 
@@ -524,7 +500,6 @@ body{
   line-height:1.35;
 }
 
-
 .article-line{
   width:100%;
 
@@ -534,7 +509,6 @@ body{
 
   background:var(--ink-faint);
 }
-
 
 .article-body{
   color:var(--ink);
@@ -555,7 +529,6 @@ body{
   margin-top:45px;
 }
 
-
 .related-title{
   margin-bottom:14px;
 
@@ -568,12 +541,10 @@ body{
   letter-spacing:.18em;
 }
 
-
 .related-list{
   display:flex;
   flex-direction:column;
 }
-
 
 .related-link{
   padding:11px 0;
@@ -589,11 +560,9 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 
-
 .related-link:first-child{
   border-top:1px solid var(--ink-faint);
 }
-
 
 .related-link:active{
   padding-left:7px;
@@ -613,11 +582,9 @@ body{
       10vh;
   }
 
-
   .dictionary-title{
     margin-bottom:6vh;
   }
-
 
   .category-list{
     margin-top:7vh;
@@ -625,16 +592,13 @@ body{
     gap:12px 18px;
   }
 
-
   .result-area{
     margin-top:6vh;
   }
 
-
   .article-modal{
     padding:4vh 4vw;
   }
-
 
   .article-window{
     max-height:90vh;
@@ -642,116 +606,6 @@ body{
     padding:
       44px 22px 32px;
   }
-
-}
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-  <title>Dictionary</title>
-
-  <link rel="stylesheet" href="world.css">
-</head>
-
-<body>
-
-  <!-- ページ表示用フェード -->
-  <div id="world-fade"></div>
-
-  <main class="dictionary-page">
-
-    <header class="dictionary-header">
-      <div class="dictionary-title">dictionary</div>
-
-      <div class="search-area">
-
-        <input
-          type="search"
-          id="world-search"
-          placeholder="search"
-          autocomplete="off"
-          enterkeyhint="search"
-        >
-
-        <button id="search-button" type="button">
-          check
-        </button>
-
-      </div>
-    </header>
-
-
-    <!-- カテゴリ -->
-    <nav id="category-list" class="category-list">
-      <!-- JSで生成 -->
-    </nav>
-
-
-    <!-- 検索結果 -->
-    <section class="result-area">
-
-      <div id="result-label" class="result-label">
-        ALL ENTRIES
-      </div>
-
-      <div id="world-results" class="world-results">
-        <div class="loading-text">
-          loading...
-        </div>
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- 記事モーダル -->
-  <div id="article-modal" class="article-modal">
-
-    <div class="modal-backdrop" id="modal-backdrop"></div>
-
-    <article class="article-window">
-
-      <button
-        type="button"
-        id="modal-close"
-        class="modal-close"
-        aria-label="close"
-      >
-        ×
-      </button>
-
-      <div id="article-category" class="article-category"></div>
-
-      <h1 id="article-title" class="article-title"></h1>
-
-      <div class="article-line"></div>
-
-      <div id="article-body" class="article-body"></div>
-
-      <div id="related-area" class="related-area">
-
-        <div class="related-title">
-          RELATED
-        </div>
-
-        <div id="related-list" class="related-list"></div>
-
-      </div>
-
-    </article>
-
-  </div>
-
-
-  <!-- Firebase / World JS -->
-  <script type="module" src="world.js"></script>
-
-</body>
-</html>
 
 /* =========================================
    WORLD / DICTIONARY
@@ -769,22 +623,17 @@ import {
 
 
 /* =========================================
-   Firebase設定
-   =========================================
-   
-   ↓↓↓ここだけ既存サイトのFirebase設定を入れる↓↓↓
-
-   既存の story / diary などで使っている
-   firebaseConfig と同じもの。
-*/
-
-const firebaseConfig={apiKey:"AIzaSyDeO0QZ1wmxGmEcyu9W3SgSos1Y4T-4TYA",authDomain:"azul-1a3c9.firebaseapp.com",projectId:"azul-1a3c9",storageBucket:"azul-1a3c9.firebasestorage.app",messagingSenderId:"107176111624",appId:"1:107176111624:web:78bc25fbe09bcd3b47ebbd"};  
-const app=initializeApp(firebaseConfig),db=getFirestore(app);  
-
-
-/* =========================================
    Firebase
    ========================================= */
+
+const firebaseConfig = {
+  apiKey:"AIzaSyDeO0QZ1wmxGmEcyu9W3SgSos1Y4T-4TYA",
+  authDomain:"azul-1a3c9.firebaseapp.com",
+  projectId:"azul-1a3c9",
+  storageBucket:"azul-1a3c9.firebasestorage.app",
+  messagingSenderId:"107176111624",
+  appId:"1:107176111624:web:78bc25fbe09bcd3b47ebbd"
+};
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -841,7 +690,7 @@ let currentCategory = "ALL";
 
 
 /* =========================================
-   Firestoreから取得
+   Firestore
    ========================================= */
 
 async function loadWorldEntries(){
@@ -849,32 +698,47 @@ async function loadWorldEntries(){
   try{
 
     const snapshot =
-      await getDocs(collection(db,"world"));
+      await getDocs(
+        collection(db,"world")
+      );
 
-    allEntries = snapshot.docs.map(doc => {
 
-      const data = doc.data();
+    allEntries =
+      snapshot.docs.map(doc => {
 
-      return {
-        id:doc.id,
+        const data = doc.data();
 
-        title:data.title || "",
-        category:data.category || "",
-        body:data.body || "",
-        keywords:Array.isArray(data.keywords)
-          ? data.keywords
-          : [],
-        related:Array.isArray(data.related)
-          ? data.related
-          : [],
-        type:data.type || ""
-      };
+        return {
 
-    });
+          id:doc.id,
+
+          title:data.title || "",
+
+          category:data.category || "",
+
+          body:data.body || "",
+
+          keywords:
+            Array.isArray(data.keywords)
+              ? data.keywords
+              : [],
+
+          related:
+            Array.isArray(data.related)
+              ? data.related
+              : [],
+
+          type:data.type || ""
+
+        };
+
+      });
+
 
     createCategories();
 
     showEntries(allEntries);
+
 
   }catch(error){
 
@@ -892,54 +756,87 @@ async function loadWorldEntries(){
 
 
 /* =========================================
-   カテゴリ生成
+   カテゴリ
    ========================================= */
 
 function createCategories(){
 
   const categories = [
+
     "ALL",
+
     ...new Set(
+
       allEntries
         .map(entry => entry.category)
         .filter(Boolean)
+
     )
+
   ];
 
+
   categoryList.innerHTML = "";
+
 
   categories.forEach(category => {
 
     const button =
       document.createElement("button");
 
+
     button.type = "button";
 
-    button.className = "category-button";
+    button.className =
+      "category-button";
+
 
     if(category === currentCategory){
+
       button.classList.add("active");
+
     }
 
-    button.textContent = category;
 
-    button.addEventListener("click", () => {
+    button.textContent =
+      category;
 
-      currentCategory = category;
 
-      document
-        .querySelectorAll(".category-button")
-        .forEach(btn => {
-          btn.classList.remove("active");
-        });
+    button.addEventListener(
+      "click",
+      () => {
 
-      button.classList.add("active");
+        currentCategory =
+          category;
 
-      searchEntries();
 
-    });
+        document
+          .querySelectorAll(
+            ".category-button"
+          )
+          .forEach(btn => {
 
-    categoryList.appendChild(button);
+            btn.classList.remove(
+              "active"
+            );
+
+          });
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        searchEntries();
+
+      }
+    );
+
+
+    categoryList.appendChild(
+      button
+    );
 
   });
 
@@ -958,19 +855,26 @@ function searchEntries(){
       .toLowerCase();
 
 
-  let filtered =
+  const filtered =
     allEntries.filter(entry => {
+
 
       if(
         currentCategory !== "ALL" &&
         entry.category !== currentCategory
       ){
+
         return false;
+
       }
 
+
       if(!keyword){
+
         return true;
+
       }
+
 
       const searchable = [
 
@@ -991,7 +895,9 @@ function searchEntries(){
       .toLowerCase();
 
 
-      return searchable.includes(keyword);
+      return searchable.includes(
+        keyword
+      );
 
     });
 
@@ -1002,12 +908,13 @@ function searchEntries(){
 
 
 /* =========================================
-   記事一覧表示
+   一覧表示
    ========================================= */
 
 function showEntries(entries){
 
   results.innerHTML = "";
+
 
   resultLabel.textContent =
     currentCategory === "ALL"
@@ -1033,9 +940,13 @@ function showEntries(entries){
     const item =
       document.createElement("div");
 
-    item.className = "result-entry";
+
+    item.className =
+      "result-entry";
+
 
     item.innerHTML = `
+
       <div class="result-entry-title">
         ${escapeHTML(entry.title)}
       </div>
@@ -1043,14 +954,18 @@ function showEntries(entries){
       <div class="result-entry-meta">
         ${escapeHTML(entry.category)}
       </div>
+
     `;
 
 
-    item.addEventListener("click", () => {
+    item.addEventListener(
+      "click",
+      () => {
 
-      openArticle(entry);
+        openArticle(entry);
 
-    });
+      }
+    );
 
 
     results.appendChild(item);
@@ -1061,16 +976,20 @@ function showEntries(entries){
 
 
 /* =========================================
-   記事モーダル
+   モーダル
    ========================================= */
 
 function openArticle(entry){
 
   articleCategory.textContent =
-    entry.category || entry.type || "";
+    entry.category ||
+    entry.type ||
+    "";
+
 
   articleTitle.textContent =
     entry.title;
+
 
   articleBody.textContent =
     entry.body;
@@ -1095,33 +1014,48 @@ function openArticle(entry){
         .filter(Boolean);
 
 
-    relatedEntries.forEach(related => {
+    relatedEntries.forEach(
+      related => {
 
-      const link =
-        document.createElement("div");
-
-      link.className = "related-link";
-
-      link.textContent =
-        related.title;
+        const link =
+          document.createElement(
+            "div"
+          );
 
 
-      link.addEventListener("click", () => {
-
-        openArticle(related);
-
-      });
+        link.className =
+          "related-link";
 
 
-      relatedList.appendChild(link);
+        link.textContent =
+          related.title;
 
-    });
 
+        link.addEventListener(
+          "click",
+          () => {
+
+            openArticle(
+              related
+            );
+
+          }
+        );
+
+
+        relatedList.appendChild(
+          link
+        );
+
+      }
+    );
 
   }
 
 
-  if(relatedList.children.length === 0){
+  if(
+    relatedList.children.length === 0
+  ){
 
     relatedList.innerHTML = `
       <div class="empty-text">
@@ -1134,7 +1068,8 @@ function openArticle(entry){
 
   modal.classList.add("open");
 
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow =
+    "hidden";
 
 }
 
@@ -1145,9 +1080,12 @@ function openArticle(entry){
 
 function closeArticle(){
 
-  modal.classList.remove("open");
+  modal.classList.remove(
+    "open"
+  );
 
-  document.body.style.overflow = "";
+  document.body.style.overflow =
+    "";
 
 }
 
@@ -1195,10 +1133,563 @@ searchInput.addEventListener(
 function escapeHTML(value){
 
   return String(value)
+
     .replace(/&/g,"&amp;")
+
     .replace(/</g,"&lt;")
+
     .replace(/>/g,"&gt;")
+
     .replace(/"/g,"&quot;")
+
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================
+   起動
+   ========================================= */
+
+loadWorldEntries();
+
+}
+
+/* =========================================
+   WORLD / DICTIONARY
+   ========================================= */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+/* =========================================
+   Firebase
+   ========================================= */
+
+const firebaseConfig = {
+  apiKey:"AIzaSyDeO0QZ1wmxGmEcyu9W3SgSos1Y4T-4TYA",
+  authDomain:"azul-1a3c9.firebaseapp.com",
+  projectId:"azul-1a3c9",
+  storageBucket:"azul-1a3c9.firebasestorage.app",
+  messagingSenderId:"107176111624",
+  appId:"1:107176111624:web:78bc25fbe09bcd3b47ebbd"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+/* =========================================
+   DOM
+   ========================================= */
+
+const searchInput =
+  document.getElementById("world-search");
+
+const searchButton =
+  document.getElementById("search-button");
+
+const categoryList =
+  document.getElementById("category-list");
+
+const resultLabel =
+  document.getElementById("result-label");
+
+const results =
+  document.getElementById("world-results");
+
+const modal =
+  document.getElementById("article-modal");
+
+const modalBackdrop =
+  document.getElementById("modal-backdrop");
+
+const modalClose =
+  document.getElementById("modal-close");
+
+const articleCategory =
+  document.getElementById("article-category");
+
+const articleTitle =
+  document.getElementById("article-title");
+
+const articleBody =
+  document.getElementById("article-body");
+
+const relatedList =
+  document.getElementById("related-list");
+
+
+/* =========================================
+   データ
+   ========================================= */
+
+let allEntries = [];
+
+let currentCategory = "ALL";
+
+
+/* =========================================
+   Firestore
+   ========================================= */
+
+async function loadWorldEntries(){
+
+  try{
+
+    const snapshot =
+      await getDocs(
+        collection(db,"world")
+      );
+
+
+    allEntries =
+      snapshot.docs.map(doc => {
+
+        const data = doc.data();
+
+        return {
+
+          id:doc.id,
+
+          title:data.title || "",
+
+          category:data.category || "",
+
+          body:data.body || "",
+
+          keywords:
+            Array.isArray(data.keywords)
+              ? data.keywords
+              : [],
+
+          related:
+            Array.isArray(data.related)
+              ? data.related
+              : [],
+
+          type:data.type || ""
+
+        };
+
+      });
+
+
+    createCategories();
+
+    showEntries(allEntries);
+
+
+  }catch(error){
+
+    console.error(error);
+
+    results.innerHTML = `
+      <div class="empty-text">
+        unable to load dictionary
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =========================================
+   カテゴリ
+   ========================================= */
+
+function createCategories(){
+
+  const categories = [
+
+    "ALL",
+
+    ...new Set(
+
+      allEntries
+        .map(entry => entry.category)
+        .filter(Boolean)
+
+    )
+
+  ];
+
+
+  categoryList.innerHTML = "";
+
+
+  categories.forEach(category => {
+
+    const button =
+      document.createElement("button");
+
+
+    button.type = "button";
+
+    button.className =
+      "category-button";
+
+
+    if(category === currentCategory){
+
+      button.classList.add("active");
+
+    }
+
+
+    button.textContent =
+      category;
+
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        currentCategory =
+          category;
+
+
+        document
+          .querySelectorAll(
+            ".category-button"
+          )
+          .forEach(btn => {
+
+            btn.classList.remove(
+              "active"
+            );
+
+          });
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        searchEntries();
+
+      }
+    );
+
+
+    categoryList.appendChild(
+      button
+    );
+
+  });
+
+}
+
+
+/* =========================================
+   検索
+   ========================================= */
+
+function searchEntries(){
+
+  const keyword =
+    searchInput.value
+      .trim()
+      .toLowerCase();
+
+
+  const filtered =
+    allEntries.filter(entry => {
+
+
+      if(
+        currentCategory !== "ALL" &&
+        entry.category !== currentCategory
+      ){
+
+        return false;
+
+      }
+
+
+      if(!keyword){
+
+        return true;
+
+      }
+
+
+      const searchable = [
+
+        entry.title,
+
+        entry.category,
+
+        entry.body,
+
+        entry.type,
+
+        ...entry.keywords,
+
+        ...entry.related
+
+      ]
+      .join(" ")
+      .toLowerCase();
+
+
+      return searchable.includes(
+        keyword
+      );
+
+    });
+
+
+  showEntries(filtered);
+
+}
+
+
+/* =========================================
+   一覧表示
+   ========================================= */
+
+function showEntries(entries){
+
+  results.innerHTML = "";
+
+
+  resultLabel.textContent =
+    currentCategory === "ALL"
+      ? "ALL ENTRIES"
+      : currentCategory;
+
+
+  if(entries.length === 0){
+
+    results.innerHTML = `
+      <div class="empty-text">
+        no entries found
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  entries.forEach(entry => {
+
+    const item =
+      document.createElement("div");
+
+
+    item.className =
+      "result-entry";
+
+
+    item.innerHTML = `
+
+      <div class="result-entry-title">
+        ${escapeHTML(entry.title)}
+      </div>
+
+      <div class="result-entry-meta">
+        ${escapeHTML(entry.category)}
+      </div>
+
+    `;
+
+
+    item.addEventListener(
+      "click",
+      () => {
+
+        openArticle(entry);
+
+      }
+    );
+
+
+    results.appendChild(item);
+
+  });
+
+}
+
+
+/* =========================================
+   モーダル
+   ========================================= */
+
+function openArticle(entry){
+
+  articleCategory.textContent =
+    entry.category ||
+    entry.type ||
+    "";
+
+
+  articleTitle.textContent =
+    entry.title;
+
+
+  articleBody.textContent =
+    entry.body;
+
+
+  relatedList.innerHTML = "";
+
+
+  if(entry.related.length > 0){
+
+    const relatedEntries =
+      entry.related
+        .map(name => {
+
+          return allEntries.find(
+            item =>
+              item.title.toLowerCase() ===
+              String(name).toLowerCase()
+          );
+
+        })
+        .filter(Boolean);
+
+
+    relatedEntries.forEach(
+      related => {
+
+        const link =
+          document.createElement(
+            "div"
+          );
+
+
+        link.className =
+          "related-link";
+
+
+        link.textContent =
+          related.title;
+
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            openArticle(
+              related
+            );
+
+          }
+        );
+
+
+        relatedList.appendChild(
+          link
+        );
+
+      }
+    );
+
+  }
+
+
+  if(
+    relatedList.children.length === 0
+  ){
+
+    relatedList.innerHTML = `
+      <div class="empty-text">
+        —
+      </div>
+    `;
+
+  }
+
+
+  modal.classList.add("open");
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+/* =========================================
+   モーダルを閉じる
+   ========================================= */
+
+function closeArticle(){
+
+  modal.classList.remove(
+    "open"
+  );
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+modalClose.addEventListener(
+  "click",
+  closeArticle
+);
+
+
+modalBackdrop.addEventListener(
+  "click",
+  closeArticle
+);
+
+
+/* =========================================
+   検索イベント
+   ========================================= */
+
+searchButton.addEventListener(
+  "click",
+  searchEntries
+);
+
+
+searchInput.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Enter"){
+
+      searchEntries();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   HTMLエスケープ
+   ========================================= */
+
+function escapeHTML(value){
+
+  return String(value)
+
+    .replace(/&/g,"&amp;")
+
+    .replace(/</g,"&lt;")
+
+    .replace(/>/g,"&gt;")
+
+    .replace(/"/g,"&quot;")
+
     .replace(/'/g,"&#039;");
 
 }
