@@ -1336,18 +1336,6 @@ document.querySelector('.menu-bubble:nth-child(3)').addEventListener('click',e=>
   menuPageTransition('diary.html');
 });
 
-document.getElementById('profile-link').addEventListener('click', e => {
-  e.preventDefault();
-
-  const overlay = document.getElementById('loading-overlay');
-
-  overlay.classList.add('profile-fade');
-  overlay.classList.add('active');
-
-  setTimeout(() => {
-    window.location.href = 'profile.html';
-  }, 800);
-});
 const mode = sessionStorage.getItem('mode');
 
 if (mode === 'reader' || mode === 'owner') {
