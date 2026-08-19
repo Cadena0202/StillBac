@@ -894,7 +894,11 @@
                 data.title || "",
 
               category:
-                data.category || "",
+                Array.isArray(data.category)
+                  ? data.category
+                  : data.category
+                    ? [data.category]
+                    : [],
 
               body:
                 data.body || "",
