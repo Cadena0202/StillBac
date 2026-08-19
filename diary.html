@@ -786,16 +786,26 @@ header:hover .site-title {
   align-items:center;
   justify-content:center;
 
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.35);
+  background:
+  radial-gradient(
+    circle at 32% 30%,
+    rgba(220,200,255,0.28) 0%,
+    rgba(160,130,240,0.10) 45%,
+    rgba(120,90,200,0.04) 75%,
+    rgba(120,90,200,0.01) 100%
+  );
+
+  border:1px solid rgba(180,160,255,0.40);
+
+  box-shadow:
+  inset 0 0 18px rgba(220,200,255,0.10),
+  0 0 20px rgba(120,90,200,0.08);
 
   color:white;
   cursor:pointer;
 
   backdrop-filter:blur(2px);
-}
 
-.menu-bubble{
   animation: menuFloat 4s ease-in-out infinite;
 }
 
@@ -806,9 +816,7 @@ header:hover .site-title {
   50%{
     transform:translateY(-18px);
   }
-}
-    
-.menu-bubble{
+
   position:absolute;
 }
 
