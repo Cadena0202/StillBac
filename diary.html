@@ -1336,21 +1336,6 @@ document.querySelector('.menu-bubble:nth-child(3)').addEventListener('click',e=>
   menuPageTransition('diary.html');
 });
 
-document.querySelector('.corner-top').addEventListener('click', e => {
-  e.preventDefault();
-
-  const fade = document.getElementById('page-fade');
-  const bubbleCanvas = document.getElementById('bubble-canvas');
-
-  document.getElementById('loading-overlay').classList.add('active')
-  bubbleCanvas.classList.add('active');
-  startBubbles(bubbleCanvas, 'down', 130);
-
-  setTimeout(() => {
-    window.location.href = 'story.html';
-  }, 3000);
-});
-
 document.getElementById('profile-link').addEventListener('click', e => {
   e.preventDefault();
 
