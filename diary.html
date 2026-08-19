@@ -841,6 +841,15 @@ header:hover .site-title {
   left:30%;
   top:45%;
 }
+
+@keyframes smallBubbleFloat{
+  0%,100%{
+    transform:translateY(0) translateX(0);
+  }
+  50%{
+    transform:translateY(-30px) translateX(12px);
+  }
+}
     
 /* ===== ページネーション ===== */
 .pagination{
@@ -1663,6 +1672,30 @@ document.getElementById('menu-overlay').addEventListener('click',(e)=>{
     document.getElementById('deep-fade').classList.remove('active');
   }
 });
+
+function createSmallBubbles(){
+  const menu=document.getElementById('menu-overlay');
+
+  for(let i=0;i<15;i++){
+    const bubble=document.createElement('div');
+
+    bubble.className='small-bubble';
+
+    bubble.style.left=`${Math.random()*90+5}%`;
+    bubble.style.top=`${Math.random()*80+10}%`;
+
+    const size=8+Math.random()*18;
+    bubble.style.width=`${size}px`;
+    bubble.style.height=`${size}px`;
+
+    bubble.style.animationDuration=`${4+Math.random()*5}s`;
+    bubble.style.animationDelay=`-${Math.random()*5}s`;
+
+    menu.appendChild(bubble);
+  }
+}
+
+createSmallBubbles();
   
 document.getElementById('password-input').addEventListener('keydown', e => {
     if (e.key === 'Enter') {
