@@ -760,6 +760,7 @@ async function deleteStory(){
   document.getElementById('story-desc-input').value = s.desc || '';
   document.getElementById('story-body-input').value = s.body || '';
   document.getElementById('story-modal').classList.remove('open');
+  document.getElementById('deep-fade').classList.remove('active');
   document.getElementById('post-modal').classList.add('open');
 }
   
