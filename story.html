@@ -529,7 +529,7 @@ async function loadStories(){
 
     const q=query(
       collection(db,'stories'),
-      orderBy('createdAt','desc')
+      orderBy('createdAt','asc')
     );
 
     const [snap] = await Promise.all([
