@@ -1584,7 +1584,11 @@ document.getElementById('password-modal').addEventListener('click', e => {
   });
 
 document.getElementById('menu-button').addEventListener('click',()=>{
-  document.getElementById('menu-overlay').classList.toggle('open');
+  const menu=document.getElementById('menu-overlay');
+  const fade=document.getElementById('deep-fade');
+
+  menu.classList.toggle('open');
+  fade.classList.toggle('active');
 });
 document.getElementById('menu-overlay').addEventListener('click',(e)=>{
   if(e.target===e.currentTarget){
