@@ -785,6 +785,8 @@ header:hover .site-title {
   display:flex;
   align-items:center;
   justify-content:center;
+  text-decoration:none;
+  color:white;
 
   background:
   radial-gradient(
@@ -964,10 +966,9 @@ if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
   <div class="lock" onclick="toggleMusic()">♪</div>
 </div>
 <div class="menu-overlay" id="menu-overlay">
-  <div class="menu-bubble">Story</div>
-  <div class="menu-bubble">Profile</div>
-  <div class="menu-bubble">Diary</div>
-  <div class="small-bubble"></div>
+  <a href="story.html" class="menu-bubble">Story</a>
+  <a href="profile.html" class="menu-bubble">Profile</a>
+  <a href="diary.html" class="menu-bubble">Diary</a>
 </div>
 
 <!-- ローディングオーバーレイ -->
