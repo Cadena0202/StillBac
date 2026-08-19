@@ -810,6 +810,20 @@ header:hover .site-title {
   animation: menuFloat 4s ease-in-out infinite;
 }
 
+.menu-bubble::before{
+  content:"";
+  position:absolute;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+
+  top:22px;
+  left:24px;
+
+  background:rgba(220,200,255,0.45);
+  filter:blur(3px);
+}
+
 @keyframes menuFloat{
   0%,100%{
     transform:translateY(0);
