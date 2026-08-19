@@ -918,9 +918,6 @@
 
         createCategories();
 
-        showEntries(allEntries);
-
-
       }catch(error){
 
         console.error(
@@ -1127,17 +1124,6 @@
 
       results.innerHTML =
         "";
-
-
-      resultLabel.textContent =
-
-        currentCategory ===
-        "ALL"
-
-          ? "ALL ENTRIES"
-
-          : currentCategory;
-
 
       if(
         entries.length === 0
