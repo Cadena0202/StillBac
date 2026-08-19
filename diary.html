@@ -793,6 +793,19 @@ header:hover .site-title {
   backdrop-filter:blur(2px);
 }
 
+.menu-bubble{
+  animation: menuFloat 4s ease-in-out infinite;
+}
+
+@keyframes menuFloat{
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-18px);
+  }
+}
+
 /* ===== ページネーション ===== */
 .pagination{
   display:flex;
