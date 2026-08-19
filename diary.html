@@ -1308,6 +1308,8 @@ function startBubbles(bc, direction = 'up') {
 // ---- 権限取得 ----
 function menuPageTransition(url){
   const bubbleCanvas=document.getElementById('bubble-canvas');
+  document.getElementById('menu-overlay').classList.remove('open');
+  document.getElementById('deep-fade').classList.remove('active');
 
   document.getElementById('loading-overlay').classList.add('active');
   bubbleCanvas.classList.add('active');
