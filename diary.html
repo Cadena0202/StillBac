@@ -1593,6 +1593,7 @@ document.getElementById('menu-button').addEventListener('click',()=>{
 document.getElementById('menu-overlay').addEventListener('click',(e)=>{
   if(e.target===e.currentTarget){
     e.currentTarget.classList.remove('open');
+    document.getElementById('deep-fade').classList.remove('active');
   }
 });
   
