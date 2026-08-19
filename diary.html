@@ -976,7 +976,7 @@ if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
 <div class="menu-overlay" id="menu-overlay">
   <a href="story.html" class="menu-bubble">Story</a>
   <a href="profile.html" class="menu-bubble">Profile</a>
-  <a href="diary.html" class="menu-bubble">Diary</a>
+  <a href="diary.html" class="menu-bubble">World</a>
 </div>
 
 <!-- ローディングオーバーレイ -->
@@ -1340,7 +1340,7 @@ document.querySelector('.menu-bubble:nth-child(2)').addEventListener('click',e=>
 
 document.querySelector('.menu-bubble:nth-child(3)').addEventListener('click',e=>{
   e.preventDefault();
-  menuPageTransition('diary.html');
+  menuPageTransition('world.html');
 });
 
 const mode = sessionStorage.getItem('mode');
