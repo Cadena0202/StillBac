@@ -1397,10 +1397,42 @@
     );
 
 
-    /* =========================================
-       起動
-       ========================================= */
-    
+/* =========================================
+   起動
+   ========================================= */
+
+    document
+      .getElementById("main-story-button")
+      .addEventListener("click", () => {
+
+        currentCategory = "STORY";
+
+        const storyEntries =
+          allEntries.filter(entry =>
+            entry.category.includes("STORY")
+          );
+
+        showEntries(storyEntries);
+
+      });
+
+
+    document
+      .getElementById("events-button")
+      .addEventListener("click", () => {
+
+        currentCategory = "EVENT";
+
+        const eventEntries =
+          allEntries.filter(entry =>
+            entry.category.includes("EVENT")
+          );
+
+        showEntries(eventEntries);
+
+      });
+
+
     loadWorldEntries();
 
   </script>
