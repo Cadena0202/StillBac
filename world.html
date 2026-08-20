@@ -704,8 +704,21 @@
 
     <!-- カテゴリ -->
     <div class="fixed-world-links">
-    <button class="fixed-world-button" type="button">MAIN STORY</button>
-    <button class="fixed-world-button" type="button">EVENTS</button>
+      <button
+        class="fixed-world-button"
+        id="main-story-button"
+        type="button"
+        >
+        MAIN STORY
+      </button>
+
+      <button
+        class="fixed-world-button"
+        id="events-button"
+        type="button"
+        >
+        EVENTS
+      </button>
     </div>
 
     <nav
@@ -898,6 +911,28 @@
 
     let currentCategory = "ALL";
 
+    document.getElementById("main-story-button")
+      .addEventListener("click", () => {
+        currentCategory = "STORY";
+
+        showEntries(
+          allEntries.filter(entry =>
+            entry.category === "STORY"
+                           )
+        );
+      });
+    document
+      .getElementById("events-button")
+      .addEventListener("click", () => {
+
+        currentCategory = "EVENT";
+        showEntries(
+          allEntries.filter(entry =>
+            entry.category === "EVENT"
+                           )
+        );
+      });
+
 
     /* =========================================
        Firestoreから取得
@@ -990,22 +1025,16 @@
     function createCategories(){
 
       const categories = [
-
         ...new Set(
-
           allEntries
-
-            .flatMap(
-              entry =>
-                entry.category
-            )
-
-            .filter(Boolean)
-
+          .map(entry => entry.category)
+          .filter(category =>
+            category &&
+            category !== "STORY" &&
+            category !== "EVENT"
+                 )
         )
-
       ];
-
 
       categoryList.innerHTML = "";
 
