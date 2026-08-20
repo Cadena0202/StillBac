@@ -1004,88 +1004,51 @@
       const categories = [
         ...new Set(
           allEntries
-          .map(entry => entry.category)
+          .flatMap(entry => entry.category)
           .filter(category =>
             category &&
             category !== "STORY" &&
             category !== "EVENT"
-                 )
+          )
         )
       ];
 
       categoryList.innerHTML = "";
-
 
       categories.forEach(category => {
 
         const button =
           document.createElement("button");
 
+        button.type = "button";
+        button.className = "category-button";
 
-        button.type =
-          "button";
-
-
-        button.className =
-          "category-button";
-
-
-        if(
-          category ===
-          currentCategory
-        ){
-
-          button.classList.add(
-            "active"
-          );
-
+        if(category === currentCategory){
+          button.classList.add("active");
         }
 
+        button.textContent = category;
 
-        button.textContent =
-          category;
+        button.addEventListener("click", () => {
 
+          currentCategory = category;
 
-        button.addEventListener(
-          "click",
-          () => {
+          document
+            .querySelectorAll(".category-button")
+            .forEach(btn => {
+              btn.classList.remove("active");
+            });
 
-            currentCategory =
-              category;
+          button.classList.add("active");
 
+          searchEntries();
+        });
 
-            document
-              .querySelectorAll(
-                ".category-button"
-              )
-              .forEach(btn => {
-
-                btn.classList.remove(
-                  "active"
-                );
-
-              });
-
-
-            button.classList.add(
-              "active"
-            );
-
-
-            searchEntries();
-
-          }
-        );
-
-
-        categoryList.appendChild(
-          button
-        );
+        categoryList.appendChild(button);
 
       });
 
     }
-
 
     /* =========================================
        検索
