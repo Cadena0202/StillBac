@@ -1408,9 +1408,11 @@
         currentCategory = "STORY";
 
         const storyEntries =
-          allEntries.filter(entry =>
+            allEntries
+          .filter(entry =>
             entry.category.includes("STORY")
-          );
+          )
+          .sort((a, b) => a.order - b.order);
 
         showEntries(storyEntries);
 
@@ -1424,9 +1426,11 @@
         currentCategory = "EVENT";
 
         const eventEntries =
-          allEntries.filter(entry =>
+          allEntries
+          .filter(entry =>
             entry.category.includes("EVENT")
-          );
+          )
+          .sort((a, b) => a.order - b.order);
 
         showEntries(eventEntries);
 
