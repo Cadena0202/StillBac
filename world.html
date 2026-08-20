@@ -720,7 +720,7 @@
         EVENTS
       </button>
     </div>
-
+    
     <nav
       id="category-list"
       class="category-list"
@@ -910,29 +910,6 @@
     let allEntries = [];
 
     let currentCategory = "ALL";
-
-    document.getElementById("main-story-button")
-      .addEventListener("click", () => {
-        currentCategory = "STORY";
-
-        showEntries(
-          allEntries.filter(entry =>
-            entry.category === "STORY"
-                           )
-        );
-      });
-    document
-      .getElementById("events-button")
-      .addEventListener("click", () => {
-
-        currentCategory = "EVENT";
-        showEntries(
-          allEntries.filter(entry =>
-            entry.category === "EVENT"
-                           )
-        );
-      });
-
 
     /* =========================================
        Firestoreから取得
@@ -1460,6 +1437,28 @@
        起動
        ========================================= */
 
+    document.getElementById("main-story-button")
+      .addEventListener("click", () => {
+        currentCategory = "STORY";
+
+        showEntries(
+          allEntries.filter(entry =>
+            entry.category === "STORY"
+                           )
+        );
+      });
+    document
+      .getElementById("events-button")
+      .addEventListener("click", () => {
+
+        currentCategory = "EVENT";
+        showEntries(
+          allEntries.filter(entry =>
+            entry.category === "EVENT"
+                           )
+        );
+      });
+    
     loadWorldEntries();
 
   </script>
